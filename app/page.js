@@ -310,17 +310,8 @@ export default function Home() {
             fontStyle='italic'
             opacity='0.8'
           >
-            To sponsor a Chain dinner, ping monica@thechain.miami
-          </Text>
-          <Text
-            textAlign='left'
-            fontSize='12px'
-            width='50%'
-            fontStyle='italic'
-            opacity='0.8'
-            mt='5px'
-          >
-            To be a dinner host? ping monica@thechain.miami
+            To sponsor a Chain dinner or be a dinner host, ping
+            monica@thechain.miami
           </Text>
         </Flex>
 
