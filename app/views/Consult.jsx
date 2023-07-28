@@ -1,0 +1,98 @@
+'use client';
+
+import { Flex, Text, VStack, SimpleGrid, Box } from '@chakra-ui/react';
+
+import { BsFillCalendarEventFill } from 'react-icons/bs';
+import { RiCommunityFill } from 'react-icons/ri';
+import { FaBookOpen } from 'react-icons/fa';
+import { MdOutlineZoomInMap } from 'react-icons/md';
+import dynamic from 'next/dynamic';
+
+import { consults } from '../utils/constants';
+
+const NoSSRConsultForm = dynamic(() => import('../forms/ConsultForm'), {
+  ssr: false
+});
+
+export const Consult = () => {
+  return (
+    <Flex
+      id='consult-section'
+      direction='column'
+      alignItems='flex-start'
+      style={{
+        backdropFilter: 'blur(9.1px)'
+      }}
+      p={{ lg: '4rem', sm: '2rem' }}
+    >
+      <Text
+        fontSize={{ lg: '24px', sm: '18px' }}
+        mb='1rem'
+        color='#42b5ff'
+        fontWeight='bold'
+      >
+        Consulting
+      </Text>
+      <VStack alignItems='flex-start'>
+        <Text opacity='0.8' fontSize={{ sm: '14px', lg: '16px' }}>
+          At The Chain Miami, we understand that every company or project
+          aspires to have a thriving community, but not everyone possesses the
+          time, expertise, or patience to build it from scratch. In addition to
+          running an exceptional in-person community in Miami, our team at The
+          Chain Miami specializes in helping businesses achieve financial
+          success through a community-driven approach.
+        </Text>
+        <NoSSRConsultForm />
+      </VStack>
+
+      <SimpleGrid
+        columns={{ lg: 4, md: 2, sm: 1 }}
+        gap='5'
+        mt={{ lg: '1rem', sm: '0' }}
+      >
+        {consults.map((offer, index) => {
+          return (
+            <Flex
+              key={index}
+              direction='column'
+              alignItems='center'
+              justifyContent='flex-start'
+              minH='150px'
+              p='2rem'
+              // boxShadow='inset 6px 6px 7px #b6d1e1,
+              //   inset -6px -6px 7px #ceebfd'
+              boxShadow='inset 5px 5px 10px #e0e0e0,
+                inset -5px -5px 10px #ffffff'
+              borderRadius='1rem'
+            >
+              <Box color='#42b5ff' fontSize='36px' mb='1rem'>
+                {index == 0 && <BsFillCalendarEventFill />}
+                {index == 1 && <RiCommunityFill />}
+                {index == 2 && <FaBookOpen />}
+                {index == 3 && <MdOutlineZoomInMap />}
+              </Box>
+
+              <Text
+                color='#42b5ff'
+                fontSize={{ lg: '1rem', sm: '1rem' }}
+                fontWeight='bold'
+                mb='1rem'
+              >
+                {offer.title}
+              </Text>
+              <Text
+                color='black'
+                textAlign='left'
+                fontSize={{ sm: '14px', lg: '14px' }}
+                mt='5px'
+                opacity='0.5'
+              >
+                {offer.content}
+              </Text>
+            </Flex>
+          );
+        })}
+      </SimpleGrid>
+    </Flex>
+  );
+};

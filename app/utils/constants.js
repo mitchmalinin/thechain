@@ -44,7 +44,7 @@ export const consults = [
       'We believe in sharing knowledge. Tap into our expertise through educational resources, workshops, and tailored guidance to enhance your community-building efforts.'
   },
   {
-    title: 'Niche Micro-Communities',
+    title: 'Micro-Communities',
     content:
       'We are pioneering the framework for the future of communities. Reach out to us to learn more about our exciting initiatives in building niche micro-communities.'
   }
