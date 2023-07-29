@@ -10,7 +10,7 @@ import {
   Box
 } from '@chakra-ui/react';
 
-import { FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { FaTwitter, FaInstagram } from 'react-icons/fa';
 
 export const Footer = () => {
   return (
@@ -37,7 +37,7 @@ export const Footer = () => {
           </Text>
           <HStack color='white'>
             <ChakraLink
-              href=''
+              href='https://twitter.com/thechain_miami'
               fontSize='25px'
               target='_blank'
               rel='noopener noreferrer'
@@ -45,12 +45,12 @@ export const Footer = () => {
               <FaTwitter />
             </ChakraLink>
             <ChakraLink
-              href=''
+              href='https://www.instagram.com/thechain_miami/'
               target='_blank'
               rel='noopener noreferrer'
               fontSize='25px'
             >
-              <FaLinkedin />
+              <FaInstagram />
             </ChakraLink>
           </HStack>
         </VStack>

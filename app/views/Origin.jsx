@@ -40,6 +40,11 @@ export const Origin = () => {
           community that shares weekly texts about upcoming events, and a
           celebration of community wins.
         </Text>
+        <Text opacity='0.8' fontSize={{ sm: '14px', lg: '16px' }}>
+          In the past year, we've hosted 12 dinners & experiences, uniting 500+
+          people. Now, as we enter our growth stage, we're more intentional than
+          ever in curating our community.
+        </Text>
       </VStack>
       <Tweet id='1524019928273199111' />
     </SimpleGrid>

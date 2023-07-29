@@ -16,6 +16,8 @@
     "@vercel/analytics": "^1.0.1",
     "@web3modal/ethereum": "^2.7.0",
     "@web3modal/react": "^2.7.0",
+    "airtable": "^0.12.1",
+    "axios": "^1.4.0",
     "ethers": "^6.6.5",
     "framer-motion": "^10.13.1",
     "next": "13.4.12",

@@ -59,7 +59,13 @@ export const Team = () => {
               style={{ filter: 'grayscale(1)' }}
               mb='15px'
             >
-              <Image src={Anna} height='100%' width='100%' placeholder='blur' />
+              <Image
+                src={Anna}
+                alt='Anna'
+                height='100%'
+                width='100%'
+                placeholder='blur'
+              />
             </Box>
             <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight='bold'>
               Anna Gandrabura
@@ -111,6 +117,7 @@ export const Team = () => {
             >
               <Image
                 src={Monica}
+                alt='Monica'
                 height='100%'
                 width='100%'
                 placeholder='blur'
@@ -166,6 +173,7 @@ export const Team = () => {
             >
               <Image
                 src={Saimano}
+                alt='Saimano'
                 height='100%'
                 width='100%'
                 placeholder='blur'

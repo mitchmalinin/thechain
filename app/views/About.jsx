@@ -37,28 +37,34 @@ export const About = () => {
           zIndex='20'
         >
           <Flex direction='column'>
-            <ChakraImage src='/the-chain-logo.png' w='150px' mb='1rem' />
+            <ChakraImage
+              src='/the-chain-logo.png'
+              alt='logo'
+              w='150px'
+              mb='1rem'
+            />
             <Text opacity='0.7'>A community for web3 builders in Miami</Text>
             <Text
               mt='2rem'
               w={{ lg: '70%', sm: '100%' }}
               fontSize={{ sm: '14px', lg: '16px' }}
             >
-              We create a space to connect through our monthly dinners and share
-              upcoming events, and celebrate the wins of our local web3 scene
-              through our bi-weekly texts
+              Connecting our local community by hosting curated monthly dinners,
+              sharing upcoming events and celebrating wins of our local tech
+              scenes through our weekly text updates.
             </Text>
             <ChakraLink href='/#dinner-section'>
               <Button
                 w='200px'
                 mt='1rem'
-                bg='#ff62c7'
+                bg='transparent'
+                border='2px solid white'
                 color='white'
                 _hover={{
                   opacity: '0.8'
                 }}
               >
-                Join the Chain
+                Apply to Chain
               </Button>
             </ChakraLink>
           </Flex>
@@ -90,23 +96,28 @@ export const About = () => {
             lineHeight='1.6'
             fontSize={{ sm: '14px', lg: '16px' }}
           >
-            Today is The Chain Miami, the premier community for web3 builders in
-            Miami, whether you're new to the web3 space or a seasoned degen. We
-            pride ourselves on being an inclusive community of builders and
-            forward thinkers, brought together by our shared passion for web3.
+            Welcome to The Chain Miami, we are a curated community and social
+            club for the top web3 executives, builders, and enthusiasts in
+            Miami. Through bear markets and bull, we bring like-minded
+            individuals together, forging genuine friendships and expanding our
+            IRL web3 networks.
+          </Text>
+          <Text
+            w={{ lg: '70%', sm: '100%' }}
+            lineHeight='1.6'
+            fontSize={{ sm: '14px', lg: '16px' }}
+          >
             At The Chain Miami, we believe in the power of intentional community
             building. We’re passed the days of generic happy hours and
             superficial networking. We curate intentional experiences that leave
-            you energized and inspired. Now more than ever, we seek to unite
-            those who are still building during bear markets, connecting
-            individuals who share our unwavering belief in the potential of
-            web3. Our mission is to bring together like-minded people, fostering
-            genuine friendships and expanding our IRL web3 networks.
+            you energized and inspired. We’re here to foster the growth of
+            Miami’s web3 community.
           </Text>
         </VStack>
 
         <ChakraImage
           src='/chain-color.png'
+          alt='the chain'
           position='absolute'
           right='-880'
           top='120'

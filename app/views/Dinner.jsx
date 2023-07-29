@@ -139,6 +139,7 @@ export const Dinner = () => {
             <Zoom>
               <Image
                 src={ImageOne}
+                alt='dinner images'
                 height='100%'
                 width='100%'
                 placeholder='blur'
@@ -149,6 +150,7 @@ export const Dinner = () => {
             <Zoom>
               <Image
                 src={ImageThree}
+                alt='dinner images'
                 height='100%'
                 width='100%'
                 placeholder='blur'
@@ -159,6 +161,7 @@ export const Dinner = () => {
             <Zoom>
               <Image
                 src={ImageFour}
+                alt='dinner images'
                 height='100%'
                 width='100%'
                 placeholder='blur'
@@ -169,6 +172,7 @@ export const Dinner = () => {
             <Zoom>
               <Image
                 src={ImageFive}
+                alt='dinner images'
                 height='100%'
                 width='100%'
                 placeholder='blur'
@@ -179,6 +183,7 @@ export const Dinner = () => {
             <Zoom>
               <Image
                 src={ImageSix}
+                alt='dinner images'
                 height='100%'
                 width='100%'
                 placeholder='blur'
@@ -189,6 +194,7 @@ export const Dinner = () => {
             <Zoom>
               <Image
                 src={ImageTwo}
+                alt='dinner images'
                 height='100%'
                 width='100%'
                 placeholder='blur'
@@ -200,6 +206,7 @@ export const Dinner = () => {
 
       <ChakraImage
         src='/chain-color.png'
+        alt='the chain'
         position='absolute'
         left='-680'
         id='chain-image'
