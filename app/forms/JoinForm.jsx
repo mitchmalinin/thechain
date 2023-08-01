@@ -72,7 +72,7 @@ const JoinForm = () => {
   const [email, setEmail] = useState('');
   const [twitter, setTwitter] = useState('');
   const [linkedin, setLinkedin] = useState('');
-  const [occupation, setOccupation] = useState('');
+  const [occupation, setOccupation] = useState('Founder');
   const [reasons, setReasons] = useState('');
   const [contribution, setContribution] = useState('');
   const [heardFrom, setHeardFrom] = useState('Twitter');
@@ -328,8 +328,13 @@ const JoinForm = () => {
                           How did you hear about us?
                         </FormLabel>
                         <RadioBox
-                          stack='horizontal'
-                          options={['Twitter', 'Friends', 'Instagram']}
+                          stack='vertical'
+                          options={[
+                            'Twitter',
+                            'Dinner Club',
+                            'Instagram',
+                            'Texting Community'
+                          ]}
                           updateRadio={setHeardFrom}
                           defaultValue={heardFrom}
                           value={heardFrom}

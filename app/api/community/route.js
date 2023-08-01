@@ -40,6 +40,7 @@ export async function POST(request) {
         headers: { 'Content-Type': 'application/json' }
       });
     } catch (err) {
+      console.log(err);
       let error_response = {
         status: 'error'
       };

@@ -13,6 +13,7 @@ function RadioCard(props) {
       <Box
         {...checkbox}
         cursor='pointer'
+        w='200px'
         color={props.color}
         boxShadow='md'
         border='1px solid'

@@ -78,7 +78,7 @@ export const Consult = () => {
               </Text>
               <Text
                 color='black'
-                textAlign='left'
+                textAlign='center'
                 fontSize={{ sm: '14px', lg: '14px' }}
                 mt='5px'
                 opacity='0.5'
