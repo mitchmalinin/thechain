@@ -146,6 +146,7 @@ export const Dinner = () => {
                 height='100%'
                 width='100%'
                 placeholder='blur'
+                priority
               />
             </Zoom>
           </Box>
@@ -157,6 +158,7 @@ export const Dinner = () => {
                 height='100%'
                 width='100%'
                 placeholder='blur'
+                priority
               />
             </Zoom>
           </Box>
@@ -168,6 +170,7 @@ export const Dinner = () => {
                 height='100%'
                 width='100%'
                 placeholder='blur'
+                priority
               />
             </Zoom>
           </Box>
@@ -179,6 +182,7 @@ export const Dinner = () => {
                 height='100%'
                 width='100%'
                 placeholder='blur'
+                priority
               />
             </Zoom>
           </Box>
@@ -190,6 +194,7 @@ export const Dinner = () => {
                 height='100%'
                 width='100%'
                 placeholder='blur'
+                priority
               />
             </Zoom>
           </Box>
@@ -201,6 +206,7 @@ export const Dinner = () => {
                 height='100%'
                 width='100%'
                 placeholder='blur'
+                priority
               />
             </Zoom>
           </Box>
@@ -208,12 +214,14 @@ export const Dinner = () => {
       </Flex>
 
       <ChakraImage
-        src='/chain-color.png'
+        src='/chain-color.webp'
         alt='the chain'
         position='absolute'
         left='-680'
         id='chain-image'
         zIndex='-1'
+        h='auto'
+        w='auto'
       />
     </>
   );

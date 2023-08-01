@@ -21,7 +21,6 @@ import {
   ModalContent,
   Box
 } from '@chakra-ui/react';
-import { Web3Button } from '@web3modal/react';
 import { useState } from 'react';
 import { useAccount, useSignMessage } from 'wagmi';
 import { RadioBox } from '../shared/RadioBox';
@@ -56,8 +55,6 @@ const budgets = [
 ];
 
 const ConsultForm = () => {
-  const { address } = useAccount();
-
   const { signMessage, isLoading: signatureLoading } = useSignMessage({
     message: 'I hereby submit my application to the chain.',
     async onSuccess(data) {
@@ -125,7 +122,7 @@ const ConsultForm = () => {
       Phone: phone,
       Organization: organization,
       Comms: contactPreference,
-      Wallet: address,
+      // Wallet: address,
       'Project Type': projectType,
       'Project Name': projectName,
       'Project Description': projectDesc,
@@ -199,7 +196,7 @@ const ConsultForm = () => {
                         fontSize={{ sm: '14px', lg: '16px' }}
                       >
                         <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
-                          Hi, What's your name?
+                          Hi, what's your name?
                         </FormLabel>
                         <Input
                           fontSize={{ sm: '14px', lg: '16px' }}
@@ -212,7 +209,7 @@ const ConsultForm = () => {
 
                       <FormControl isRequired color='black'>
                         <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
-                          Email address
+                          Email Address
                         </FormLabel>
                         <Input
                           bg='white'
@@ -243,7 +240,7 @@ const ConsultForm = () => {
                         />
                       </FormControl>
 
-                      <FormControl isRequired color='black'>
+                      <FormControl color='black'>
                         <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
                           Company/Organization Name (if applicable)
                         </FormLabel>
@@ -278,7 +275,7 @@ const ConsultForm = () => {
                           color='black'
                         />
                       </FormControl>
-                      <FormControl>
+                      {/* <FormControl>
                         <FormLabel
                           color='black'
                           fontSize={{ sm: '14px', lg: '16px' }}
@@ -286,7 +283,7 @@ const ConsultForm = () => {
                           Your wallet address (auto fetched)
                         </FormLabel>
                         <Web3Button />
-                      </FormControl>
+                      </FormControl> */}
                     </Stack>
 
                     <Stack
@@ -369,7 +366,7 @@ const ConsultForm = () => {
 
                       <FormControl isRequired color='black' mb={10}>
                         <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
-                          Estimated budget
+                          Estimated Budget
                         </FormLabel>
                         <Select
                           bg='white'
@@ -427,9 +424,7 @@ const ConsultForm = () => {
                       _hover={{
                         opacity: '0.8'
                       }}
-                      isDisabled={
-                        !address || !name || !email || !phone || !projectName
-                      }
+                      isDisabled={!name || !email || !phone || !projectName}
                       isLoading={isLoading || signatureLoading}
                       loadingText={
                         signatureLoading

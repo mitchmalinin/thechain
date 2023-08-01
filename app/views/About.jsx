@@ -104,12 +104,14 @@ export const About = () => {
         </VStack>
 
         <ChakraImage
-          src='/chain-color.png'
+          src='/chain-color.webp'
           alt='the chain'
           position='absolute'
           right='-880'
           top='120'
           id='chain-image'
+          h='auto'
+          w='auto'
           zIndex='10'
         />
       </Flex>
