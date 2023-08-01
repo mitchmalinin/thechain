@@ -207,7 +207,7 @@ const JoinForm = () => {
                     >
                       <FormControl isRequired color='black' mb={10}>
                         <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
-                          Hi, What's your name?
+                          Hi, what's your name?
                         </FormLabel>
                         <Input
                           bg='white'
@@ -220,7 +220,7 @@ const JoinForm = () => {
 
                       <FormControl isRequired color='black'>
                         <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
-                          Email address?
+                          Email Address?
                         </FormLabel>
                         <Input
                           bg='white'
@@ -267,7 +267,7 @@ const JoinForm = () => {
 
                     <FormControl isRequired color='black' mb={10}>
                       <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
-                        What's your occupation?
+                        Profession?
                       </FormLabel>
                       <Select
                         bg='white'
@@ -346,7 +346,7 @@ const JoinForm = () => {
                           color='black'
                           fontSize={{ sm: '14px', lg: '16px' }}
                         >
-                          Your wallet address (auto fetched)
+                          Wallet Address
                         </FormLabel>
 
                         <Web3Button />
