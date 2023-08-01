@@ -17,12 +17,10 @@ const NoSSRConsultForm = dynamic(() => import('../forms/ConsultForm'), {
 export const Consult = () => {
   return (
     <Flex
-      id='consult-section'
+      id='consult'
       direction='column'
       alignItems='flex-start'
-      style={{
-        backdropFilter: 'blur(9.1px)'
-      }}
+      bg='#ccecff'
       p={{ lg: '4rem', sm: '2rem' }}
     >
       <Text
@@ -59,13 +57,11 @@ export const Consult = () => {
               justifyContent='flex-start'
               minH='150px'
               p='2rem'
-              // boxShadow='inset 6px 6px 7px #b6d1e1,
-              //   inset -6px -6px 7px #ceebfd'
-              boxShadow='inset 5px 5px 10px #e0e0e0,
-                inset -5px -5px 10px #ffffff'
+              boxShadow='inset 5px 5px 10px #c0def0,
+              inset -5px -5px 10px #d8faff'
               borderRadius='1rem'
             >
-              <Box color='#42b5ff' fontSize='36px' mb='1rem'>
+              <Box color='black' fontSize='36px' mb='1rem'>
                 {index == 0 && <BsFillCalendarEventFill />}
                 {index == 1 && <RiCommunityFill />}
                 {index == 2 && <FaBookOpen />}
@@ -73,7 +69,7 @@ export const Consult = () => {
               </Box>
 
               <Text
-                color='#42b5ff'
+                color='black'
                 fontSize={{ lg: '1rem', sm: '1rem' }}
                 fontWeight='bold'
                 mb='1rem'
@@ -82,7 +78,7 @@ export const Consult = () => {
               </Text>
               <Text
                 color='black'
-                textAlign='left'
+                textAlign='center'
                 fontSize={{ sm: '14px', lg: '14px' }}
                 mt='5px'
                 opacity='0.5'

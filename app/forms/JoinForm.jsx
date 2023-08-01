@@ -28,6 +28,9 @@ import { RadioBox } from '../shared/RadioBox';
 import { MdCelebration } from 'react-icons/md';
 
 import axios from 'axios';
+import jsonwebtoken from 'jsonwebtoken';
+
+import { JWT_SECRET } from '../config';
 
 const occupations = [
   'Founder',
@@ -69,7 +72,7 @@ const JoinForm = () => {
   const [email, setEmail] = useState('');
   const [twitter, setTwitter] = useState('');
   const [linkedin, setLinkedin] = useState('');
-  const [occupation, setOccupation] = useState('');
+  const [occupation, setOccupation] = useState('Founder');
   const [reasons, setReasons] = useState('');
   const [contribution, setContribution] = useState('');
   const [heardFrom, setHeardFrom] = useState('Twitter');
@@ -94,9 +97,21 @@ const JoinForm = () => {
   const validateSubmission = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.post(`/api/submission`, {
-        address: address
-      });
+      const { data } = await axios.post(
+        `/api/submission`,
+        {
+          address: address
+        },
+        {
+          headers: {
+            Authorization:
+              'Bearer ' +
+              jsonwebtoken.sign({ time: Date.now() }, JWT_SECRET, {
+                expiresIn: '1h'
+              })
+          }
+        }
+      );
       if (data.status === null) {
         signMessage();
       } else {
@@ -134,7 +149,15 @@ const JoinForm = () => {
     };
 
     try {
-      const { data } = await axios.post('/api/community', airtableInput);
+      const { data } = await axios.post('/api/community', airtableInput, {
+        headers: {
+          Authorization:
+            'Bearer ' +
+            jsonwebtoken.sign({ time: Date.now() }, JWT_SECRET, {
+              expiresIn: '1h'
+            })
+        }
+      });
       toast({
         position: 'bottom-left',
         render: () => (
@@ -305,8 +328,13 @@ const JoinForm = () => {
                           How did you hear about us?
                         </FormLabel>
                         <RadioBox
-                          stack='horizontal'
-                          options={['Twitter', 'Friends', 'Instagram']}
+                          stack='vertical'
+                          options={[
+                            'Twitter',
+                            'Dinner Club',
+                            'Instagram',
+                            'Texting Community'
+                          ]}
                           updateRadio={setHeardFrom}
                           defaultValue={heardFrom}
                           value={heardFrom}

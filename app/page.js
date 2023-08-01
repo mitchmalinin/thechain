@@ -1,51 +1,44 @@
-'use client';
+import Head from 'next/head';
+import Home from './Home';
 
-import { Flex, Text } from '@chakra-ui/react';
-import { useNetwork } from 'wagmi';
+export const metadata = {
+  title: 'The Chain',
+  description: 'A community for web3 builders in Miami.',
+  openGraph: {
+    title: 'The Chain',
+    description: 'A community for web3 builders in Miami.'
+  }
+};
 
-import { Team } from './views/Team';
-import { Consult } from './views/Consult';
-import { Dinner } from './views/Dinner';
-import { Origin } from './views/Origin';
-import { Offering } from './views/Offering';
-import { About } from './views/About';
-
-import { Footer } from './shared/Footer';
-
-export default function Home() {
-  const { chain } = useNetwork();
-
+export default function Index() {
   return (
-    <Flex
-      direction='column'
-      justifyContent='space-between'
-      minH='100vh'
-      maxW='80rem'
-      mx='auto'
-    >
-      <About />
-      <Origin />
-
-      <Flex direction='column'>
-        <Offering />
-        <Dinner />
-        <Consult />
-      </Flex>
-
-      <Team />
-      <Text
-        p={{ lg: '4rem', sm: '2rem' }}
-        id='quote'
-        fontSize={{ lg: '24px', sm: '18px' }}
-        textAlign='center'
-        bg='black'
-      >
-        Choose The Chain Miami as your trusted partner in community building and
-        unlock the full potential of your brand. Together, we will create a
-        thriving community that fosters growth, loyalty, and success.
-      </Text>
-
-      <Footer />
-    </Flex>
+    <>
+      <Head>
+        <title>The Chain</title>
+        <meta
+          name='description'
+          content='A community for web3 builders in Miami.'
+        />
+        <meta property='og:title' content='The Chain' />
+        <meta
+          property='og:description'
+          content='A community for web3 builders in Miami'
+        />
+        <meta name='twitter:title' content='The Chain' />
+        <meta
+          name='twitter:description'
+          content='A community for web3 builders in Miami'
+        />
+        <meta property='og:image' content='<generated>' />
+        <meta property='og:image:type' content='<generated>' />
+        <meta property='og:image:width' content='<generated>' />
+        <meta property='og:image:height' content='<generated>' />
+        <meta name='twitter:image' content='<generated>' />
+        <meta name='twitter:image:type' content='<generated>' />
+        <meta name='twitter:image:width' content='<generated>' />
+        <meta name='twitter:image:height' content='<generated>' />
+      </Head>
+      <Home />
+    </>
   );
 }

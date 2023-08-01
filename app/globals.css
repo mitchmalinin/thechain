@@ -27,13 +27,13 @@ html {
   background: #ff62c7;
 }
 
-#quote {
-  /* background: linear-gradient(
+#gradient {
+  background: linear-gradient(
     14deg,
     rgba(83, 206, 241, 1) 0%,
     rgba(255, 104, 211, 1) 51%,
     rgba(242, 239, 241, 1) 98%
-  ); */
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

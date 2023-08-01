@@ -10,7 +10,8 @@ import {
   Image as ChakraImage
 } from '@chakra-ui/react';
 import Image from 'next/image';
-import { Web3Button } from '@web3modal/react';
+
+import { Header } from '../shared/Header';
 import GroupPic from '../../public/chain_group_pic.png';
 
 export const About = () => {
@@ -28,55 +29,42 @@ export const About = () => {
         overflow='hidden'
       >
         <Flex
-          direction={{ lg: 'row', sm: 'column-reverse' }}
+          direction='column'
           alignItems='flex-start'
           border='2px solid white'
           borderRadius='20px'
           p={{ lg: '4rem', sm: '2rem' }}
-          background='rgba(0,0,0,.2)'
+          background='rgba(0,0,0,.4)'
           zIndex='20'
         >
+          <Header />
           <Flex direction='column'>
-            <ChakraImage
-              src='/the-chain-logo.png'
-              alt='logo'
-              w='150px'
-              mb='1rem'
-            />
-            <Text opacity='0.7'>A community for web3 builders in Miami</Text>
             <Text
-              mt='2rem'
               w={{ lg: '70%', sm: '100%' }}
-              fontSize={{ sm: '14px', lg: '16px' }}
+              fontSize={{ sm: '14px', lg: '24px' }}
             >
               Connecting our local community by hosting curated monthly dinners,
               sharing upcoming events and celebrating wins of our local tech
-              scenes through our weekly text updates.
+              scene through our weekly text updates.
             </Text>
-            <ChakraLink href='/#dinner-section'>
+            <Text opacity='0.7' mt='2rem'>
+              A community for web3 builders in Miami
+            </Text>
+            <ChakraLink w='200px' href='/#apply'>
               <Button
-                w='200px'
-                mt='1rem'
+                mt='15px'
                 bg='transparent'
-                border='2px solid white'
                 color='white'
+                border='2px solid white'
+                fontSize={{ lg: '16px', sm: '12px' }}
                 _hover={{
-                  opacity: '0.8'
+                  opacity: 0.6
                 }}
               >
-                Apply to Chain
+                Apply to Join
               </Button>
             </ChakraLink>
           </Flex>
-
-          <Box
-            minW='30%'
-            display='flex'
-            justifyContent='flex-end'
-            mb={{ sm: '1rem' }}
-          >
-            <Web3Button />
-          </Box>
         </Flex>
 
         <VStack
