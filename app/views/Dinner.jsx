@@ -32,7 +32,7 @@ export const Dinner = () => {
   return (
     <>
       <Flex
-        id='dinner-section'
+        id='apply'
         direction='column'
         alignItems='flex-start'
         mt='4rem'
@@ -74,46 +74,49 @@ export const Dinner = () => {
               monica@thechain.miami
             </Text>
           </VStack>
-          <VStack alignItems='center'>
+          <VStack alignItems='flex-start'>
             <HStack
-              bg='#0c9ef9'
-              w='100%'
+              bg='black'
               color='white'
               py='.5rem'
-              px='1rem'
-              borderRadius='10px'
-              opacity='0.8'
+              px='.8rem'
+              borderLeft='2px solid white'
+              justifyContent='flex-start'
             >
-              <MdBrunchDining />
-              <Text fontSize={{ sm: '14px', lg: '16px' }}>
+              <Text
+                fontSize={{ sm: '12px', lg: '16px' }}
+                textTransform='uppercase'
+              >
                 The first Tuesday of every month
               </Text>
             </HStack>
             <HStack
-              bg='#0c9ef9'
-              opacity='0.8'
-              w='100%'
+              bg='black'
               color='white'
               py='.5rem'
-              px='1rem'
-              borderRadius='10px'
+              px='.8rem'
+              borderLeft='2px solid white'
+              justifyContent='flex-start'
             >
-              <MdBrunchDining />
-              <Text fontSize={{ sm: '14px', lg: '16px' }}>
+              <Text
+                fontSize={{ sm: '12px', lg: '16px' }}
+                textTransform='uppercase'
+              >
                 A highly curated dinner of 15-20 web3 builders in Miami{' '}
               </Text>
             </HStack>
             <HStack
-              bg='#0c9ef9'
+              bg='black'
               color='white'
-              opacity='0.8'
-              w='100%'
               py='.5rem'
-              px='1rem'
-              borderRadius='10px'
+              px='.8rem'
+              borderLeft='2px solid white'
+              justifyContent='flex-start'
             >
-              <MdBrunchDining />
-              <Text fontSize={{ sm: '14px', lg: '16px' }}>
+              <Text
+                fontSize={{ sm: '12px', lg: '16px' }}
+                textTransform='uppercase'
+              >
                 Topics, special guests, meaningful connections
               </Text>
             </HStack>

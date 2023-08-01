@@ -65,7 +65,7 @@ export const Footer = () => {
               For Community
             </Text>
 
-            <ChakraLink href='/#dinner-section'>
+            <ChakraLink href='/#apply'>
               <Text
                 fontSize={{ lg: '16px', sm: '14px' }}
                 color='white'
@@ -84,8 +84,7 @@ export const Footer = () => {
             >
               For Clients
             </Text>
-
-            <ChakraLink href='/#consult-section'>
+            <ChakraLink href='/#consult'>
               <Text
                 fontSize={{ lg: '16px', sm: '14px' }}
                 color='white'
@@ -95,25 +94,14 @@ export const Footer = () => {
                 Hire Us
               </Text>
             </ChakraLink>
-            <Text
-              fontSize={{ lg: '16px', sm: '14px' }}
-              color='white'
-              cursor='pointer'
-              opacity='0.8'
-            >
-              Ask Q's
-            </Text>
-            <Text
-              fontSize={{ lg: '16px', sm: '14px' }}
-              color='white'
-              opacity='0.8'
-              cursor='pointer'
-            >
-              Past Clients
-            </Text>
           </VStack>
         </SimpleGrid>
       </Flex>
+      <Box bg='black' color='white' px={{ base: '2rem', lg: '5rem' }}>
+        <Text fontSize='12px' my='10px' textAlign='center'>
+          the chain miami © 2023
+        </Text>
+      </Box>
     </Flex>
   );
 };

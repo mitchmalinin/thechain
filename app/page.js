@@ -1,7 +1,6 @@
 'use client';
-
-import { Flex, Text } from '@chakra-ui/react';
-import { useNetwork } from 'wagmi';
+import Head from 'next/head';
+import { Flex } from '@chakra-ui/react';
 
 import { Team } from './views/Team';
 import { Consult } from './views/Consult';
@@ -13,39 +12,45 @@ import { About } from './views/About';
 import { Footer } from './shared/Footer';
 
 export default function Home() {
-  const { chain } = useNetwork();
-
   return (
-    <Flex
-      direction='column'
-      justifyContent='space-between'
-      minH='100vh'
-      maxW='80rem'
-      mx='auto'
-    >
-      <About />
-      <Origin />
-
-      <Flex direction='column'>
-        <Offering />
-        <Dinner />
-        <Consult />
-      </Flex>
-
-      <Team />
-      <Text
-        p={{ lg: '4rem', sm: '2rem' }}
-        id='quote'
-        fontSize={{ lg: '24px', sm: '18px' }}
-        textAlign='center'
-        bg='black'
+    <>
+      <Head>
+        <title>The Chain</title>
+        <meta
+          name='description'
+          content='A community for web3 builders in Miami.'
+        />
+        <meta property='og:title' content='The Chain' />
+        <meta
+          property='og:description'
+          content='A community for web3 builders in Miami'
+        />
+        <meta name='twitter:title' content='The Chain' />
+        <meta
+          name='twitter:description'
+          content='A community for web3 builders in Miami'
+        />
+      </Head>
+      <Flex
+        direction='column'
+        justifyContent='space-between'
+        minH='100vh'
+        maxW='80rem'
+        mx='auto'
       >
-        Choose The Chain Miami as your trusted partner in community building and
-        unlock the full potential of your brand. Together, we will create a
-        thriving community that fosters growth, loyalty, and success.
-      </Text>
+        <About />
+        <Origin />
 
-      <Footer />
-    </Flex>
+        <Flex direction='column'>
+          <Offering />
+          <Dinner />
+
+          <Consult />
+        </Flex>
+        <Team />
+
+        <Footer />
+      </Flex>
+    </>
   );
 }

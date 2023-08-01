@@ -11,7 +11,7 @@ export const Origin = () => {
       gap='5'
       columns={{ lg: '2', sm: '1' }}
       placeItems='center'
-      px={{ sm: '2rem' }}
+      px={{ lg: '4rem', sm: '2rem' }}
     >
       <VStack alignItems='flex-start'>
         <Text
@@ -23,22 +23,21 @@ export const Origin = () => {
           The Chain's Origin Story:
         </Text>
         <Text opacity='0.8' fontSize={{ sm: '14px', lg: '16px' }}>
-          Uniting Miami's Web3 Community In the midst of the bull run of 2022,
-          Monica discovered a remarkable truth about Miami – a city with people
-          passionate about web3, yet no place for them to connect.{' '}
+          In the midst of the bull run of 2022, Monica discovered a remarkable
+          truth about Miami – a city with people passionate about web3, yet no
+          place for them to connect.
         </Text>
         <Text opacity='0.8' fontSize={{ sm: '14px', lg: '16px' }}>
-          With a simple tweet to gauge the presence of the web3 community,
-          Monica's expectations were surpassed as engagement flooded in,
-          revealing an undeniable need for connection and IRL community for web3
-          builders.
+          With a simple tweet to gauge the presence of the local web3 community,
+          Monica's expectations were surpassed revealing an undeniable need for
+          connection and IRL community for web3 builders in Miami.
         </Text>
         <Text opacity='0.8' fontSize={{ sm: '14px', lg: '16px' }}>
-          In June 2022, The Chain was born, assembling the best local builders
-          and forward-thinkers in the web3 space through hosting monthly dinners
-          and keeping the local web3 community up-to-date by launching a texting
-          community that shares weekly texts about upcoming events, and a
-          celebration of community wins.
+          In June 2022, The Chain was born, a community for local builders and
+          forward-thinkers in the web3 space to connect through monthly dinners
+          and keep the local web3 community up-to-date by launching a texting
+          community that shares upcoming events, and a celebration of community
+          wins.
         </Text>
         <Text opacity='0.8' fontSize={{ sm: '14px', lg: '16px' }}>
           In the past year, we've hosted 12 dinners & experiences, uniting 500+

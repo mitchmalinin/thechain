@@ -11,7 +11,7 @@ import { Web3Modal } from '@web3modal/react';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { gnosis, mainnet, goerli, sepolia } from 'wagmi/chains';
 import { Box } from '@chakra-ui/react';
-import Head from 'next/head';
+
 import { Analytics } from '@vercel/analytics/react';
 
 import { Providers } from './providers';
@@ -37,23 +37,6 @@ export default function RootLayout({ children }) {
         <WagmiConfig config={wagmiConfig}>
           <Providers>
             <Box>
-              {/* <Head>
-                <title>WrapnWrap</title>
-                <meta
-                  name='description'
-                  content='Wrap and Unwrap chain specific gas tokens.'
-                />
-                <meta property='og:title' content='WrapnWrap' />
-                <meta
-                  property='og:description'
-                  content='Wrap and Unwrap chain specific gas tokens.'
-                />
-                <meta name='twitter:title' content='WrapnWrap' />
-                <meta
-                  name='twitter:description'
-                  content='Wrap and Unwrap chain specific gas tokens.'
-                />
-              </Head> */}
               {children}
               <Analytics />
             </Box>
