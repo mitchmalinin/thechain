@@ -3,6 +3,7 @@ import {
   Stack,
   FormControl,
   FormLabel,
+  FormHelperText,
   Input,
   Select,
   Textarea,
@@ -298,9 +299,16 @@ const JoinForm = () => {
                         h='100px'
                         fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder='Please say a few words about you and why you would like to become a member of The Chain. What are your interests? Who are you looking to meet? Any hobbies / interests outside of work?'
-                        onChange={(e) => setReasons(e.target.value)}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 200) {
+                            setReasons(e.target.value);
+                          }
+                        }}
                         value={reasons}
                       />
+                      <FormHelperText textTransform='uppercase'>
+                        {200 - reasons.length} chars left
+                      </FormHelperText>
                     </FormControl>
 
                     <FormControl isRequired color='black' mb={10}>
@@ -310,9 +318,15 @@ const JoinForm = () => {
                         h='100px'
                         fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder='What do you want to contribute to the community? What areas of expertise or resources can you offer the community?'
-                        onChange={(e) => setContribution(e.target.value)}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 200)
+                            setContribution(e.target.value);
+                        }}
                         value={contribution}
                       />
+                      <FormHelperText textTransform='uppercase'>
+                        {200 - contribution.length} chars left
+                      </FormHelperText>
                     </FormControl>
 
                     <Stack
@@ -360,9 +374,16 @@ const JoinForm = () => {
                         h='100px'
                         fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder='Anything else? Is there something you’d like to share, ask or offer? This is your time to ask!'
-                        onChange={(e) => setExtras(e.target.value)}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 200) {
+                            setExtras(e.target.value);
+                          }
+                        }}
                         value={extras}
                       />
+                      <FormHelperText textTransform='uppercase'>
+                        {200 - extras.length} chars left
+                      </FormHelperText>
                     </FormControl>
 
                     <Button

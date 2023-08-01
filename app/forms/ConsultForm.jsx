@@ -6,6 +6,7 @@ import {
   Input,
   Select,
   Textarea,
+  FormHelperText,
   Button,
   AccordionButton,
   Accordion,
@@ -22,7 +23,7 @@ import {
   Box
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useAccount, useSignMessage } from 'wagmi';
+import { useSignMessage } from 'wagmi';
 import { RadioBox } from '../shared/RadioBox';
 import { MdCelebration } from 'react-icons/md';
 import axios from 'axios';
@@ -329,8 +330,14 @@ const ConsultForm = () => {
                         fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder='Briefly describe the nature of the consulting project or services you’re interested in.'
                         value={projectDesc}
-                        onChange={(e) => setProjectDesc(e.target.value)}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 200)
+                            setProjectDesc(e.target.value);
+                        }}
                       />
+                      <FormHelperText textTransform='uppercase'>
+                        {200 - projectDesc.length} chars left
+                      </FormHelperText>
                     </FormControl>
 
                     <Stack
@@ -399,8 +406,14 @@ const ConsultForm = () => {
                         fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder='What specific challenges or issues are you looking to address through The Chain’s consulting?'
                         value={issues}
-                        onChange={(e) => setIssues(e.target.value)}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 200)
+                            setIssues(e.target.value);
+                        }}
                       />
+                      <FormHelperText textTransform='uppercase'>
+                        {200 - issues.length} chars left
+                      </FormHelperText>
                     </FormControl>
 
                     <FormControl isRequired color='black' mb={10}>
@@ -411,8 +424,14 @@ const ConsultForm = () => {
                         fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder='Additional Information / questions.'
                         value={extras}
-                        onChange={(e) => setExtras(e.target.value)}
+                        onChange={(e) => {
+                          if (e.target.value.length <= 200)
+                            setExtras(e.target.value);
+                        }}
                       />
+                      <FormHelperText textTransform='uppercase'>
+                        {200 - extras.length} chars left
+                      </FormHelperText>
                     </FormControl>
 
                     <Button
