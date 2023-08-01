@@ -1,17 +1,16 @@
-'use client';
 import Head from 'next/head';
-import { Flex } from '@chakra-ui/react';
+import Home from './Home';
 
-import { Team } from './views/Team';
-import { Consult } from './views/Consult';
-import { Dinner } from './views/Dinner';
-import { Origin } from './views/Origin';
-import { Offering } from './views/Offering';
-import { About } from './views/About';
+export const metadata = {
+  title: 'The Chain',
+  description: 'A community for web3 builders in Miami.',
+  openGraph: {
+    title: 'The Chain',
+    description: 'A community for web3 builders in Miami.'
+  }
+};
 
-import { Footer } from './shared/Footer';
-
-export default function Home() {
+export default function Index() {
   return (
     <>
       <Head>
@@ -31,26 +30,7 @@ export default function Home() {
           content='A community for web3 builders in Miami'
         />
       </Head>
-      <Flex
-        direction='column'
-        justifyContent='space-between'
-        minH='100vh'
-        maxW='80rem'
-        mx='auto'
-      >
-        <About />
-        <Origin />
-
-        <Flex direction='column'>
-          <Offering />
-          <Dinner />
-
-          <Consult />
-        </Flex>
-        <Team />
-
-        <Footer />
-      </Flex>
+      <Home />
     </>
   );
 }
