@@ -27,6 +27,9 @@ import { useAccount, useSignMessage } from 'wagmi';
 import { RadioBox } from '../shared/RadioBox';
 import { MdCelebration } from 'react-icons/md';
 import axios from 'axios';
+import jsonwebtoken from 'jsonwebtoken';
+
+import { JWT_SECRET } from '../config';
 
 const services = [
   'Community Strategy (ideation, launch, planning)',
@@ -133,7 +136,15 @@ const ConsultForm = () => {
     };
 
     try {
-      const { data } = await axios.post('/api/consultation', airtableInput);
+      const { data } = await axios.post('/api/consultation', airtableInput, {
+        headers: {
+          Authorization:
+            'Bearer ' +
+            jsonwebtoken.sign({ time: Date.now() }, JWT_SECRET, {
+              expiresIn: '1h'
+            })
+        }
+      });
       toast({
         position: 'bottom-left',
         render: () => (
