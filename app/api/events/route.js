@@ -1,38 +1,6 @@
 import { NextResponse } from 'next/server';
-import airtable from 'airtable';
 import jsonwebtoken from 'jsonwebtoken';
-
 import { headers } from 'next/headers';
-import { Resend } from 'resend';
-
-import { EmailTemplate } from '@/app/components/emailTemplate';
-
-const RESEND = new Resend(process.env.RESEND_API_KEY);
-const COMMUNITY_BASE_ID = process.env.AIRTABLE_COMMUNITY_BASE_ID;
-
-airtable.configure({
-  endpointUrl: 'https://api.airtable.com',
-  apiKey: process.env.AIRTABLE_TOKEN
-});
-
-const base = airtable.base(COMMUNITY_BASE_ID);
-export const CommunityApplicationsTable = base('Applications');
-
-const tryMail = async (toEmail, firstName) => {
-  const SUBJECT = 'Welcome! 👋You’re officially a Member of The Chain Miami';
-  const FROM_EMAIL = 'Monica <onboarding@hello.thechain.miami>';
-
-  try {
-    const data = await RESEND.emails.send({
-      from: FROM_EMAIL,
-      to: [toEmail],
-      subject: SUBJECT,
-      react: EmailTemplate({ firstName: firstName })
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 export async function POST(request) {
   const headersList = headers();
@@ -50,12 +18,25 @@ export async function POST(request) {
     jsonwebtoken.verify(token, process.env.JWT_SECRET);
     try {
       const json = await request.json();
-      await CommunityApplicationsTable.create(json);
-      let json_response = {
-        status: 'success'
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          'x-luma-api-key': process.env.LUMA_API_KEY
+        }
       };
 
-      tryMail(json.Email, json.Name);
+      let response = await fetch(
+        `https://api.lu.ma/public/v1/calendar/list-events?after=${json.date}&series_mode=sessions`,
+        options
+      );
+
+      response = await response.json();
+
+      let json_response = {
+        status: 'success',
+        data: response.entries
+      };
 
       return new NextResponse(JSON.stringify(json_response), {
         status: 201,

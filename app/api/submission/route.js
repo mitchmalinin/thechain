@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import airtable from 'airtable';
-
-import jsonwebtoken from 'jsonwebtoken';
 
 import { headers } from 'next/headers';
+
+import jsonwebtoken from 'jsonwebtoken';
+import airtable from 'airtable';
 
 const COMMUNITY_BASE_ID = process.env.AIRTABLE_COMMUNITY_BASE_ID;
 

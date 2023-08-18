@@ -87,7 +87,7 @@ const JoinForm = () => {
     setEmail('');
     setTwitter('');
     setLinkedin('');
-    setOccupation('');
+    setOccupation('Founder');
     setReasons('');
     setContribution('');
     setHeardFrom('Twitter');
