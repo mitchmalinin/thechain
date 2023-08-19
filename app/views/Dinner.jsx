@@ -7,10 +7,13 @@ import {
   SimpleGrid,
   Image as ChakraImage,
   HStack,
-  Box
+  Box,
+  Button
 } from '@chakra-ui/react';
 
-import { MdBrunchDining } from 'react-icons/md';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import jsonwebtoken from 'jsonwebtoken';
 import Zoom from 'react-medium-image-zoom';
 import Masonry from 'react-masonry-css';
 import 'react-medium-image-zoom/dist/styles.css';
@@ -24,11 +27,37 @@ import ImageFour from '../../public/dinner_club_4.png';
 import ImageFive from '../../public/dinner_club_5.png';
 import ImageSix from '../../public/dinner_club_6.png';
 
+import { JWT_SECRET } from '../config';
+
 const NoSSRJoinForm = dynamic(() => import('../forms/JoinForm'), {
   ssr: false
 });
 
 export const Dinner = () => {
+  const [events, setEvents] = useState([]);
+
+  const getEvents = async () => {
+    const { data } = await axios.post(
+      '/api/events',
+      { date: new Date().toISOString() },
+      {
+        headers: {
+          Authorization:
+            'Bearer ' +
+            jsonwebtoken.sign({ time: Date.now() }, JWT_SECRET, {
+              expiresIn: '1h'
+            })
+        }
+      }
+    );
+
+    setEvents(data.data);
+  };
+
+  useEffect(() => {
+    getEvents();
+  }, []);
+
   return (
     <>
       <Flex
@@ -124,6 +153,80 @@ export const Dinner = () => {
         </SimpleGrid>
         <NoSSRJoinForm />
       </Flex>
+
+      <SimpleGrid
+        columns='1'
+        bg='black'
+        minH='300px'
+        py={{ lg: '4rem', sm: '2rem' }}
+        px={{ lg: '4rem', sm: '2rem' }}
+      >
+        <Text
+          fontSize={{ lg: '24px', sm: '18px' }}
+          mb='1rem'
+          color='#ff62c7'
+          fontWeight='bold'
+        >
+          Upcoming Events
+        </Text>
+        {events.length > 0 ? (
+          events.map((record, index) => {
+            return (
+              <Flex
+                key={index}
+                w='100%'
+                direction={{ lg: 'row', sm: 'column-reverse' }}
+                bg='black'
+                py='1rem'
+                color='white'
+                alignItems='center'
+                justifyContent='space-between'
+                borderRadius='5px'
+              >
+                <Flex direction='column'>
+                  <Text
+                    fontSize='14px'
+                    mb='10px'
+                    color='rgba(255, 173, 226, 0.67)'
+                    textTransform='uppercase'
+                  >
+                    {new Date(record.event.start_at).toString()}
+                  </Text>
+                  <Text fontSize={{ lg: '24px', sm: '18px' }} maxW='80%'>
+                    {record.event.name}
+                  </Text>
+                  <Button
+                    w={{ lg: '200px', sm: '100px' }}
+                    mt='20px'
+                    fontSize={{ sm: '16px' }}
+                    onClick={() =>
+                      window.open(record.event.url, '_blank').focus()
+                    }
+                  >
+                    RSVP
+                  </Button>
+                </Flex>
+                <ChakraImage
+                  w={{ lg: '500px', sm: '200px' }}
+                  mb={{ lg: 0, sm: '1rem' }}
+                  src={record.event.cover_url}
+                  alt='event cover'
+                />
+              </Flex>
+            );
+          })
+        ) : (
+          <Text
+            fontSize='14px'
+            mb='2rem'
+            textAlign='center'
+            color='white'
+            textTransform='uppercase'
+          >
+            No events to show now
+          </Text>
+        )}
+      </SimpleGrid>
 
       <Flex
         px={{ lg: '3rem', sm: '2rem' }}

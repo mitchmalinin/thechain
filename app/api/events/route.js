@@ -1,31 +1,6 @@
 import { NextResponse } from 'next/server';
-
-import { headers } from 'next/headers';
-
 import jsonwebtoken from 'jsonwebtoken';
-import airtable from 'airtable';
-
-const COMMUNITY_BASE_ID = process.env.AIRTABLE_COMMUNITY_BASE_ID;
-
-airtable.configure({
-  endpointUrl: 'https://api.airtable.com',
-  apiKey: process.env.AIRTABLE_TOKEN
-});
-
-const base = airtable.base(COMMUNITY_BASE_ID);
-export const CommunityApplicationsTable = base('Applications');
-
-const fetchSubmission = async (wallet) => {
-  const response = await CommunityApplicationsTable.select({
-    fields: ['ID', 'Wallet']
-  }).all();
-
-  let filteredRes = response.filter(
-    (res) => res.fields['Wallet'].toLowerCase() === wallet.toLowerCase()
-  );
-
-  return filteredRes[0] ? filteredRes[0].fields : null;
-};
+import { headers } from 'next/headers';
 
 export async function POST(request) {
   const headersList = headers();
@@ -43,11 +18,24 @@ export async function POST(request) {
     jsonwebtoken.verify(token, process.env.JWT_SECRET);
     try {
       const json = await request.json();
+      const options = {
+        method: 'GET',
+        headers: {
+          accept: 'application/json',
+          'x-luma-api-key': process.env.LUMA_API_KEY
+        }
+      };
 
-      let submission = await fetchSubmission(json.address);
+      let response = await fetch(
+        `https://api.lu.ma/public/v1/calendar/list-events?after=${json.date}&series_mode=sessions`,
+        options
+      );
+
+      response = await response.json();
 
       let json_response = {
-        status: submission
+        status: 'success',
+        data: response.entries
       };
 
       return new NextResponse(JSON.stringify(json_response), {

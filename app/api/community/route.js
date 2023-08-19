@@ -3,7 +3,11 @@ import airtable from 'airtable';
 import jsonwebtoken from 'jsonwebtoken';
 
 import { headers } from 'next/headers';
+import { Resend } from 'resend';
 
+import { EmailTemplate } from '@/app/components/emailTemplate';
+
+const RESEND = new Resend(process.env.RESEND_API_KEY);
 const COMMUNITY_BASE_ID = process.env.AIRTABLE_COMMUNITY_BASE_ID;
 
 airtable.configure({
@@ -13,6 +17,22 @@ airtable.configure({
 
 const base = airtable.base(COMMUNITY_BASE_ID);
 export const CommunityApplicationsTable = base('Applications');
+
+const tryMail = async (toEmail, firstName) => {
+  const SUBJECT = 'The Chain Miami - Application Received';
+  const FROM_EMAIL = 'Monica <hello@thechain.miami>';
+
+  try {
+    const data = await RESEND.emails.send({
+      from: FROM_EMAIL,
+      to: [toEmail],
+      subject: SUBJECT,
+      react: EmailTemplate({ firstName: firstName })
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export async function POST(request) {
   const headersList = headers();
@@ -34,6 +54,8 @@ export async function POST(request) {
       let json_response = {
         status: 'success'
       };
+
+      tryMail(json.Email, json.Name);
 
       return new NextResponse(JSON.stringify(json_response), {
         status: 201,
