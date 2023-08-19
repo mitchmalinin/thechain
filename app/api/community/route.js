@@ -19,8 +19,8 @@ const base = airtable.base(COMMUNITY_BASE_ID);
 export const CommunityApplicationsTable = base('Applications');
 
 const tryMail = async (toEmail, firstName) => {
-  const SUBJECT = 'Welcome! 👋You’re officially a Member of The Chain Miami';
-  const FROM_EMAIL = 'Monica <onboarding@hello.thechain.miami>';
+  const SUBJECT = 'The Chain Miami - Application Received';
+  const FROM_EMAIL = 'Monica <hello@thechain.miami>';
 
   try {
     const data = await RESEND.emails.send({

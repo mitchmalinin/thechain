@@ -403,7 +403,25 @@ const JoinForm = () => {
                         opacity: '0.8'
                       }}
                       onClick={() => {
-                        validateSubmission();
+                        const regex =
+                          /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                        if (regex.test(email)) {
+                          validateSubmission();
+                        } else {
+                          toast({
+                            position: 'bottom-left',
+                            render: () => (
+                              <HStack
+                                color='white'
+                                p={3}
+                                fontSize='14px'
+                                bg='#1413146f'
+                              >
+                                <Text>Not a valid email address.</Text>
+                              </HStack>
+                            )
+                          });
+                        }
                       }}
                     >
                       Submit Application
