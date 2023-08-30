@@ -6,6 +6,7 @@ import { headers } from 'next/headers';
 import { Resend } from 'resend';
 
 import { EmailTemplate } from '@/app/components/emailTemplate';
+import { NotifyAdminEmail } from '@/app/components/notifyAdminEmail';
 
 const RESEND = new Resend(process.env.RESEND_API_KEY);
 const COMMUNITY_BASE_ID = process.env.AIRTABLE_COMMUNITY_BASE_ID;
@@ -18,7 +19,7 @@ airtable.configure({
 const base = airtable.base(COMMUNITY_BASE_ID);
 export const CommunityApplicationsTable = base('Applications');
 
-const tryMail = async (toEmail, firstName) => {
+const notifyApplicantEmail = async (toEmail, firstName) => {
   const SUBJECT = 'The Chain Miami - Application Received';
   const FROM_EMAIL = 'Monica <hello@thechain.miami>';
 
@@ -28,6 +29,22 @@ const tryMail = async (toEmail, firstName) => {
       to: [toEmail],
       subject: SUBJECT,
       react: EmailTemplate({ firstName: firstName })
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const notifyAdminEmail = async (firstName, recordId) => {
+  const SUBJECT = 'The Chain Miami - New Applicant';
+  const FROM_EMAIL = 'Notifications <hello@thechain.miami>';
+
+  try {
+    const data = await RESEND.emails.send({
+      from: FROM_EMAIL,
+      to: ['monica@thechain.miami'],
+      subject: SUBJECT,
+      react: NotifyAdminEmail({ firstName: firstName, recordId: recordId })
     });
   } catch (err) {
     console.log(err);
@@ -50,12 +67,13 @@ export async function POST(request) {
     jsonwebtoken.verify(token, process.env.JWT_SECRET);
     try {
       const json = await request.json();
-      await CommunityApplicationsTable.create(json);
+      let record = await CommunityApplicationsTable.create(json);
       let json_response = {
         status: 'success'
       };
-
-      tryMail(json.Email, json.Name);
+      console.log(record);
+      notifyApplicantEmail(json.Email, json.Name);
+      notifyAdminEmail(json.Name, record.id);
 
       return new NextResponse(JSON.stringify(json_response), {
         status: 201,
