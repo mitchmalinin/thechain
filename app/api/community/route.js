@@ -72,8 +72,9 @@ export async function POST(request) {
         status: 'success'
       };
       console.log(record);
-      notifyApplicantEmail(json.Email, json.Name);
-      notifyAdminEmail(json.Name, record.id);
+
+      await notifyApplicantEmail(json.Email, json.Name);
+      await notifyAdminEmail(json.Name, record.id);
 
       return new NextResponse(JSON.stringify(json_response), {
         status: 201,
