@@ -1,4 +1,3 @@
-import { withRateLimit } from "@vercel/rate-limiter"
 import airtable from "airtable"
 import { NextResponse } from "next/server"
 
@@ -50,7 +49,7 @@ const notifyAdminEmail = async (firstName, recordId) => {
   }
 }
 
-const POST = async (request) => {
+export async function POST(request) {
   try {
     const json = await request.json()
     let record = await CommunityApplicationsTable.create(json)
@@ -77,8 +76,3 @@ const POST = async (request) => {
     })
   }
 }
-
-export default withRateLimit({
-  max: 10,
-  timeWindow: "1 minute",
-})(POST)
