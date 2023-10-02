@@ -1,3 +1,4 @@
+import { withRateLimit } from "@vercel/rate-limiter"
 import airtable from "airtable"
 import { NextResponse } from "next/server"
 
