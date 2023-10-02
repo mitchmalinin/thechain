@@ -37,19 +37,9 @@ export const Dinner = () => {
   const [events, setEvents] = useState([])
 
   const getEvents = async () => {
-    const { data } = await axios.post(
-      "/api/events",
-      { date: new Date().toISOString() },
-      {
-        headers: {
-          Authorization:
-            "Bearer " +
-            jsonwebtoken.sign({ time: Date.now() }, JWT_SECRET, {
-              expiresIn: "1h",
-            }),
-        },
-      }
-    )
+    const { data } = await axios.post("/api/events", {
+      date: new Date().toISOString(),
+    })
 
     setEvents(data.data)
   }
