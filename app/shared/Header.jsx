@@ -100,7 +100,7 @@ export const Header = () => {
                     Team
                   </ChakraLink>
                   <Box display="flex" justifyContent="flex-end" ml="10px">
-                    <ConnectButton />
+                    <ConnectButton chainStatus="none" showBalance={false} />
                   </Box>
                 </VStack>
               </DrawerBody>
@@ -143,7 +143,7 @@ export const Header = () => {
           </ChakraLink>
 
           <Box display="flex" justifyContent="flex-end" ml="10px">
-            <ConnectButton />
+            <ConnectButton chainStatus="none" showBalance={false} />
           </Box>
         </HStack>
       )}

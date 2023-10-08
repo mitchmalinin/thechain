@@ -31,6 +31,7 @@ import { RadioBox } from "../shared/RadioBox"
 import axios from "axios"
 import jsonwebtoken from "jsonwebtoken"
 
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { JWT_SECRET } from "../config"
 
 const occupations = [
@@ -351,7 +352,7 @@ const JoinForm = () => {
                           Wallet Address
                         </FormLabel>
 
-                        <Web3Button />
+                        <ConnectButton chainStatus="none" showBalance={false} />
                       </FormControl>
                     </Stack>
 
