@@ -31,12 +31,10 @@ const wagmiConfig = createConfig({
   connectors,
   publicClient,
 })
-const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 const getSiweMessageOptions = () => ({
   statement: "Sign in to my RainbowKit app",
 })
-
 export function Providers({ children, ...props }) {
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -44,7 +42,12 @@ export function Providers({ children, ...props }) {
         <RainbowKitSiweNextAuthProvider
           getSiweMessageOptions={getSiweMessageOptions}
         >
-          <RainbowKitProvider chains={chains} theme={darkTheme()}>
+          <RainbowKitProvider
+            coolMode
+            chains={chains}
+            theme={darkTheme()}
+            modalSize="compact"
+          >
             <CacheProvider>
               <ChakraProvider theme={theme}>{children}</ChakraProvider>
             </CacheProvider>
