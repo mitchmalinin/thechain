@@ -21,7 +21,7 @@ const chains = [gnosis, mainnet, goerli, sepolia]
 const { publicClient } = configureChains(chains, [publicProvider()])
 
 const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
+  appName: "The Chain",
   projectId: projectId,
   chains,
 })
@@ -33,7 +33,7 @@ const wagmiConfig = createConfig({
 })
 
 const getSiweMessageOptions = () => ({
-  statement: "Sign in to my RainbowKit app",
+  statement: "Sign in to The Chain",
 })
 export function Providers({ children, ...props }) {
   return (
