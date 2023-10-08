@@ -20,13 +20,16 @@ import {
 } from "@chakra-ui/react"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { Web3Button } from "@web3modal/react"
+import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
 export const Header = () => {
   const router = useRouter()
   const isMobile = useBreakpointValue({ base: true, md: false })
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { data: session } = useSession()
 
+  console.log("session", session)
   const handleNavigation = (section) => {
     router.push(`/#${section}`)
     onClose()
@@ -138,6 +141,7 @@ export const Header = () => {
           >
             Team
           </ChakraLink>
+
           <Box display="flex" justifyContent="flex-end" ml="10px">
             <ConnectButton />
           </Box>

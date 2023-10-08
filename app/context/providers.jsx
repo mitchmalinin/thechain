@@ -6,6 +6,7 @@ import {
   darkTheme,
   getDefaultWallets,
 } from "@rainbow-me/rainbowkit"
+import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth"
 import { EthereumClient, w3mProvider } from "@web3modal/ethereum"
 import { Web3Modal } from "@web3modal/react"
 import { SessionProvider } from "next-auth/react"
@@ -21,7 +22,7 @@ const { publicClient } = configureChains(chains, [publicProvider()])
 
 const { connectors } = getDefaultWallets({
   appName: "My RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
+  projectId: projectId,
   chains,
 })
 
@@ -32,16 +33,24 @@ const wagmiConfig = createConfig({
 })
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
+const getSiweMessageOptions = () => ({
+  statement: "Sign in to my RainbowKit app",
+})
+
 export function Providers({ children, ...props }) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains} theme={darkTheme()}>
-        <SessionProvider session={props.session}>
-          <CacheProvider>
-            <ChakraProvider theme={theme}>{children}</ChakraProvider>
-          </CacheProvider>{" "}
-        </SessionProvider>
-      </RainbowKitProvider>
+      <SessionProvider session={props.session}>
+        <RainbowKitSiweNextAuthProvider
+          getSiweMessageOptions={getSiweMessageOptions}
+        >
+          <RainbowKitProvider chains={chains} theme={darkTheme()}>
+            <CacheProvider>
+              <ChakraProvider theme={theme}>{children}</ChakraProvider>
+            </CacheProvider>
+          </RainbowKitProvider>
+        </RainbowKitSiweNextAuthProvider>
+      </SessionProvider>
     </WagmiConfig>
   )
 }
