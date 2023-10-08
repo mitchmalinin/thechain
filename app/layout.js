@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react"
 
+import "@rainbow-me/rainbowkit/styles.css"
 import { Analytics } from "@vercel/analytics/react"
 import { Poppins } from "next/font/google"
 import "./globals.css"

@@ -18,6 +18,7 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { Web3Button } from "@web3modal/react"
 import { useRouter } from "next/navigation"
 
@@ -95,7 +96,9 @@ export const Header = () => {
                   >
                     Team
                   </ChakraLink>
-                  <Box display="flex" justifyContent="flex-end" ml="10px"></Box>
+                  <Box display="flex" justifyContent="flex-end" ml="10px">
+                    <ConnectButton />
+                  </Box>
                 </VStack>
               </DrawerBody>
             </DrawerContent>
@@ -135,7 +138,9 @@ export const Header = () => {
           >
             Team
           </ChakraLink>
-          <Box display="flex" justifyContent="flex-end" ml="10px"></Box>
+          <Box display="flex" justifyContent="flex-end" ml="10px">
+            <ConnectButton />
+          </Box>
         </HStack>
       )}
     </Flex>
