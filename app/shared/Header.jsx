@@ -95,9 +95,7 @@ export const Header = () => {
                   >
                     Team
                   </ChakraLink>
-                  <Box display="flex" justifyContent="flex-end" ml="10px">
-                    <Web3Button label="Sign In" />
-                  </Box>
+                  <Box display="flex" justifyContent="flex-end" ml="10px"></Box>
                 </VStack>
               </DrawerBody>
             </DrawerContent>
@@ -137,9 +135,7 @@ export const Header = () => {
           >
             Team
           </ChakraLink>
-          <Box display="flex" justifyContent="flex-end" ml="10px">
-            <Web3Button label="Sign In" />
-          </Box>
+          <Box display="flex" justifyContent="flex-end" ml="10px"></Box>
         </HStack>
       )}
     </Flex>

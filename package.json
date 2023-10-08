@@ -21,10 +21,11 @@
     "@web3modal/react": "^2.7.0",
     "airtable": "^0.12.1",
     "axios": "^1.4.0",
-    "ethers": "^6.6.5",
+    "ethers": "^6.7.1",
     "framer-motion": "^10.13.1",
     "jsonwebtoken": "^8.5.1",
     "next": "13.4.12",
+    "next-auth": "^4.23.2",
     "pino-pretty": "^10.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -33,8 +34,9 @@
     "react-medium-image-zoom": "^5.1.6",
     "react-tweet": "^3.0.3",
     "resend": "^0.17.2",
+    "siwe": "^2.1.4",
     "viem": "^1.4.1",
-    "wagmi": "^1.3.9"
+    "wagmi": "^1.4.3"
   },
   "devDependencies": {
     "tap": "^18.4.2"
