@@ -1,3 +1,4 @@
+import { CheckboxGroup } from "@chakra-ui/react"
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { getCsrfToken } from "next-auth/react"
@@ -24,6 +25,10 @@ export function getAuthOptions() {
             return null
           }
 
+          console.log("this is runnin", siwe, req, {
+            req: { headers: req.headers },
+          })
+
           if (
             siwe.nonce !==
             (await getCsrfToken({ req: { headers: req.headers } }))
@@ -36,6 +41,14 @@ export function getAuthOptions() {
             domain: nextAuthUrl.host,
             nonce: await getCsrfToken({ req }),
           })
+
+          console.log(
+            "this is runnin",
+            siwe,
+            req,
+            { req: { headers: req.headers } },
+            result
+          )
 
           if (result.success) {
             return {
