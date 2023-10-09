@@ -1,3 +1,3 @@
 export default function Index() {
-  return <div>Membership Page</div>
+  return <div>Membership Page TEST</div>
 }
