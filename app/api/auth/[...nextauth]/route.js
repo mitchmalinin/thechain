@@ -25,10 +25,6 @@ export function getAuthOptions() {
             return null
           }
 
-          console.log("this is runnin", siwe, req, {
-            req: { headers: req.headers },
-          })
-
           if (
             siwe.nonce !==
             (await getCsrfToken({ req: { headers: req.headers } }))
@@ -39,16 +35,8 @@ export function getAuthOptions() {
           const result = await siwe.verify({
             signature: credentials?.signature || "",
             domain: nextAuthUrl.host,
-            nonce: await getCsrfToken({ req }),
+            nonce: await getCsrfToken({ req: { headers: req.headers } }),
           })
-
-          console.log(
-            "this is runnin",
-            siwe,
-            req,
-            { req: { headers: req.headers } },
-            result
-          )
 
           if (result.success) {
             return {
