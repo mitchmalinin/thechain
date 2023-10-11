@@ -21,78 +21,58 @@ import {
   Text,
   Textarea,
   useToast,
-} from "@chakra-ui/react"
-import { Web3Button } from "@web3modal/react"
-import { useState } from "react"
-import { MdCelebration } from "react-icons/md"
-import { useAccount, useSignMessage } from "wagmi"
-import { RadioBox } from "../shared/RadioBox"
+} from '@chakra-ui/react'
+import { useState } from 'react'
+import { MdCelebration } from 'react-icons/md'
+import { useAccount } from 'wagmi'
+import { RadioBox } from '../shared/RadioBox'
 
-import axios from "axios"
-import jsonwebtoken from "jsonwebtoken"
+import axios from 'axios'
 
-import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { JWT_SECRET } from "../config"
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 const occupations = [
-  "Founder",
-  "Investor",
-  "Developer",
-  "Marketer",
-  "Community Manager",
-  "Business Developer",
-  "Designer",
-  "IT Support",
-  "Student",
-  "Other",
+  'Founder',
+  'Investor',
+  'Developer',
+  'Marketer',
+  'Community Manager',
+  'Business Developer',
+  'Designer',
+  'IT Support',
+  'Student',
+  'Other',
 ]
 
 const JoinForm = () => {
   const { address } = useAccount()
 
-  const { signMessage, isLoading: signatureLoading } = useSignMessage({
-    message: "I hereby submit my application to the chain.",
-    async onSuccess(data) {
-      submitHandler()
-    },
-    onError() {
-      setIsLoading(false)
-      toast({
-        position: "bottom-left",
-        render: () => (
-          <HStack color="white" p={3} fontSize="14px" bg="#1413146f">
-            <Text>Signature denied.</Text>
-          </HStack>
-        ),
-      })
-    },
-  })
-
   const toast = useToast()
 
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [twitter, setTwitter] = useState("")
-  const [linkedin, setLinkedin] = useState("")
-  const [occupation, setOccupation] = useState("Founder")
-  const [reasons, setReasons] = useState("")
-  const [contribution, setContribution] = useState("")
-  const [heardFrom, setHeardFrom] = useState("Twitter")
-  const [extras, setExtras] = useState("")
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [twitter, setTwitter] = useState('')
+  const [linkedin, setLinkedin] = useState('')
+  const [occupation, setOccupation] = useState('Founder')
+  const [reasons, setReasons] = useState('')
+  const [contribution, setContribution] = useState('')
+  const [heardFrom, setHeardFrom] = useState('Twitter')
+  const [extras, setExtras] = useState('')
+  const [error, setError] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmissionSuccess, setIsSubmissionSuccess] = useState(false)
 
   const resetForm = () => {
-    setName("")
-    setEmail("")
-    setTwitter("")
-    setLinkedin("")
-    setOccupation("Founder")
-    setReasons("")
-    setContribution("")
-    setHeardFrom("Twitter")
-    setExtras("")
+    setName('')
+    setEmail('')
+    setTwitter('')
+    setLinkedin('')
+    setOccupation('Founder')
+    setReasons('')
+    setContribution('')
+    setHeardFrom('Twitter')
+    setExtras('')
     setIsSubmissionSuccess(false)
   }
 
@@ -103,12 +83,12 @@ const JoinForm = () => {
         address: address,
       })
       if (data.status === null) {
-        signMessage()
+        submitHandler()
       } else {
         setIsLoading(false)
 
         toast({
-          position: "bottom-left",
+          position: 'bottom-left',
           render: () => (
             <HStack color="white" p={3} fontSize="14px" bg="#1413146f">
               <Text>You have already made a submission before.</Text>
@@ -139,17 +119,9 @@ const JoinForm = () => {
     }
 
     try {
-      const { data } = await axios.post("/api/community", airtableInput, {
-        headers: {
-          Authorization:
-            "Bearer " +
-            jsonwebtoken.sign({ time: Date.now() }, JWT_SECRET, {
-              expiresIn: "1h",
-            }),
-        },
-      })
+      await axios.post('/api/community', airtableInput)
       toast({
-        position: "bottom-left",
+        position: 'bottom-left',
         render: () => (
           <HStack color="white" p={3} fontSize="14px" bg="#1413146f">
             <Text>Submission Successful.</Text>
@@ -159,7 +131,7 @@ const JoinForm = () => {
       setIsSubmissionSuccess(true)
       setIsLoading(false)
     } catch (err) {
-      console.log(err)
+      setError(true)
       setIsLoading(false)
     }
   }
@@ -176,47 +148,47 @@ const JoinForm = () => {
                 border="2px solid #ff62c7"
                 color="white"
                 bg="#ff62c7"
-                fontSize={{ sm: "14px", lg: "16px" }}
+                fontSize={{ sm: '14px', lg: '16px' }}
                 _hover={{
-                  opacity: "0.8",
+                  opacity: '0.8',
                 }}
               >
-                {isExpanded ? "Close Application" : "Open Application"}
+                {isExpanded ? 'Close Application' : 'Open Application'}
               </AccordionButton>
               <AccordionPanel>
                 <Flex
                   direction="column"
                   alignItems="center"
-                  py={{ lg: "2rem", sm: "1rem" }}
+                  py={{ lg: '2rem', sm: '1rem' }}
                 >
                   <Flex direction="column" w="100%">
                     <Stack
                       mb={{ base: 10, lg: 0 }}
-                      direction={{ base: "column", lg: "row" }}
+                      direction={{ base: 'column', lg: 'row' }}
                       spacing={{ base: 0, lg: 5 }}
                     >
                       <FormControl isRequired color="black" mb={10}>
-                        <FormLabel fontSize={{ sm: "14px", lg: "16px" }}>
+                        <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
                           Hi, what's your name?
                         </FormLabel>
                         <Input
                           bg="white"
                           color="black"
-                          fontSize={{ sm: "14px", lg: "16px" }}
+                          fontSize={{ sm: '14px', lg: '16px' }}
                           onChange={(e) => setName(e.target.value)}
                           value={name}
                         />
                       </FormControl>
 
                       <FormControl isRequired color="black">
-                        <FormLabel fontSize={{ sm: "14px", lg: "16px" }}>
+                        <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
                           Email Address?
                         </FormLabel>
                         <Input
                           bg="white"
                           type="email"
                           color="black"
-                          fontSize={{ sm: "14px", lg: "16px" }}
+                          fontSize={{ sm: '14px', lg: '16px' }}
                           onChange={(e) => setEmail(e.target.value)}
                           value={email}
                         />
@@ -225,30 +197,30 @@ const JoinForm = () => {
 
                     <Stack
                       mb={{ base: 10, lg: 0 }}
-                      direction={{ base: "column", lg: "row" }}
+                      direction={{ base: 'column', lg: 'row' }}
                       spacing={{ base: 0, lg: 5 }}
                     >
                       <FormControl color="black" mb={10}>
-                        <FormLabel fontSize={{ sm: "14px", lg: "16px" }}>
+                        <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
                           Twitter?
                         </FormLabel>
                         <Input
                           bg="white"
                           color="black"
-                          fontSize={{ sm: "14px", lg: "16px" }}
+                          fontSize={{ sm: '14px', lg: '16px' }}
                           onChange={(e) => setTwitter(e.target.value)}
                           value={twitter}
                         />
                       </FormControl>
 
                       <FormControl color="black">
-                        <FormLabel fontSize={{ sm: "14px", lg: "16px" }}>
+                        <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
                           Linkedin?
                         </FormLabel>
                         <Input
                           bg="white"
                           color="black"
-                          fontSize={{ sm: "14px", lg: "16px" }}
+                          fontSize={{ sm: '14px', lg: '16px' }}
                           onChange={(e) => setLinkedin(e.target.value)}
                           value={linkedin}
                         />
@@ -256,12 +228,12 @@ const JoinForm = () => {
                     </Stack>
 
                     <FormControl isRequired color="black" mb={10}>
-                      <FormLabel fontSize={{ sm: "14px", lg: "16px" }}>
+                      <FormLabel fontSize={{ sm: '14px', lg: '16px' }}>
                         Profession?
                       </FormLabel>
                       <Select
                         bg="white"
-                        fontSize={{ sm: "14px", lg: "16px" }}
+                        fontSize={{ sm: '14px', lg: '16px' }}
                         onChange={(e) =>
                           setOccupation(e.target[e.target.selectedIndex].text)
                         }
@@ -272,7 +244,7 @@ const JoinForm = () => {
                             <option
                               key={index}
                               value={occupation}
-                              style={{ background: "white", color: "black" }}
+                              style={{ background: 'white', color: 'black' }}
                             >
                               {occupation}
                             </option>
@@ -286,7 +258,7 @@ const JoinForm = () => {
                         bg="white"
                         color="black"
                         h="100px"
-                        fontSize={{ sm: "14px", lg: "16px" }}
+                        fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder="Please say a few words about you and why you would like to become a member of The Chain. What are your interests? Who are you looking to meet? Any hobbies / interests outside of work?"
                         onChange={(e) => {
                           if (e.target.value.length <= 200) {
@@ -305,7 +277,7 @@ const JoinForm = () => {
                         bg="white"
                         color="black"
                         h="100px"
-                        fontSize={{ sm: "14px", lg: "16px" }}
+                        fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder="What do you want to contribute to the community? What areas of expertise or resources can you offer the community?"
                         onChange={(e) => {
                           if (e.target.value.length <= 200)
@@ -320,23 +292,23 @@ const JoinForm = () => {
 
                     <Stack
                       mb={{ base: 10, lg: 0 }}
-                      direction={{ base: "column", lg: "row" }}
+                      direction={{ base: 'column', lg: 'row' }}
                       spacing={{ base: 0, lg: 5 }}
                     >
                       <FormControl mb="10">
                         <FormLabel
                           color="black"
-                          fontSize={{ sm: "14px", lg: "16px" }}
+                          fontSize={{ sm: '14px', lg: '16px' }}
                         >
                           How did you hear about us?
                         </FormLabel>
                         <RadioBox
                           stack="vertical"
                           options={[
-                            "Twitter",
-                            "Dinner Club",
-                            "Instagram",
-                            "Texting Community",
+                            'Twitter',
+                            'Dinner Club',
+                            'Instagram',
+                            'Texting Community',
                           ]}
                           updateRadio={setHeardFrom}
                           defaultValue={heardFrom}
@@ -347,7 +319,7 @@ const JoinForm = () => {
                       <FormControl isRequired>
                         <FormLabel
                           color="black"
-                          fontSize={{ sm: "14px", lg: "16px" }}
+                          fontSize={{ sm: '14px', lg: '16px' }}
                         >
                           Wallet Address
                         </FormLabel>
@@ -361,7 +333,7 @@ const JoinForm = () => {
                         bg="white"
                         color="black"
                         h="100px"
-                        fontSize={{ sm: "14px", lg: "16px" }}
+                        fontSize={{ sm: '14px', lg: '16px' }}
                         placeholder="Anything else? Is there something you’d like to share, ask or offer? This is your time to ask!"
                         onChange={(e) => {
                           if (e.target.value.length <= 200) {
@@ -375,46 +347,46 @@ const JoinForm = () => {
                       </FormHelperText>
                     </FormControl>
 
-                    <Button
-                      mx="auto"
-                      mt="2rem"
-                      bg="black"
-                      border="2px solid black"
-                      color="white"
-                      isDisabled={!address || !name || !email}
-                      isLoading={isLoading || signatureLoading}
-                      loadingText={
-                        signatureLoading
-                          ? "Waiting for signature.."
-                          : "Submitting.."
-                      }
-                      _hover={{
-                        opacity: "0.8",
-                      }}
-                      onClick={() => {
-                        const regex =
-                          /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-                        if (regex.test(email)) {
-                          validateSubmission()
-                        } else {
-                          toast({
-                            position: "bottom-left",
-                            render: () => (
-                              <HStack
-                                color="white"
-                                p={3}
-                                fontSize="14px"
-                                bg="#1413146f"
-                              >
-                                <Text>Not a valid email address.</Text>
-                              </HStack>
-                            ),
-                          })
-                        }
-                      }}
-                    >
-                      Submit Application
-                    </Button>
+                    {error ? (
+                      <div>Sorry something went wrong...</div>
+                    ) : (
+                      <Button
+                        mx="auto"
+                        mt="2rem"
+                        bg="black"
+                        border="2px solid black"
+                        color="white"
+                        isDisabled={!address || !name || !email}
+                        isLoading={isLoading}
+                        loadingText={'Submitting..'}
+                        _hover={{
+                          opacity: '0.8',
+                        }}
+                        onClick={() => {
+                          const regex =
+                            /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+                          if (regex.test(email)) {
+                            validateSubmission()
+                          } else {
+                            toast({
+                              position: 'bottom-left',
+                              render: () => (
+                                <HStack
+                                  color="white"
+                                  p={3}
+                                  fontSize="14px"
+                                  bg="#1413146f"
+                                >
+                                  <Text>Not a valid email address.</Text>
+                                </HStack>
+                              ),
+                            })
+                          }
+                        }}
+                      >
+                        Submit Application
+                      </Button>
+                    )}
                   </Flex>
                 </Flex>
               </AccordionPanel>

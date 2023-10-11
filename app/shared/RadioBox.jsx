@@ -1,27 +1,27 @@
-import { Box, useRadio, useRadioGroup, HStack, VStack } from '@chakra-ui/react';
+import { Box, HStack, VStack, useRadio, useRadioGroup } from '@chakra-ui/react'
 
 // 1. Create a component that consumes the `useRadio` hook
 function RadioCard(props) {
-  const { getInputProps, getCheckboxProps } = useRadio(props);
+  const { getInputProps, getCheckboxProps } = useRadio(props)
 
-  const input = getInputProps();
-  const checkbox = getCheckboxProps();
+  const input = getInputProps()
+  const checkbox = getCheckboxProps()
 
   return (
-    <Box as='label'>
+    <Box as="label">
       <input {...input} />
       <Box
         {...checkbox}
-        cursor='pointer'
+        cursor="pointer"
         color={props.color}
-        boxShadow='md'
-        border='1px solid'
+        boxShadow="md"
+        border="1px solid"
         borderColor={props.color}
-        bg='white'
+        bg="white"
         _checked={{
           bg: props.color,
           color: 'white',
-          borderColor: props.color
+          borderColor: props.color,
         }}
         px={2}
         py={2}
@@ -30,7 +30,7 @@ function RadioCard(props) {
         {props.children}
       </Box>
     </Box>
-  );
+  )
 }
 
 // Step 2: Use the `useRadioGroup` hook to control a group of custom radios.
@@ -39,33 +39,33 @@ export const RadioBox = (props) => {
     name: props.name,
     defaultValue: props.defaultValue,
     onChange: (e) => {
-      props.updateRadio(e);
-    }
-  });
+      props.updateRadio(e)
+    },
+  })
 
-  const group = getRootProps();
+  const group = getRootProps()
 
   return props.stack === 'vertical' ? (
     <VStack {...group} style={{ alignItems: 'inherit' }}>
       {props.options.map((value) => {
-        const radio = getRadioProps({ value });
+        const radio = getRadioProps({ value })
         return (
           <RadioCard key={value} {...radio} color={props.color}>
             {value}
           </RadioCard>
-        );
+        )
       })}
     </VStack>
   ) : (
     <HStack {...group}>
       {props.options.map((value) => {
-        const radio = getRadioProps({ value });
+        const radio = getRadioProps({ value })
         return (
           <RadioCard key={value} {...radio} color={props.color}>
             {value}
           </RadioCard>
-        );
+        )
       })}
     </HStack>
-  );
-};
+  )
+}

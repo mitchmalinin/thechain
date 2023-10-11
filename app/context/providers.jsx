@@ -1,19 +1,17 @@
-"use client"
-import { CacheProvider } from "@chakra-ui/next-js"
-import { ChakraProvider, extendTheme, theme } from "@chakra-ui/react"
+'use client'
+import { CacheProvider } from '@chakra-ui/next-js'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import {
   RainbowKitProvider,
   darkTheme,
   getDefaultWallets,
-} from "@rainbow-me/rainbowkit"
-import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth"
-import { EthereumClient, w3mProvider } from "@web3modal/ethereum"
-import { Web3Modal } from "@web3modal/react"
-import { SessionProvider } from "next-auth/react"
-import { WagmiConfig, configureChains, createConfig } from "wagmi"
-import { gnosis, goerli, mainnet, sepolia } from "wagmi/chains"
-import { publicProvider } from "wagmi/providers/public"
-import { WALLETCONNECT_PROJECT_ID } from "../config"
+} from '@rainbow-me/rainbowkit'
+import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next-auth'
+import { SessionProvider } from 'next-auth/react'
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import { gnosis, goerli, mainnet, sepolia } from 'wagmi/chains'
+import { publicProvider } from 'wagmi/providers/public'
+import { WALLETCONNECT_PROJECT_ID } from '../config'
 
 const projectId = WALLETCONNECT_PROJECT_ID
 
@@ -21,7 +19,7 @@ const chains = [gnosis, mainnet, goerli, sepolia]
 const { publicClient } = configureChains(chains, [publicProvider()])
 
 const { connectors } = getDefaultWallets({
-  appName: "The Chain",
+  appName: 'The Chain',
   projectId: projectId,
   chains,
 })
@@ -33,7 +31,17 @@ const wagmiConfig = createConfig({
 })
 
 const getSiweMessageOptions = () => ({
-  statement: "Sign in to The Chain",
+  statement: 'Sign in to The Chain',
+})
+
+const breakpoints = {
+  base: '320px',
+  md: '620px',
+  lg: '1020px',
+}
+
+const theme = extendTheme({
+  breakpoints,
 })
 export function Providers({ children, ...props }) {
   return (

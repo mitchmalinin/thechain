@@ -1,15 +1,13 @@
-"use client"
+'use client'
 
-import { HamburgerIcon } from "@chakra-ui/icons"
+import { HamburgerIcon } from '@chakra-ui/icons'
 import {
   Box,
   Image as ChakraImage,
   Link as ChakraLink,
   Drawer,
-  DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerHeader,
   DrawerOverlay,
   Flex,
   HStack,
@@ -17,11 +15,10 @@ import {
   useBreakpointValue,
   useDisclosure,
   VStack,
-} from "@chakra-ui/react"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { Web3Button } from "@web3modal/react"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+} from '@chakra-ui/react'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 export const Header = () => {
   const router = useRouter()
@@ -29,7 +26,8 @@ export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
 
-  console.log("session", session)
+  console.log('session', session)
+
   const handleNavigation = (section) => {
     router.push(`/#${section}`)
     onClose()
@@ -47,8 +45,9 @@ export const Header = () => {
       <ChakraImage
         src="/the-chain-logo.png"
         alt="logo"
-        w={{ lg: "150px", sm: "75px" }}
-        onClick={() => handleNavigation("home")}
+        w={{ sm: '75px', lg: '150px' }}
+        _hover={{ cursor: 'pointer' }}
+        onClick={() => handleNavigation('home')}
       />
 
       {isMobile ? (
@@ -62,48 +61,57 @@ export const Header = () => {
             <DrawerOverlay />
             <DrawerContent background="black">
               <DrawerCloseButton color="white" />
-              <DrawerBody>
+              <div>
                 <VStack spacing={4} alignItems="flex-start">
                   <ChakraLink
                     color="white"
-                    _hover={{ textDecoration: "none", color: "#ED73CF" }}
-                    onClick={() => handleNavigation("origin")}
+                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+                    onClick={() => handleNavigation('origin')}
                   >
                     Benefits
                   </ChakraLink>
                   <ChakraLink
                     color="white"
-                    _hover={{ textDecoration: "none", color: "#ED73CF" }}
-                    onClick={() => handleNavigation("apply")}
+                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+                    onClick={() => handleNavigation('apply')}
                   >
                     Apply
                   </ChakraLink>
                   <ChakraLink
                     color="white"
-                    _hover={{ textDecoration: "none", color: "#ED73CF" }}
-                    onClick={() => handleNavigation("events")}
+                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+                    onClick={() => handleNavigation('events')}
                   >
                     Events
                   </ChakraLink>
                   <ChakraLink
                     color="white"
-                    _hover={{ textDecoration: "none", color: "#ED73CF" }}
-                    onClick={() => handleNavigation("consult")}
+                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+                    onClick={() => handleNavigation('consult')}
                   >
                     Consult
                   </ChakraLink>
                   <ChakraLink
                     color="white"
-                    _hover={{ textDecoration: "none", color: "#ED73CF" }}
-                    onClick={() => handleNavigation("team")}
+                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+                    onClick={() => handleNavigation('team')}
                   >
                     Team
                   </ChakraLink>
+                  {session && (
+                    <ChakraLink
+                      color="white"
+                      _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+                      href={'/dashboard/members'}
+                    >
+                      Members
+                    </ChakraLink>
+                  )}
                   <Box display="flex" justifyContent="flex-end" ml="10px">
                     <ConnectButton chainStatus="none" showBalance={false} />
                   </Box>
                 </VStack>
-              </DrawerBody>
+              </div>
             </DrawerContent>
           </Drawer>
         </>
@@ -111,37 +119,45 @@ export const Header = () => {
         <HStack color="white" justifyContent="center">
           <ChakraLink
             color="white"
-            _hover={{ textDecoration: "none", color: "#ED73CF" }}
-            onClick={() => handleNavigation("origin")}
+            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+            onClick={() => handleNavigation('origin')}
           >
             Benefits
           </ChakraLink>
           <ChakraLink
             color="white"
-            _hover={{ textDecoration: "none", color: "#ED73CF" }}
-            onClick={() => handleNavigation("apply")}
+            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+            onClick={() => handleNavigation('apply')}
           >
             Apply
           </ChakraLink>
           <ChakraLink
-            _hover={{ textDecoration: "none", color: "#ED73CF" }}
-            onClick={() => handleNavigation("events")}
+            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+            onClick={() => handleNavigation('events')}
           >
             Events
           </ChakraLink>
           <ChakraLink
-            _hover={{ textDecoration: "none", color: "#ED73CF" }}
-            onClick={() => handleNavigation("consult")}
+            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+            onClick={() => handleNavigation('consult')}
           >
             Consult
           </ChakraLink>
           <ChakraLink
-            _hover={{ textDecoration: "none", color: "#ED73CF" }}
-            onClick={() => handleNavigation("team")}
+            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+            onClick={() => handleNavigation('team')}
           >
             Team
           </ChakraLink>
-
+          {session && (
+            <ChakraLink
+              color="white"
+              _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+              href={'/dashboard/members'}
+            >
+              Members
+            </ChakraLink>
+          )}
           <Box display="flex" justifyContent="flex-end" ml="10px">
             <ConnectButton chainStatus="none" showBalance={false} />
           </Box>

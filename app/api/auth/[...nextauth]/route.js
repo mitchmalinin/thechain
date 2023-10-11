@@ -1,15 +1,23 @@
-import { CheckboxGroup } from "@chakra-ui/react"
-import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import { getCsrfToken } from "next-auth/react"
-import { SiweMessage } from "siwe"
+import airtable from 'airtable'
+import NextAuth from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { getCsrfToken } from 'next-auth/react'
+import { SiweMessage } from 'siwe'
+
+airtable.configure({
+  endpointUrl: 'https://api.airtable.com',
+  apiKey: process.env.AIRTABLE_TOKEN,
+})
+
+const base = airtable.base(process.env.AIRTABLE_COMMUNITY_BASE_ID)
+const CommunityMembersTable = base('Applications')
 
 export function getAuthOptions() {
   const providers = [
     CredentialsProvider({
       async authorize(credentials, req) {
         try {
-          const siwe = new SiweMessage(JSON.parse(credentials?.message || "{}"))
+          const siwe = new SiweMessage(JSON.parse(credentials?.message || '{}'))
 
           const nextAuthUrl =
             process.env.NEXTAUTH_URL ||
@@ -33,14 +41,20 @@ export function getAuthOptions() {
           }
 
           const result = await siwe.verify({
-            signature: credentials?.signature || "",
+            signature: credentials?.signature || '',
             domain: nextAuthUrl.host,
             nonce: await getCsrfToken({ req: { headers: req.headers } }),
           })
 
           if (result.success) {
+            const address = siwe.address
+            const records = await CommunityMembersTable.select({
+              filterByFormula: `{Wallet} = '${address}'`,
+            }).firstPage()
+            const isMember = records.length > 0
             return {
-              id: siwe.address,
+              id: address,
+              isMember,
             }
           }
           return null
@@ -50,26 +64,37 @@ export function getAuthOptions() {
       },
       credentials: {
         message: {
-          label: "Message",
-          placeholder: "0x0",
-          type: "text",
+          label: 'Message',
+          placeholder: '0x0',
+          type: 'text',
         },
         signature: {
-          label: "Signature",
-          placeholder: "0x0",
-          type: "text",
+          label: 'Signature',
+          placeholder: '0x0',
+          type: 'text',
         },
       },
-      name: "Ethereum",
+      name: 'Ethereum',
     }),
   ]
 
   return {
     callbacks: {
+      async jwt(token, user) {
+        console.log('jwt user:', user) // Add this line
+        if (user) {
+          token.isMember = user.isMember
+        }
+        console.log('jwt return value:', token) // Add this line
+        return token
+      },
       async session({ session, token }) {
+        console.log('session token:', token) // Add this line
+
         session.address = token.sub
         session.user = {
           name: token.sub,
+          isMember: token.isMember,
         }
         return session
       },
@@ -77,7 +102,7 @@ export function getAuthOptions() {
     providers,
     secret: process.env.NEXTAUTH_SECRET,
     session: {
-      strategy: "jwt",
+      strategy: 'jwt',
     },
   }
 }

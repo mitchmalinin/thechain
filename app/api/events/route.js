@@ -1,14 +1,13 @@
-import { headers } from "next/headers"
-import { NextResponse } from "next/server"
+import { NextResponse } from 'next/server'
 
 export async function POST(request) {
   try {
     const json = await request.json()
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        accept: "application/json",
-        "x-luma-api-key": process.env.LUMA_API_KEY,
+        accept: 'application/json',
+        'x-luma-api-key': process.env.LUMA_API_KEY,
       },
     }
 
@@ -20,22 +19,22 @@ export async function POST(request) {
     response = await response.json()
 
     let json_response = {
-      status: "success",
+      status: 'success',
       data: response.entries,
     }
 
     return new NextResponse(JSON.stringify(json_response), {
       status: 201,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     })
   } catch (err) {
     console.log(err)
     let error_response = {
-      status: "error",
+      status: 'error',
     }
     return new NextResponse(JSON.stringify(error_response), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     })
   }
 }

@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import {
   Image as ChakraImage,
@@ -6,9 +6,9 @@ import {
   Flex,
   SimpleGrid,
   Text,
-} from "@chakra-ui/react"
+} from '@chakra-ui/react'
 
-import { offerings } from "../utils/constants"
+import { offerings } from '../utils/constants'
 
 export const Offering = () => {
   return (
@@ -16,8 +16,8 @@ export const Offering = () => {
       id="offering"
       columns={{ lg: 4, md: 2, sm: 1 }}
       gap="5"
-      mt={{ lg: "1rem", sm: "0" }}
-      px={{ lg: "4rem", sm: "2rem" }}
+      mt={{ lg: '1rem', sm: '0' }}
+      px={{ lg: '4rem', sm: '2rem' }}
     >
       {offerings.map((offer, index) => {
         return (
@@ -37,7 +37,7 @@ export const Offering = () => {
             <ChakraImage src={offer.icon} alt="icon" w="40px" mb="15px" />
             <Text
               color="black"
-              fontSize={{ lg: "1rem", sm: "1rem" }}
+              fontSize={{ lg: '1rem', sm: '1rem' }}
               fontWeight="bold"
               mb="1rem"
               minH="45px"
@@ -48,7 +48,7 @@ export const Offering = () => {
             <Text
               color="#6B728E"
               textAlign="center"
-              fontSize={{ sm: "14px", lg: "14px" }}
+              fontSize={{ sm: '14px', lg: '14px' }}
               mt="5px"
               opacity="0.8"
             >
@@ -58,7 +58,7 @@ export const Offering = () => {
               <ChakraLink
                 src="/#consult"
                 mt="15px"
-                fontSize={{ sm: "14px", lg: "14px" }}
+                fontSize={{ sm: '14px', lg: '14px' }}
                 textDecoration="underline"
               >
                 Learn more

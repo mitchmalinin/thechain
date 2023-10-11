@@ -1,26 +1,25 @@
-"use client"
+'use client'
 
 import {
   Box,
-  Image as ChakraImage,
   Link as ChakraLink,
   Flex,
   HStack,
   SimpleGrid,
   Text,
-} from "@chakra-ui/react"
+} from '@chakra-ui/react'
 
 import {
   AiFillInstagram,
   AiFillLinkedin,
   AiFillTwitterSquare,
-} from "react-icons/ai"
+} from 'react-icons/ai'
 
-import Image from "next/image"
+import Image from 'next/image'
 
-import Anna from "../../public/anna.png"
-import Monica from "../../public/monica.png"
-import Saimano from "../../public/saimano.png"
+import Anna from '../../public/anna.png'
+import Mitch from '../../public/mitch.jpeg'
+import Monica from '../../public/monica.png'
 
 export const Team = () => {
   return (
@@ -29,7 +28,7 @@ export const Team = () => {
         fontWeight="bold"
         textAlign="center"
         mt="1rem"
-        fontSize={{ lg: "1.5rem", sm: "1rem" }}
+        fontSize={{ lg: '1.5rem', sm: '1rem' }}
         p="1rem"
         color="black"
       >
@@ -38,8 +37,8 @@ export const Team = () => {
       <Flex
         direction="column"
         alignItems="center"
-        px={{ base: "2rem", lg: "5rem" }}
-        py={{ base: "2rem", lg: "2rem" }}
+        px={{ base: '2rem', lg: '5rem' }}
+        py={{ base: '2rem', lg: '2rem' }}
       >
         <SimpleGrid columns={{ lg: 3, sm: 1 }} gap="2rem" id="team">
           <Flex
@@ -52,11 +51,11 @@ export const Team = () => {
             color="black"
           >
             <Box
-              w={{ lg: "150px", sm: "100px" }}
-              h={{ lg: "150px", sm: "100px" }}
+              w={{ lg: '150px', sm: '100px' }}
+              h={{ lg: '150px', sm: '100px' }}
               overflow="hidden"
               borderRadius="50%"
-              style={{ filter: "grayscale(1)" }}
+              style={{ filter: 'grayscale(1)' }}
               mb="15px"
             >
               <Image
@@ -67,7 +66,7 @@ export const Team = () => {
                 placeholder="blur"
               />
             </Box>
-            <Text fontSize={{ lg: "1.2rem", sm: "1rem" }} fontWeight="bold">
+            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
               Anna Gandrabura
             </Text>
             <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
@@ -108,11 +107,11 @@ export const Team = () => {
             color="black"
           >
             <Box
-              w={{ lg: "150px", sm: "100px" }}
-              h={{ lg: "150px", sm: "100px" }}
+              w={{ lg: '150px', sm: '100px' }}
+              h={{ lg: '150px', sm: '100px' }}
               overflow="hidden"
               borderRadius="50%"
-              style={{ filter: "grayscale(1)" }}
+              style={{ filter: 'grayscale(1)' }}
               mb="15px"
             >
               <Image
@@ -123,7 +122,7 @@ export const Team = () => {
                 placeholder="blur"
               />
             </Box>
-            <Text fontSize={{ lg: "1.2rem", sm: "1rem" }} fontWeight="bold">
+            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
               Monica Rojas
             </Text>
             <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
@@ -164,37 +163,37 @@ export const Team = () => {
             color="black"
           >
             <Box
-              w={{ lg: "150px", sm: "100px" }}
-              h={{ lg: "150px", sm: "100px" }}
+              w={{ lg: '150px', sm: '100px' }}
+              h={{ lg: '150px', sm: '100px' }}
               overflow="hidden"
               borderRadius="50%"
-              style={{ filter: "grayscale(1)" }}
+              style={{ filter: 'grayscale(1)' }}
               mb="15px"
             >
               <Image
-                src={Saimano}
-                alt="Saimano"
+                src={Mitch}
+                alt="MrWzrd"
                 height="100%"
                 width="100%"
                 placeholder="blur"
               />
             </Box>
-            <Text fontSize={{ lg: "1.2rem", sm: "1rem" }} fontWeight="bold">
-              Saimano
+            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
+              Mitch Malinin
             </Text>
             <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
-              Web3 Developer - RaidGuild
+              Web Developer
             </Text>
             <HStack mt="15px">
               <ChakraLink
-                href="https://twitter.com/saimano1996"
+                href="https://twitter.com/0xMrWzrd"
                 isExternal
                 fontSize="25px"
               >
                 <AiFillTwitterSquare />
               </ChakraLink>
               <ChakraLink
-                href="https://www.linkedin.com/in/saimano1996"
+                href="https://www.linkedin.com/in/mitchmalinin/"
                 isExternal
                 fontSize="25px"
               >

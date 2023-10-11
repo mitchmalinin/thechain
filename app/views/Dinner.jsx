@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import {
   Box,
@@ -9,27 +9,24 @@ import {
   SimpleGrid,
   Text,
   VStack,
-} from "@chakra-ui/react"
+} from '@chakra-ui/react'
 
-import axios from "axios"
-import jsonwebtoken from "jsonwebtoken"
-import dynamic from "next/dynamic"
-import Image from "next/image"
-import { useEffect, useState } from "react"
-import Masonry from "react-masonry-css"
-import Zoom from "react-medium-image-zoom"
-import "react-medium-image-zoom/dist/styles.css"
+import axios from 'axios'
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import Masonry from 'react-masonry-css'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
-import ImageOne from "../../public/dinner_club_1.png"
-import ImageTwo from "../../public/dinner_club_2.png"
-import ImageThree from "../../public/dinner_club_3.png"
-import ImageFour from "../../public/dinner_club_4.png"
-import ImageFive from "../../public/dinner_club_5.png"
-import ImageSix from "../../public/dinner_club_6.png"
+import ImageOne from '../../public/dinner_club_1.png'
+import ImageTwo from '../../public/dinner_club_2.png'
+import ImageThree from '../../public/dinner_club_3.png'
+import ImageFour from '../../public/dinner_club_4.png'
+import ImageFive from '../../public/dinner_club_5.png'
+import ImageSix from '../../public/dinner_club_6.png'
 
-import { JWT_SECRET } from "../config"
-
-const NoSSRJoinForm = dynamic(() => import("../forms/JoinForm"), {
+const NoSSRJoinForm = dynamic(() => import('../forms/JoinForm'), {
   ssr: false,
 })
 
@@ -37,7 +34,7 @@ export const Dinner = () => {
   const [events, setEvents] = useState([])
 
   const getEvents = async () => {
-    const { data } = await axios.post("/api/events", {
+    const { data } = await axios.post('/api/events', {
       date: new Date().toISOString(),
     })
 
@@ -56,15 +53,15 @@ export const Dinner = () => {
         alignItems="flex-start"
         mt="4rem"
         bg="rgba(255, 173, 226, 0.67)"
-        py={{ lg: "4rem", sm: "2rem" }}
-        px={{ lg: "4rem", sm: "2rem" }}
+        py={{ lg: '4rem', sm: '2rem' }}
+        px={{ lg: '4rem', sm: '2rem' }}
         style={{
-          backdropFilter: "blur(9.1px)",
+          backdropFilter: 'blur(9.1px)',
         }}
         position="relative"
       >
         <Text
-          fontSize={{ lg: "24px", sm: "18px" }}
+          fontSize={{ lg: '24px', sm: '18px' }}
           mb="1rem"
           color="#ff62c7"
           fontWeight="bold"
@@ -72,9 +69,9 @@ export const Dinner = () => {
           Web3 Dinner Club
         </Text>
 
-        <SimpleGrid columns={{ lg: "2", sm: "1" }} gap="10" placeItems="center">
+        <SimpleGrid columns={{ lg: '2', sm: '1' }} gap="10" placeItems="center">
           <VStack alignItems="flex-start">
-            <Text color="black" fontSize={{ sm: "14px", lg: "16px" }}>
+            <Text color="black" fontSize={{ sm: '14px', lg: '16px' }}>
               The Chain Miami hosts a community driven dinner club that invites
               Miami’s brightest minds in the web 3space to interact, connect,
               and learn from each other. To ensure a high caliber of attendees
@@ -84,7 +81,7 @@ export const Dinner = () => {
             <Text
               textAlign="left"
               fontSize="12px"
-              width={{ lg: "50%", sm: "100%" }}
+              width={{ lg: '50%', sm: '100%' }}
               mt="15px"
               fontStyle="italic"
               opacity="0.8"
@@ -103,7 +100,7 @@ export const Dinner = () => {
               justifyContent="flex-start"
             >
               <Text
-                fontSize={{ sm: "12px", lg: "16px" }}
+                fontSize={{ sm: '12px', lg: '16px' }}
                 textTransform="uppercase"
               >
                 The first Tuesday of every month
@@ -118,10 +115,10 @@ export const Dinner = () => {
               justifyContent="flex-start"
             >
               <Text
-                fontSize={{ sm: "12px", lg: "16px" }}
+                fontSize={{ sm: '12px', lg: '16px' }}
                 textTransform="uppercase"
               >
-                A highly curated dinner of 15-20 web3 builders in Miami{" "}
+                A highly curated dinner of 15-20 web3 builders in Miami{' '}
               </Text>
             </HStack>
             <HStack
@@ -133,7 +130,7 @@ export const Dinner = () => {
               justifyContent="flex-start"
             >
               <Text
-                fontSize={{ sm: "12px", lg: "16px" }}
+                fontSize={{ sm: '12px', lg: '16px' }}
                 textTransform="uppercase"
               >
                 Topics, special guests, meaningful connections
@@ -149,11 +146,11 @@ export const Dinner = () => {
         columns="1"
         bg="black"
         minH="300px"
-        py={{ lg: "4rem", sm: "2rem" }}
-        px={{ lg: "4rem", sm: "2rem" }}
+        py={{ lg: '4rem', sm: '2rem' }}
+        px={{ lg: '4rem', sm: '2rem' }}
       >
         <Text
-          fontSize={{ lg: "24px", sm: "18px" }}
+          fontSize={{ lg: '24px', sm: '18px' }}
           mb="1rem"
           color="#ff62c7"
           fontWeight="bold"
@@ -166,7 +163,7 @@ export const Dinner = () => {
               <Flex
                 key={index}
                 w="100%"
-                direction={{ lg: "row", sm: "column-reverse" }}
+                direction={{ lg: 'row', sm: 'column-reverse' }}
                 bg="black"
                 py="1rem"
                 color="white"
@@ -183,23 +180,23 @@ export const Dinner = () => {
                   >
                     {new Date(record.event.start_at).toString()}
                   </Text>
-                  <Text fontSize={{ lg: "24px", sm: "18px" }} maxW="80%">
+                  <Text fontSize={{ lg: '24px', sm: '18px' }} maxW="80%">
                     {record.event.name}
                   </Text>
                   <Button
-                    w={{ lg: "200px", sm: "100px" }}
+                    w={{ lg: '200px', sm: '100px' }}
                     mt="20px"
-                    fontSize={{ sm: "16px" }}
+                    fontSize={{ sm: '16px' }}
                     onClick={() =>
-                      window.open(record.event.url, "_blank").focus()
+                      window.open(record.event.url, '_blank').focus()
                     }
                   >
                     RSVP
                   </Button>
                 </Flex>
                 <ChakraImage
-                  w={{ lg: "500px", sm: "200px" }}
-                  mb={{ lg: 0, sm: "1rem" }}
+                  w={{ lg: '500px', sm: '200px' }}
+                  mb={{ lg: 0, sm: '1rem' }}
                   src={record.event.cover_url}
                   alt="event cover"
                 />
@@ -220,8 +217,8 @@ export const Dinner = () => {
       </SimpleGrid>
 
       <Flex
-        px={{ lg: "3rem", sm: "2rem" }}
-        pt={{ lg: "4rem", sm: "2rem" }}
+        px={{ lg: '3rem', sm: '2rem' }}
+        pt={{ lg: '4rem', sm: '2rem' }}
         // bg='linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(217,240,255,1) 100%)'
         position="relative"
         zIndex="1"

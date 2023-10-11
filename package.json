@@ -29,6 +29,7 @@
     "next": "13.4.12",
     "next-auth": "^4.23.2",
     "pino-pretty": "^10.2.0",
+    "prettier-plugin-organize-imports": "^3.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
@@ -41,6 +42,8 @@
     "wagmi": "^1.4.3"
   },
   "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-plugin-react": "^7.33.2",
     "tap": "^18.4.2"
   }
 }
