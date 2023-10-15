@@ -48,13 +48,8 @@ export function getAuthOptions() {
 
           if (result.success) {
             const address = siwe.address
-            const records = await CommunityMembersTable.select({
-              filterByFormula: `{Wallet} = '${address}'`,
-            }).firstPage()
-            const isMember = records.length > 0
             return {
               id: address,
-              isMember,
             }
           }
           return null
@@ -80,21 +75,14 @@ export function getAuthOptions() {
 
   return {
     callbacks: {
-      async jwt(token, user) {
-        console.log('jwt user:', user) // Add this line
-        if (user) {
-          token.isMember = user.isMember
-        }
-        console.log('jwt return value:', token) // Add this line
-        return token
-      },
       async session({ session, token }) {
-        console.log('session token:', token) // Add this line
-
-        session.address = token.sub
+        const records = await CommunityMembersTable.select({
+          filterByFormula: `{Wallet} = '${token.sub}'`,
+        }).firstPage()
+        const isMember = records.length > 0
         session.user = {
-          name: token.sub,
-          isMember: token.isMember,
+          address: token.sub,
+          isMember: isMember,
         }
         return session
       },
