@@ -4,34 +4,35 @@ import useSWR from 'swr'
 
 import { Box, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react'
 
-import { getSession } from 'next-auth/react'
-
 export default function Members() {
-  const session = getSession()
-
   const fetcher = (url) => fetch(url).then((r) => r.json())
 
-  const { data: members, error } = useSWR(
-    session.isMember ? '/api/community' : null,
-    fetcher
-  )
+  const { data: members, error } = useSWR('/api/community', fetcher)
 
-  console.log('session', session)
-
-  if (error) return <div>Failed to load members</div>
-
-  if (!session) {
+  if (!members)
     return (
-      <Flex minH="100vh">
-        <div>Need to be a member of The Chain to Access this page</div>
+      <Flex minH="100vh" alignItems="center" justifyContent="center">
+        <div>Must be Chain Member to view</div>
       </Flex>
     )
-  }
+
+  if (error)
+    return (
+      <Flex minH="100vh" alignItems="center" justifyContent="center">
+        <div>Failed to load members</div>
+      </Flex>
+    )
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10}>
+    <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10} p={4} minH={'100vh'}>
       {members.map((member) => (
-        <Box key={member.ID} p={5} shadow="md" borderWidth="1px">
+        <Box
+          key={member.ID}
+          p={5}
+          shadow="md"
+          borderWidth="1px"
+          h={'min-content'}
+        >
           <Text fontWeight="bold">{member.Name}</Text>
           <Text>{member.Occupation}</Text>
           <Text>{member.Contribution}</Text>

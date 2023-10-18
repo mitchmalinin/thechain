@@ -98,7 +98,7 @@ export const Header = () => {
                   >
                     Team
                   </ChakraLink>
-                  {session && (
+                  {session?.user?.isMember && (
                     <ChakraLink
                       color="white"
                       _hover={{ textDecoration: 'none', color: '#ED73CF' }}
@@ -149,7 +149,7 @@ export const Header = () => {
           >
             Team
           </ChakraLink>
-          {session && (
+          {session?.user?.isMember && (
             <ChakraLink
               color="white"
               _hover={{ textDecoration: 'none', color: '#ED73CF' }}

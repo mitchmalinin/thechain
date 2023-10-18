@@ -24,12 +24,9 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { MdCelebration } from 'react-icons/md'
-import { useAccount } from 'wagmi'
 import { RadioBox } from '../shared/RadioBox'
 
 import axios from 'axios'
-
-import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 const occupations = [
   'Founder',
@@ -45,8 +42,6 @@ const occupations = [
 ]
 
 const JoinForm = () => {
-  const { address } = useAccount()
-
   const toast = useToast()
 
   const [name, setName] = useState('')
@@ -59,6 +54,7 @@ const JoinForm = () => {
   const [heardFrom, setHeardFrom] = useState('Twitter')
   const [extras, setExtras] = useState('')
   const [error, setError] = useState(false)
+  const [address, setAddress] = useState('')
 
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmissionSuccess, setIsSubmissionSuccess] = useState(false)
@@ -177,6 +173,22 @@ const JoinForm = () => {
                           fontSize={{ sm: '14px', lg: '16px' }}
                           onChange={(e) => setName(e.target.value)}
                           value={name}
+                        />
+                      </FormControl>
+                      <FormControl isRequired>
+                        <FormLabel
+                          color="black"
+                          fontSize={{ sm: '14px', lg: '16px' }}
+                        >
+                          Enter Wallet Address (Non-ENS)
+                        </FormLabel>
+                        <Input
+                          bg="white"
+                          fontSize={{ sm: '14px', lg: '16px' }}
+                          onChange={(e) => setAddress(e.target.value)}
+                          placeholder="0x00..."
+                          value={address}
+                          mb={10}
                         />
                       </FormControl>
 
@@ -315,16 +327,6 @@ const JoinForm = () => {
                           value={heardFrom}
                           color="black"
                         />
-                      </FormControl>
-                      <FormControl isRequired>
-                        <FormLabel
-                          color="black"
-                          fontSize={{ sm: '14px', lg: '16px' }}
-                        >
-                          Wallet Address
-                        </FormLabel>
-
-                        <ConnectButton chainStatus="none" showBalance={false} />
                       </FormControl>
                     </Stack>
 

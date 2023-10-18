@@ -81,22 +81,18 @@ export async function GET(req) {
 
   const token = await getToken({ req, secret })
 
-  if (!token)
-    return new NextResponse(
-      JSON.stringify({
-        status: 'Not Authorized',
-      }),
-      {
-        status: 403,
-        headers: { 'Content-Type': 'application/json' },
-      }
-    )
+  if (!token || !token.isMember)
+    return new NextResponse(null, {
+      status: 403,
+      headers: { 'Content-Type': 'application/json' },
+    })
 
   try {
     const allRecords = []
     await CommunityApplicationsTable.select({
       view: 'Grid view',
       fields: [],
+      filterByFormula: `{isAccepted} = '1'`,
     }).eachPage((records, processNextPage) => {
       allRecords.push(records.map((record) => record.fields))
       processNextPage()
