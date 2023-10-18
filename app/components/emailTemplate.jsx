@@ -12,7 +12,7 @@ export const EmailTemplate = ({ firstName }) => (
       decision by mid-October.
     </p>
     <p>
-      In the meantime, join our
+      In the meantime, join our{' '}
       <a href="https://bit.ly/m/thechain_miami">texting community</a> or follow
       us on <a href="https://bit.ly/m/thechain_miami">social</a> to
       stay-up-to-date on upcoming events and updates

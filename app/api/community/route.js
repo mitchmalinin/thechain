@@ -1,10 +1,10 @@
 import airtable from 'airtable'
 import { NextResponse } from 'next/server'
 
-import { Resend } from 'resend'
-
 import { EmailTemplate } from '@/app/components/emailTemplate'
 import { NotifyAdminEmail } from '@/app/components/notifyAdminEmail'
+import { getToken } from 'next-auth/jwt'
+import { Resend } from 'resend'
 
 const RESEND = new Resend(process.env.RESEND_API_KEY)
 const COMMUNITY_BASE_ID = process.env.AIRTABLE_COMMUNITY_BASE_ID
@@ -76,17 +76,28 @@ export async function POST(request) {
   }
 }
 
-export async function GET() {
+export async function GET(req) {
+  const secret = process.env.NEXTAUTH_SECRET
+
+  const token = await getToken({ req, secret })
+
+  if (!token || !token.isMember)
+    return new NextResponse(null, {
+      status: 403,
+      headers: { 'Content-Type': 'application/json' },
+    })
+
   try {
     const allRecords = []
     await CommunityApplicationsTable.select({
       view: 'Grid view',
       fields: [],
+      filterByFormula: `{isAccepted} = '1'`,
     }).eachPage((records, processNextPage) => {
-      allRecords.push(records)
+      allRecords.push(records.map((record) => record.fields))
       processNextPage()
     })
-    return new NextResponse(JSON.stringify(allRecords), {
+    return new NextResponse(JSON.stringify(allRecords.flat()), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     })

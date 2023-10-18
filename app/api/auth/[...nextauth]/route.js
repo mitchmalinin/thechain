@@ -52,10 +52,11 @@ export function getAuthOptions() {
               filterByFormula: `{Wallet} = '${address}'`,
             }).firstPage()
             const isMember = records.length > 0
-            return {
+            const user = {
               id: address,
               isMember,
             }
+            return user
           }
           return null
         } catch (e) {
@@ -80,22 +81,12 @@ export function getAuthOptions() {
 
   return {
     callbacks: {
-      async jwt(token, user) {
-        console.log('jwt user:', user) // Add this line
-        if (user) {
-          token.isMember = user.isMember
-        }
-        console.log('jwt return value:', token) // Add this line
-        return token
+      async jwt({ token, user }) {
+        return { ...token, ...user }
       },
-      async session({ session, token }) {
-        console.log('session token:', token) // Add this line
 
-        session.address = token.sub
-        session.user = {
-          name: token.sub,
-          isMember: token.isMember,
-        }
+      async session({ session, token }) {
+        session.user = token
         return session
       },
     },

@@ -1,11 +1,11 @@
-'use client';
+'use client'
 
-import { Flex, Spinner } from '@chakra-ui/react';
+import { Flex, Spinner } from '@chakra-ui/react'
 
 export default function Loading() {
   return (
-    <Flex minH='300px' alignItems='center' justifyContent='center'>
-      <Spinner size='xl' />
+    <Flex minH="100vh" alignItems="center" justifyContent="center">
+      <Spinner size="xl" />
     </Flex>
-  );
+  )
 }

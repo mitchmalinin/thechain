@@ -1,30 +1,49 @@
-"use client"
+'use client'
 
-import { Flex, Spinner } from "@chakra-ui/react"
-import { useSession } from "next-auth/react"
+import useSWR from 'swr'
+
+import { Box, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react'
 
 export default function Members() {
-  const { data: session, status } = useSession()
+  const fetcher = (url) => fetch(url).then((r) => r.json())
 
-  if (status === "loading") {
+  const { data: members, error } = useSWR('/api/community', fetcher)
+
+  if (!members)
     return (
       <Flex minH="100vh" alignItems="center" justifyContent="center">
-        <Spinner size="xl" />
+        <div>Must be Chain Member to view</div>
       </Flex>
     )
-  }
 
-  if (!session && status === "loading") {
+  if (error)
     return (
-      <Flex minH="100vh">
-        <div>Need to be a member of The Chain to Access this page</div>
+      <Flex minH="100vh" alignItems="center" justifyContent="center">
+        <div>Failed to load members</div>
       </Flex>
     )
-  }
 
   return (
-    <Flex minH="100vh">
-      <div>Membership Page TEST</div>
-    </Flex>
+    <SimpleGrid columns={{ base: 1, md: 4 }} spacing={10} p={4} minH={'100vh'}>
+      {members.map((member) => (
+        <Box
+          key={member.ID}
+          p={5}
+          shadow="md"
+          borderWidth="1px"
+          h={'min-content'}
+        >
+          <Text fontWeight="bold">{member.Name}</Text>
+          <Text>{member.Occupation}</Text>
+          <Text>{member.Contribution}</Text>
+          <Link href={member.Linkedin} isExternal>
+            LinkedIn
+          </Link>
+          <Link href={`https://twitter.com/${member.Twitter}`} isExternal>
+            Twitter
+          </Link>
+        </Box>
+      ))}
+    </SimpleGrid>
   )
 }
