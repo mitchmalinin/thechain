@@ -55,7 +55,7 @@ const JoinForm = () => {
   const [extras, setExtras] = useState('')
   const [error, setError] = useState(false)
   const [address, setAddress] = useState('')
-
+  const [defaultIndex, setDefaultIndex] = useState([0])
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmissionSuccess, setIsSubmissionSuccess] = useState(false)
 
@@ -69,6 +69,7 @@ const JoinForm = () => {
     setContribution('')
     setHeardFrom('Twitter')
     setExtras('')
+    setAddress('')
     setIsSubmissionSuccess(false)
   }
 
@@ -397,7 +398,13 @@ const JoinForm = () => {
         </AccordionItem>
       </Accordion>
 
-      <Modal isOpen={isSubmissionSuccess} onClose={resetForm} isCentered>
+      <Modal
+        isOpen={isSubmissionSuccess}
+        onClose={() => {
+          resetForm()
+        }}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
