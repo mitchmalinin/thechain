@@ -17,14 +17,28 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { useAccount, useDisconnect } from 'wagmi'
 
 export const Header = () => {
   const router = useRouter()
   const isMobile = useBreakpointValue({ base: true, md: false })
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
+
+  const { address } = useAccount()
+  const { disconnect } = useDisconnect()
+
+  useEffect(() => {
+    if (address && session && address !== session.user.id) {
+      disconnect()
+      signOut({ callbackUrl: window.location.origin })
+    }
+  }, [address])
+
+  console.log('address-==-=-', address)
 
   const handleNavigation = (section) => {
     router.push(`/#${section}`)

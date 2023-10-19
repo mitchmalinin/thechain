@@ -2,13 +2,19 @@
 
 import useSWR from 'swr'
 
-import { Box, Flex, Link, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Flex, Link, SimpleGrid, Spinner, Text } from '@chakra-ui/react'
 
 export default function Members() {
   const fetcher = (url) => fetch(url).then((r) => r.json())
 
-  const { data: members, error } = useSWR('/api/community', fetcher)
+  const { data: members, error, isLoading } = useSWR('/api/community', fetcher)
 
+  if (isLoading)
+    return (
+      <Flex minH="100vh" alignItems="center" justifyContent="center">
+        <Spinner />
+      </Flex>
+    )
   if (!members)
     return (
       <Flex minH="100vh" alignItems="center" justifyContent="center">
