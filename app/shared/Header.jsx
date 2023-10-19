@@ -26,8 +26,6 @@ export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { data: session } = useSession()
 
-  console.log('session', session)
-
   const handleNavigation = (section) => {
     router.push(`/#${section}`)
     onClose()

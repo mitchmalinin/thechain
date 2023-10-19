@@ -43,7 +43,6 @@ const occupations = [
 
 const JoinForm = () => {
   const toast = useToast()
-
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [twitter, setTwitter] = useState('')
@@ -55,7 +54,6 @@ const JoinForm = () => {
   const [extras, setExtras] = useState('')
   const [error, setError] = useState(false)
   const [address, setAddress] = useState('')
-
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmissionSuccess, setIsSubmissionSuccess] = useState(false)
 
@@ -69,6 +67,7 @@ const JoinForm = () => {
     setContribution('')
     setHeardFrom('Twitter')
     setExtras('')
+    setAddress('')
     setIsSubmissionSuccess(false)
   }
 
@@ -397,7 +396,13 @@ const JoinForm = () => {
         </AccordionItem>
       </Accordion>
 
-      <Modal isOpen={isSubmissionSuccess} onClose={resetForm} isCentered>
+      <Modal
+        isOpen={isSubmissionSuccess}
+        onClose={() => {
+          resetForm()
+        }}
+        isCentered
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
