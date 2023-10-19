@@ -30,7 +30,7 @@ export const Consult = () => {
           color="#42b5ff"
           fontWeight="bold"
         >
-          Consulting.
+          Consulting
         </Text>
         <VStack alignItems="flex-start">
           <Text opacity="0.8" fontSize={{ sm: '14px', lg: '16px' }}>
