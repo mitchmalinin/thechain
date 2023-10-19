@@ -49,7 +49,7 @@ export function getAuthOptions() {
           if (result.success) {
             const address = siwe.address
             const records = await CommunityMembersTable.select({
-              filterByFormula: `{Wallet} = '${address}'`,
+              filterByFormula: `AND({Wallet} = '${address}', {isAccepted} = '1')`,
             }).firstPage()
             const isMember = records.length > 0
             const user = {

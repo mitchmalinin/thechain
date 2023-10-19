@@ -100,6 +100,7 @@ export const About = () => {
           p={{ lg: '4rem', sm: '1rem' }}
           mt="1rem"
           maxW={'100rem'}
+          zIndex={100}
         >
           <Text
             fontSize={{ lg: '24px', sm: '18px' }}
