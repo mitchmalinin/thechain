@@ -38,8 +38,6 @@ export const Header = () => {
     }
   }, [address])
 
-  console.log('address-==-=-', address)
-
   const handleNavigation = (section) => {
     router.push(`/#${section}`)
     onClose()
