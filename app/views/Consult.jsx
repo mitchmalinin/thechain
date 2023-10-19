@@ -19,29 +19,31 @@ export const Consult = () => {
     <Flex
       id="consult"
       direction="column"
-      alignItems="flex-start"
+      alignItems="center"
       bg="#ccecff"
       p={{ lg: '4rem', sm: '2rem' }}
     >
-      <Text
-        fontSize={{ lg: '24px', sm: '18px' }}
-        mb="1rem"
-        color="#42b5ff"
-        fontWeight="bold"
-      >
-        Consulting
-      </Text>
-      <VStack alignItems="flex-start">
-        <Text opacity="0.8" fontSize={{ sm: '14px', lg: '16px' }}>
-          At The Chain Miami, we understand that every company or project
-          aspires to have a thriving community, but not everyone possesses the
-          time, expertise, or patience to build it from scratch. In addition to
-          running an exceptional in-person community in Miami, our team at The
-          Chain Miami specializes in helping businesses achieve financial
-          success through a community-driven approach.
+      <Flex maxW={'100rem'} direction="column" alignItems="flex-start">
+        <Text
+          fontSize={{ lg: '24px', sm: '18px' }}
+          mb="1rem"
+          color="#42b5ff"
+          fontWeight="bold"
+        >
+          Consulting
         </Text>
-        <NoSSRConsultForm />
-      </VStack>
+        <VStack alignItems="flex-start">
+          <Text opacity="0.8" fontSize={{ sm: '14px', lg: '16px' }}>
+            At The Chain Miami, we understand that every company or project
+            aspires to have a thriving community, but not everyone possesses the
+            time, expertise, or patience to build it from scratch. In addition
+            to running an exceptional in-person community in Miami, our team at
+            The Chain Miami specializes in helping businesses achieve financial
+            success through a community-driven approach.
+          </Text>
+          <NoSSRConsultForm />
+        </VStack>
+      </Flex>
 
       <SimpleGrid
         columns={{ lg: 4, md: 2, sm: 1 }}

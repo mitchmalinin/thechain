@@ -133,7 +133,7 @@ const JoinForm = () => {
 
   return (
     <>
-      <Accordion w="100%" py="1rem" allowToggle>
+      <Accordion w="100%" py="1rem" allowToggle maxW={'100rem'}>
         <AccordionItem outline="none" border="none">
           {({ isExpanded }) => (
             <>

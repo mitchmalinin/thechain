@@ -13,6 +13,7 @@ export const Origin = () => {
       columns={{ lg: '2', sm: '1' }}
       placeItems="center"
       px={{ lg: '4rem', sm: '2rem' }}
+      maxW={'100rem'}
     >
       <VStack alignItems="flex-start">
         <Text

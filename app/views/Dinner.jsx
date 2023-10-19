@@ -50,7 +50,7 @@ export const Dinner = () => {
       <Flex
         id="apply"
         direction="column"
-        alignItems="flex-start"
+        alignItems="center"
         mt="4rem"
         bg="rgba(255, 173, 226, 0.67)"
         py={{ lg: '4rem', sm: '2rem' }}
@@ -59,6 +59,7 @@ export const Dinner = () => {
           backdropFilter: 'blur(9.1px)',
         }}
         position="relative"
+        w={'100%'}
       >
         <Text
           fontSize={{ lg: '24px', sm: '18px' }}
@@ -69,7 +70,12 @@ export const Dinner = () => {
           Web3 Dinner Club
         </Text>
 
-        <SimpleGrid columns={{ lg: '2', sm: '1' }} gap="10" placeItems="center">
+        <SimpleGrid
+          columns={{ lg: '2', sm: '1' }}
+          gap="10"
+          placeItems="center"
+          maxW={'100rem'}
+        >
           <VStack alignItems="flex-start">
             <Text color="black" fontSize={{ sm: '14px', lg: '16px' }}>
               The Chain Miami hosts a community driven dinner club that invites
@@ -141,80 +147,89 @@ export const Dinner = () => {
         <NoSSRJoinForm />
       </Flex>
 
-      <SimpleGrid
+      <Flex
         id="events"
         columns="1"
         bg="black"
         minH="300px"
-        py={{ lg: '4rem', sm: '2rem' }}
-        px={{ lg: '4rem', sm: '2rem' }}
+        w={'100%'}
+        justifyContent={'center'}
       >
-        <Text
-          fontSize={{ lg: '24px', sm: '18px' }}
-          mb="1rem"
-          color="#ff62c7"
-          fontWeight="bold"
+        <SimpleGrid
+          columns="1"
+          py={{ lg: '4rem', sm: '2rem' }}
+          px={{ lg: '4rem', sm: '2rem' }}
+          maxW={'100rem'}
+          w="100%"
         >
-          Upcoming Events
-        </Text>
-        {events.length > 0 ? (
-          events.map((record, index) => {
-            return (
-              <Flex
-                key={index}
-                w="100%"
-                direction={{ lg: 'row', sm: 'column-reverse' }}
-                bg="black"
-                py="1rem"
-                color="white"
-                alignItems="center"
-                justifyContent="space-between"
-                borderRadius="5px"
-              >
-                <Flex direction="column">
-                  <Text
-                    fontSize="14px"
-                    mb="10px"
-                    color="rgba(255, 173, 226, 0.67)"
-                    textTransform="uppercase"
-                  >
-                    {new Date(record.event.start_at).toString()}
-                  </Text>
-                  <Text fontSize={{ lg: '24px', sm: '18px' }} maxW="80%">
-                    {record.event.name}
-                  </Text>
-                  <Button
-                    w={{ lg: '200px', sm: '100px' }}
-                    mt="20px"
-                    fontSize={{ sm: '16px' }}
-                    onClick={() =>
-                      window.open(record.event.url, '_blank').focus()
-                    }
-                  >
-                    RSVP
-                  </Button>
-                </Flex>
-                <ChakraImage
-                  w={{ lg: '500px', sm: '200px' }}
-                  mb={{ lg: 0, sm: '1rem' }}
-                  src={record.event.cover_url}
-                  alt="event cover"
-                />
-              </Flex>
-            )
-          })
-        ) : (
           <Text
-            fontSize="14px"
-            mb="2rem"
-            textAlign="center"
-            color="white"
-            textTransform="uppercase"
+            fontSize={{ lg: '24px', sm: '18px' }}
+            mb="1rem"
+            color="#ff62c7"
+            fontWeight="bold"
           >
-            No events to show now
+            Upcoming Events
           </Text>
-        )}
-      </SimpleGrid>
+          {events.length > 0 ? (
+            events.map((record, index) => {
+              return (
+                <Flex
+                  key={index}
+                  w="100%"
+                  direction={{ lg: 'row', sm: 'column-reverse' }}
+                  bg="black"
+                  py="1rem"
+                  color="white"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  borderRadius="5px"
+                  maxW={'100rem'}
+                >
+                  <Flex direction="column">
+                    <Text
+                      fontSize="14px"
+                      mb="10px"
+                      color="rgba(255, 173, 226, 0.67)"
+                      textTransform="uppercase"
+                    >
+                      {new Date(record.event.start_at).toString()}
+                    </Text>
+                    <Text fontSize={{ lg: '24px', sm: '18px' }} maxW="80%">
+                      {record.event.name}
+                    </Text>
+                    <Button
+                      w={{ lg: '200px', sm: '100px' }}
+                      mt="20px"
+                      fontSize={{ sm: '16px' }}
+                      onClick={() =>
+                        window.open(record.event.url, '_blank').focus()
+                      }
+                    >
+                      RSVP
+                    </Button>
+                  </Flex>
+                  <ChakraImage
+                    w={{ lg: '500px', sm: '200px' }}
+                    mb={{ lg: 0, sm: '1rem' }}
+                    src={record.event.cover_url}
+                    alt="event cover"
+                  />
+                </Flex>
+              )
+            })
+          ) : (
+            <Text
+              fontSize="14px"
+              mb="2rem"
+              textAlign="center"
+              color="white"
+              textTransform="uppercase"
+            >
+              No events to show now
+            </Text>
+          )}
+        </SimpleGrid>
+      </Flex>
 
       <Flex
         px={{ lg: '3rem', sm: '2rem' }}
@@ -223,6 +238,7 @@ export const Dinner = () => {
         position="relative"
         zIndex="1"
         overflow="hidden"
+        maxW={'100rem'}
       >
         <Masonry
           breakpointCols={3}

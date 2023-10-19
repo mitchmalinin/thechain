@@ -18,6 +18,7 @@ export const Offering = () => {
       gap="5"
       mt={{ lg: '1rem', sm: '0' }}
       px={{ lg: '4rem', sm: '2rem' }}
+      maxW={'100rem'}
     >
       {offerings.map((offer, index) => {
         return (
