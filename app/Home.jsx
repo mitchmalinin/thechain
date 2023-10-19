@@ -15,13 +15,13 @@ export default function Home() {
       direction="column"
       justifyContent="space-between"
       minH="100vh"
-      maxW="80rem"
       mx="auto"
+      alignItems="center"
     >
       <About />
       <Origin />
 
-      <Flex direction="column">
+      <Flex direction="column" alignItems={'center'} w="100%">
         <Offering />
         <Dinner />
 

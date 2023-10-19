@@ -27,6 +27,7 @@ export const About = () => {
         color="white"
         position="relative"
         overflow="hidden"
+        w={'100%'}
       >
         <Flex
           direction="column"
@@ -36,6 +37,7 @@ export const About = () => {
           p={{ lg: '4rem', sm: '2rem' }}
           background="rgba(0,0,0,.4)"
           zIndex="20"
+          maxW={'100rem'}
         >
           <Flex justifyContent="space-between" w="100%">
             <ChakraImage
@@ -97,6 +99,7 @@ export const About = () => {
           alignItems="flex-start"
           p={{ lg: '4rem', sm: '1rem' }}
           mt="1rem"
+          maxW={'100rem'}
         >
           <Text
             fontSize={{ lg: '24px', sm: '18px' }}
@@ -142,7 +145,7 @@ export const About = () => {
         />
       </Flex>
 
-      <Box py="2rem">
+      <Box py="2rem" display="flex" justifyContent="center" alignItems="center">
         <Image
           src={GroupPic}
           alt="the chain december"
