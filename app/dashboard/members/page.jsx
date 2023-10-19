@@ -15,6 +15,7 @@ export default function Members() {
         <Spinner />
       </Flex>
     )
+
   if (!members)
     return (
       <Flex minH="100vh" alignItems="center" justifyContent="center">
