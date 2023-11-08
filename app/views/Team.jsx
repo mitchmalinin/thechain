@@ -278,7 +278,7 @@ export const Team = () => {
               />
             </Box>
             <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
-              Neha Sonlin
+              Neha Jwala
             </Text>
             <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
               Co-Founder, Marketer - Nifty Bridge
