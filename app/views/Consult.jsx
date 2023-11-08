@@ -59,19 +59,18 @@ export const Consult = () => {
               justifyContent="flex-start"
               minH="150px"
               p="2rem"
-              boxShadow="inset 5px 5px 10px #c0def0,
-              inset -5px -5px 10px #d8faff"
-              borderRadius="1rem"
+              bg={'black'}
+              borderRadius="0.5rem"
             >
               <Box color="black" fontSize="36px" mb="1rem">
-                {index == 0 && <BsFillCalendarEventFill />}
-                {index == 1 && <RiCommunityFill />}
-                {index == 2 && <FaBookOpen />}
-                {index == 3 && <MdOutlineZoomInMap />}
+                {index == 0 && <BsFillCalendarEventFill color="white" />}
+                {index == 1 && <RiCommunityFill color="white" />}
+                {index == 2 && <FaBookOpen color="white" />}
+                {index == 3 && <MdOutlineZoomInMap color="white" />}
               </Box>
 
               <Text
-                color="black"
+                color="#42b5ff"
                 fontSize={{ lg: '1rem', sm: '1rem' }}
                 fontWeight="bold"
                 mb="1rem"
@@ -79,7 +78,7 @@ export const Consult = () => {
                 {offer.title}
               </Text>
               <Text
-                color="black"
+                color="white"
                 textAlign="center"
                 fontSize={{ sm: '14px', lg: '14px' }}
                 mt="5px"
