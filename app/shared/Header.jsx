@@ -55,7 +55,7 @@ export const Header = () => {
       <ChakraImage
         src="/the-chain-logo.png"
         alt="logo"
-        w={{ sm: '75px', lg: '150px' }}
+        w={{ sm: '75px', lg: '100px' }}
         _hover={{ cursor: 'pointer' }}
         onClick={() => handleNavigation('home')}
       />
@@ -76,7 +76,7 @@ export const Header = () => {
                   <ChakraLink
                     color="white"
                     _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-                    onClick={() => handleNavigation('origin')}
+                    href={'/info/member-benefits'}
                   >
                     Benefits
                   </ChakraLink>
@@ -130,7 +130,7 @@ export const Header = () => {
           <ChakraLink
             color="white"
             _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-            onClick={() => handleNavigation('origin')}
+            href={'/info/member-benefits'}
           >
             Benefits
           </ChakraLink>

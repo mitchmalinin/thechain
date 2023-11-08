@@ -39,14 +39,8 @@ export const About = () => {
           zIndex="20"
           maxW={'100rem'}
         >
-          <Flex justifyContent="space-between" w="100%">
-            <ChakraImage
-              mb="1rem"
-              src="/the-chain-logo.png"
-              alt="logo"
-              w={{ lg: '150px', sm: '75px' }}
-            />{' '}
-            <Flex gap="1rem">
+          <Flex justifyContent="flex-end" w="100%">
+            <Flex gap="1rem" justifySelf="flex-end">
               <ChakraLink
                 href="https://twitter.com/thechain_miami"
                 fontSize={{ lg: '25px', sm: '15px' }}
