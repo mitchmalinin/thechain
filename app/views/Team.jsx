@@ -18,8 +18,10 @@ import {
 import Image from 'next/image'
 
 import Anna from '../../public/anna.png'
+import Kyle from '../../public/kyle.jpg'
 import Mitch from '../../public/mitch.jpeg'
 import Monica from '../../public/monica.png'
+import Neha from '../../public/neha.jpeg'
 
 export const Team = () => {
   return (
@@ -182,7 +184,7 @@ export const Team = () => {
               Mitch Malinin
             </Text>
             <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
-              Web Developer
+              Frontend Web Alchemist
             </Text>
             <HStack mt="15px">
               <ChakraLink
@@ -194,6 +196,103 @@ export const Team = () => {
               </ChakraLink>
               <ChakraLink
                 href="https://www.linkedin.com/in/mitchmalinin/"
+                isExternal
+                fontSize="25px"
+              >
+                <AiFillLinkedin />
+              </ChakraLink>
+            </HStack>
+          </Flex>
+
+          <Flex
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            minH="150px"
+            p="1rem"
+            borderRadius="5px"
+            color="black"
+          >
+            <Box
+              w={{ lg: '150px', sm: '100px' }}
+              h={{ lg: '150px', sm: '100px' }}
+              overflow="hidden"
+              borderRadius="50%"
+              style={{ filter: 'grayscale(1)' }}
+              mb="15px"
+            >
+              <Image
+                src={Kyle}
+                alt="Kyle"
+                height="100%"
+                width="100%"
+                placeholder="blur"
+              />
+            </Box>
+            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
+              Kyle Sonlin
+            </Text>
+            <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
+              Entrepreneur, Investor, Bestselling Author
+            </Text>
+            <HStack mt="15px">
+              <ChakraLink
+                href="https://twitter.com/KyleSonlin"
+                isExternal
+                fontSize="25px"
+              >
+                <AiFillTwitterSquare />
+              </ChakraLink>
+              <ChakraLink
+                href="https://www.linkedin.com/in/kylesonlin/"
+                isExternal
+                fontSize="25px"
+              >
+                <AiFillLinkedin />
+              </ChakraLink>
+            </HStack>
+          </Flex>
+          <Flex
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            minH="150px"
+            p="1rem"
+            borderRadius="5px"
+            color="black"
+          >
+            <Box
+              w={{ lg: '150px', sm: '100px' }}
+              h={{ lg: '150px', sm: '100px' }}
+              overflow="hidden"
+              borderRadius="50%"
+              style={{ filter: 'grayscale(1)' }}
+              mb="15px"
+            >
+              <Image
+                src={Neha}
+                alt="Kyle"
+                height="100%"
+                width="100%"
+                placeholder="blur"
+              />
+            </Box>
+            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
+              Neha Sonlin
+            </Text>
+            <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
+              Co-Founder, Marketer - Nifty Bridge
+            </Text>
+            <HStack mt="15px">
+              <ChakraLink
+                href="https://twitter.com/nehaisfunny"
+                isExternal
+                fontSize="25px"
+              >
+                <AiFillTwitterSquare />
+              </ChakraLink>
+              <ChakraLink
+                href="https://www.linkedin.com/in/neha-jwala/"
                 isExternal
                 fontSize="25px"
               >

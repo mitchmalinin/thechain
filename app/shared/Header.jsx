@@ -55,8 +55,9 @@ export const Header = () => {
       <ChakraImage
         src="/the-chain-logo.png"
         alt="logo"
-        w={{ sm: '75px', lg: '150px' }}
+        w={{ sm: '75px', lg: '120px' }}
         _hover={{ cursor: 'pointer' }}
+        p={'0.5rem'}
         onClick={() => handleNavigation('home')}
       />
 
@@ -76,17 +77,18 @@ export const Header = () => {
                   <ChakraLink
                     color="white"
                     _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-                    onClick={() => handleNavigation('origin')}
-                  >
-                    Benefits
-                  </ChakraLink>
-                  <ChakraLink
-                    color="white"
-                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
                     onClick={() => handleNavigation('apply')}
                   >
                     Apply
                   </ChakraLink>
+                  <ChakraLink
+                    color="white"
+                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+                    onClick={() => handleNavigation('about')}
+                  >
+                    About
+                  </ChakraLink>
+
                   <ChakraLink
                     color="white"
                     _hover={{ textDecoration: 'none', color: '#ED73CF' }}
@@ -130,17 +132,18 @@ export const Header = () => {
           <ChakraLink
             color="white"
             _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-            onClick={() => handleNavigation('origin')}
-          >
-            Benefits
-          </ChakraLink>
-          <ChakraLink
-            color="white"
-            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
             onClick={() => handleNavigation('apply')}
           >
             Apply
           </ChakraLink>
+          <ChakraLink
+            color="white"
+            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
+            onClick={() => handleNavigation('about')}
+          >
+            About
+          </ChakraLink>
+
           <ChakraLink
             _hover={{ textDecoration: 'none', color: '#ED73CF' }}
             onClick={() => handleNavigation('events')}
