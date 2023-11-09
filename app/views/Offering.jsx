@@ -84,7 +84,7 @@ export const Offering = () => {
         })}
       </SimpleGrid>
       <SimpleGrid
-        columns={{ sm: '1', lg: '3' }}
+        columns={{ sm: '1', md: '3', lg: '3' }}
         spacing={10}
         mt={'64px'}
         bg="#000000ed"
