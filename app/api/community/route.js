@@ -51,7 +51,7 @@ export async function POST(request) {
             .or(
                 `wallet_address.eq.${json.wallet_address},email.eq.${json.email}`,
             )
-            .single();
+            .maybeSingle();
 
         if (userError && userError.message !== "No rows found") {
             throw userError;
@@ -82,7 +82,7 @@ export async function POST(request) {
         });
     } catch (err) {
         console.error(err);
-        return new Response(err.message, {
+        return new Response("Something went wrong. Please try again later.", {
             status: 500,
             headers: { "Content-Type": "application/json" },
         });
