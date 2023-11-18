@@ -103,9 +103,8 @@ export async function GET(request) {
     try {
         const { data: members, error } = await supabase
             .from("users")
-            .select("*");
-        // for later admin dashboard
-        // .eq("is_accepted", true);
+            .select("*")
+            .eq("is_accepted", true);
 
         if (error) throw error;
 

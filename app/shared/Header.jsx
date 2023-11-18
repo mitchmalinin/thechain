@@ -16,11 +16,12 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
+
 import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useAccount, useDisconnect } from 'wagmi'
+import ConnectWalletWrapper from '../components/connectWalletWrapper'
 
 export const Header = () => {
   const router = useRouter()
@@ -120,7 +121,7 @@ export const Header = () => {
                     </ChakraLink>
                   )}
                   <Box display="flex" justifyContent="flex-end" ml="10px">
-                    <ConnectButton chainStatus="none" showBalance={false} />
+                    <ConnectWalletWrapper />
                   </Box>
                 </VStack>
               </div>
@@ -172,7 +173,7 @@ export const Header = () => {
             </ChakraLink>
           )}
           <Box display="flex" justifyContent="flex-end" ml="10px">
-            <ConnectButton chainStatus="none" showBalance={false} />
+            <ConnectWalletWrapper />
           </Box>
         </HStack>
       )}
