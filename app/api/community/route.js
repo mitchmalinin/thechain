@@ -1,114 +1,123 @@
-import airtable from 'airtable'
-import { NextResponse } from 'next/server'
+import { EmailTemplate } from "@/app/components/emailTemplate";
+import { NotifyAdminEmail } from "@/app/components/notifyAdminEmail";
+import { supabase } from "@/app/utils/supabaseClient";
+import { getToken } from "next-auth/jwt";
+import { Resend } from "resend";
 
-import { EmailTemplate } from '@/app/components/emailTemplate'
-import { NotifyAdminEmail } from '@/app/components/notifyAdminEmail'
-import { getToken } from 'next-auth/jwt'
-import { Resend } from 'resend'
-
-const RESEND = new Resend(process.env.RESEND_API_KEY)
-const COMMUNITY_BASE_ID = process.env.AIRTABLE_COMMUNITY_BASE_ID
-
-airtable.configure({
-  endpointUrl: 'https://api.airtable.com',
-  apiKey: process.env.AIRTABLE_TOKEN,
-})
-
-const base = airtable.base(COMMUNITY_BASE_ID)
-export const CommunityApplicationsTable = base('Applications')
+const RESEND = new Resend(process.env.RESEND_API_KEY);
 
 const notifyApplicantEmail = async (toEmail, firstName) => {
-  const SUBJECT = 'The Chain Miami - Application Received'
-  const FROM_EMAIL = 'Monica <hello@thechain.miami>'
+    const SUBJECT = "The Chain Miami - Application Received";
+    const FROM_EMAIL = "Monica <hello@thechain.miami>";
 
-  try {
-    await RESEND.emails.send({
-      from: FROM_EMAIL,
-      to: [toEmail],
-      subject: SUBJECT,
-      react: EmailTemplate({ firstName: firstName }),
-    })
-  } catch (err) {
-    console.log(err)
-  }
-}
+    try {
+        await RESEND.emails.send({
+            from: FROM_EMAIL,
+            to: [toEmail],
+            subject: SUBJECT,
+            react: EmailTemplate({ firstName: firstName }),
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
 
-const notifyAdminEmail = async (firstName, recordId) => {
-  const SUBJECT = 'The Chain Miami - New Applicant'
-  const FROM_EMAIL = 'Notifications <hello@thechain.miami>'
+const notifyAdminEmail = async (firstName) => {
+    const SUBJECT = "The Chain Miami - New Applicant";
+    const FROM_EMAIL = "Notifications <hello@thechain.miami>";
 
-  try {
-    await RESEND.emails.send({
-      from: FROM_EMAIL,
-      to: ['monica@thechain.miami', 'hello@thechain.miami'],
-      subject: SUBJECT,
-      react: NotifyAdminEmail({ firstName: firstName, recordId: recordId }),
-    })
-  } catch (err) {
-    console.log(err)
-  }
-}
+    try {
+        await RESEND.emails.send({
+            from: FROM_EMAIL,
+            to: ["monica@thechain.miami", "hello@thechain.miami"],
+            subject: SUBJECT,
+            react: NotifyAdminEmail({
+                firstName: firstName,
+            }),
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
 
 export async function POST(request) {
-  try {
-    const json = await request.json()
-    let record = await CommunityApplicationsTable.create(json)
-    let json_response = {
-      status: 'success',
-    }
+    try {
+        const json = await request.json();
 
-    await notifyApplicantEmail(json.Email, json.Name)
-    await notifyAdminEmail(json.Name, record.id)
+        // Check if the user already exists
+        const { data: existingUser, error: userError } = await supabase
+            .from("users")
+            .select("id")
+            .or(
+                `wallet_address.eq.${json.wallet_address},email.eq.${json.email}`,
+            )
+            .maybeSingle();
 
-    return new NextResponse(JSON.stringify(json_response), {
-      status: 201,
-      headers: { 'Content-Type': 'application/json' },
-    })
-  } catch (err) {
-    console.log(err)
-    let error_response = {
-      status: 'error',
+        if (userError && userError.message !== "No rows found") {
+            throw userError;
+        }
+
+        if (existingUser) {
+            // User already exists
+            return new Response(
+                "A member with this email or wallet address already submitted.",
+                {
+                    status: 422,
+                    headers: { "Content-Type": "application/json" },
+                },
+            );
+        }
+
+        // TODO: add type check
+        let { error } = await supabase.from("users").insert([json]);
+
+        if (error) throw error;
+
+        await notifyApplicantEmail(json.email, json.name);
+        await notifyAdminEmail(json.name);
+
+        return new Response({
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+        });
+    } catch (err) {
+        console.error(err);
+        return new Response("Something went wrong. Please try again later.", {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+        });
     }
-    return new NextResponse(JSON.stringify(error_response), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    })
-  }
 }
 
-export async function GET(req) {
-  const secret = process.env.NEXTAUTH_SECRET
+export async function GET(request) {
+    const secret = process.env.NEXTAUTH_SECRET;
+    const token = await getToken({ req: request, secret });
 
-  const token = await getToken({ req, secret })
-
-  if (!token || !token.isMember)
-    return new NextResponse(null, {
-      status: 403,
-      headers: { 'Content-Type': 'application/json' },
-    })
-
-  try {
-    const allRecords = []
-    await CommunityApplicationsTable.select({
-      view: 'Grid view',
-      fields: [],
-      filterByFormula: `{isAccepted} = '1'`,
-    }).eachPage((records, processNextPage) => {
-      allRecords.push(records.map((record) => record.fields))
-      processNextPage()
-    })
-    return new NextResponse(JSON.stringify(allRecords.flat()), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    })
-  } catch (err) {
-    console.log(err)
-    let error_response = {
-      status: 'error',
+    if (!token || !token.isMember) {
+        return new Response(null, {
+            status: 403,
+            headers: { "Content-Type": "application/json" },
+        });
     }
-    return new NextResponse(JSON.stringify(error_response), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    })
-  }
+
+    try {
+        const { data: members, error } = await supabase
+            .from("users")
+            .select("*");
+        // for later admin dashboard
+        // .eq("is_accepted", true);
+
+        if (error) throw error;
+
+        return new Response(JSON.stringify(members), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+        });
+    } catch (err) {
+        console.error(err);
+        return new Response(err.message || "Something went wrong.", {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
 }

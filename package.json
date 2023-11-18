@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.0",
     "@rainbow-me/rainbowkit": "^1.1.1",
     "@rainbow-me/rainbowkit-siwe-next-auth": "^0.3.1",
+    "@supabase/supabase-js": "^2.38.4",
     "@upstash/ratelimit": "^0.4.4",
     "@vercel/analytics": "^1.0.1",
     "@walletconnect/client": "^1.8.0",
