@@ -1,11 +1,11 @@
-'use client'
+"use client";
 
-import { Flex, Spinner } from '@chakra-ui/react'
+import { ImSpinner8 } from "react-icons/im";
 
 export default function Loading() {
-  return (
-    <Flex minH="100vh" alignItems="center" justifyContent="center">
-      <Spinner size="xl" />
-    </Flex>
-  )
+    return (
+        <div className="flex min-h-screen items-center justify-center">
+            <ImSpinner8 size={64} className="animate-spin text-[#ff62c7]" />
+        </div>
+    );
 }
