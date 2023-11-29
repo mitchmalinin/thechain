@@ -5,6 +5,8 @@ export async function GET(request) {
     const secret = process.env.NEXTAUTH_SECRET;
     const token = await getToken({ req: request, secret });
 
+    console.log("token", token);
+
     if (!token || !token.isMember) {
         return new Response(null, {
             status: 403,

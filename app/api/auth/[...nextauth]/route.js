@@ -59,7 +59,7 @@ export function getAuthOptions() {
                         if (data) {
                             // User is found and is a member
                             const user = {
-                                id: data.wallet_address,
+                                id: siwe.address,
                                 isMember: true,
                             };
                             return user;
@@ -94,6 +94,8 @@ export function getAuthOptions() {
             },
 
             async session({ session, token }) {
+                console.log("sesson", session, token);
+
                 session.user = token;
                 return session;
             },
