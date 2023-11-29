@@ -66,33 +66,33 @@ const team = [
 export const Team = () => {
     return (
         <div className="flex flex-col">
-            <h2 className="font-bold text-center mt-4 text-lg lg:text-2xl p-4 text-black">
+            <h2 className="mt-4 p-4 text-center text-lg font-bold text-black lg:text-2xl">
                 Meet the Team
             </h2>
-            <div className="flex flex-col items-center px-8 lg:px-20 py-8">
+            <div className="flex flex-col items-center px-8 py-8 lg:px-20">
                 <div
-                    className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+                    className="grid grid-cols-1 gap-8 lg:grid-cols-3"
                     id="team"
                 >
                     {team.map((member, index) => (
                         <div
                             key={index}
-                            className="flex flex-col items-center justify-center min-h-[150px] p-4 rounded-lg text-black"
+                            className="flex min-h-[150px] flex-col items-center justify-center rounded-lg p-4 text-black"
                         >
-                            <div className="w-24 lg:w-40 h-24 lg:h-40 overflow-hidden rounded-full mb-4 grayscale">
+                            <div className="mb-4 h-24 w-24 overflow-hidden rounded-full grayscale lg:h-40 lg:w-40">
                                 <Image
                                     src={member.image}
                                     alt={`${member.name} - ${member.role}`}
                                     fill={true}
                                 />
                             </div>
-                            <p className="text-lg lg:text-xl font-bold">
+                            <p className="text-lg font-bold lg:text-xl">
                                 {member.name}
                             </p>
-                            <p className="opacity-70 text-center text-xs mt-2">
+                            <p className="mt-2 text-center text-xs opacity-70">
                                 {member.role}
                             </p>
-                            <div className="flex mt-4 gap-2">
+                            <div className="mt-4 flex gap-2">
                                 {member.twitter && (
                                     <Link
                                         href={member.twitter}
@@ -127,4 +127,4 @@ export const Team = () => {
             </div>
         </div>
     );
-
+};
