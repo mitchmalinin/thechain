@@ -1,181 +1,167 @@
-'use client'
-
-import { HamburgerIcon } from '@chakra-ui/icons'
-import {
-  Box,
-  Image as ChakraImage,
-  Link as ChakraLink,
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
-  Flex,
-  HStack,
-  IconButton,
-  useBreakpointValue,
-  useDisclosure,
-  VStack,
-} from '@chakra-ui/react'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { useAccount, useDisconnect } from 'wagmi'
+"use client";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { IoMdMenu } from "react-icons/io";
+import { useAccount, useDisconnect } from "wagmi";
 
 export const Header = () => {
-  const router = useRouter()
-  const isMobile = useBreakpointValue({ base: true, md: false })
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { data: session } = useSession()
+    const router = useRouter();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { data: session } = useSession();
 
-  const { address } = useAccount()
-  const { disconnect } = useDisconnect()
+    const { address } = useAccount();
+    const { disconnect } = useDisconnect();
+    const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    if (address && session && address !== session.user.id) {
-      disconnect()
-      signOut({ callbackUrl: window.location.origin })
-    }
-  }, [address])
+    useEffect(() => {
+        if (address && session && address !== session.user.id) {
+            disconnect();
+            signOut({ callbackUrl: window.location.origin });
+        }
+    }, [address, disconnect, session]);
 
-  const handleNavigation = (section) => {
-    router.push(`/#${section}`)
-    onClose()
-  }
+    const handleNavigation = (section) => {
+        router.push(`/#${section}`);
+        setIsMobileMenuOpen(false);
+    };
 
-  return (
-    <Flex
-      w="100%"
-      direction="row"
-      alignItems="center"
-      justifyContent="space-between"
-      p="0.5rem"
-      background="black"
-    >
-      <ChakraImage
-        src="/the-chain-logo.png"
-        alt="logo"
-        w={{ sm: '75px', lg: '120px' }}
-        _hover={{ cursor: 'pointer' }}
-        p={'0.5rem'}
-        onClick={() => handleNavigation('home')}
-      />
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target)
+            ) {
+                setIsMobileMenuOpen(false);
+            }
+        };
 
-      {isMobile ? (
-        <>
-          <IconButton
-            icon={<HamburgerIcon />}
-            onClick={onOpen}
-            colorScheme="white"
-          />
-          <Drawer isOpen={isOpen} placement="top" onClose={onClose}>
-            <DrawerOverlay />
-            <DrawerContent background="black">
-              <DrawerCloseButton color="white" />
-              <div>
-                <VStack spacing={4} alignItems="flex-start">
-                  <ChakraLink
-                    color="white"
-                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-                    onClick={() => handleNavigation('apply')}
-                  >
-                    Apply
-                  </ChakraLink>
-                  <ChakraLink
-                    color="white"
-                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-                    onClick={() => handleNavigation('about')}
-                  >
-                    About
-                  </ChakraLink>
+        if (isMobileMenuOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
 
-                  <ChakraLink
-                    color="white"
-                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-                    onClick={() => handleNavigation('events')}
-                  >
-                    Events
-                  </ChakraLink>
-                  <ChakraLink
-                    color="white"
-                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-                    onClick={() => handleNavigation('consult')}
-                  >
-                    Consult
-                  </ChakraLink>
-                  <ChakraLink
-                    color="white"
-                    _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-                    onClick={() => handleNavigation('team')}
-                  >
-                    Team
-                  </ChakraLink>
-                  {session?.user?.isMember && (
-                    <ChakraLink
-                      color="white"
-                      _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-                      href={'/dashboard/members'}
-                    >
-                      Members
-                    </ChakraLink>
-                  )}
-                  <Box display="flex" justifyContent="flex-end" ml="10px">
-                    <ConnectButton chainStatus="none" showBalance={false} />
-                  </Box>
-                </VStack>
-              </div>
-            </DrawerContent>
-          </Drawer>
-        </>
-      ) : (
-        <HStack color="white" justifyContent="center">
-          <ChakraLink
-            color="white"
-            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-            onClick={() => handleNavigation('apply')}
-          >
-            Apply
-          </ChakraLink>
-          <ChakraLink
-            color="white"
-            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-            onClick={() => handleNavigation('about')}
-          >
-            About
-          </ChakraLink>
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isMobileMenuOpen]);
 
-          <ChakraLink
-            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-            onClick={() => handleNavigation('events')}
-          >
-            Events
-          </ChakraLink>
-          <ChakraLink
-            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-            onClick={() => handleNavigation('consult')}
-          >
-            Consult
-          </ChakraLink>
-          <ChakraLink
-            _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-            onClick={() => handleNavigation('team')}
-          >
-            Team
-          </ChakraLink>
-          {session?.user?.isMember && (
-            <ChakraLink
-              color="white"
-              _hover={{ textDecoration: 'none', color: '#ED73CF' }}
-              href={'/dashboard/members'}
+    return (
+        <div className="flex w-full flex-row items-center justify-between p-2 bg-black">
+            <div className="p-2">
+                <Image
+                    src="/the-chain-logo.png"
+                    alt="logo"
+                    width={100}
+                    height={100}
+                    className="cursor-pointer"
+                    onClick={() => handleNavigation("home")}
+                />
+            </div>
+
+            <button
+                className="lg:hidden"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              Members
-            </ChakraLink>
-          )}
-          <Box display="flex" justifyContent="flex-end" ml="10px">
-            <ConnectButton chainStatus="none" showBalance={false} />
-          </Box>
-        </HStack>
-      )}
-    </Flex>
-  )
-}
+                <IoMdMenu className="h-6 w-6 text-white" />
+            </button>
+
+            <div
+                ref={dropdownRef}
+                className={`${
+                    isMobileMenuOpen
+                        ? "scale-100 opacity-100"
+                        : "scale-0 opacity-0"
+                } absolute top-0 left-0 z-10 gap-1 w-full flex flex-col items-start bg-black text-white py-4 px-6 transition-transform duration-300 ease-out`}
+                style={{
+                    transformOrigin: "top right",
+                }}
+            >
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#apply"
+                >
+                    Apply
+                </Link>
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#about"
+                >
+                    About
+                </Link>
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#events"
+                >
+                    Events
+                </Link>
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#consult"
+                >
+                    Consult
+                </Link>
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#team"
+                >
+                    Team
+                </Link>
+                {session?.user?.isMember && (
+                    <Link
+                        className="hover:text-[#ED73CF] transition-colors"
+                        href="/dashboard/members"
+                    >
+                        Members
+                    </Link>
+                )}
+            </div>
+
+            <div className="hidden lg:flex text-white gap-2 items-center">
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#apply"
+                >
+                    Apply
+                </Link>
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#about"
+                >
+                    About
+                </Link>
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#events"
+                >
+                    Events
+                </Link>
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#consult"
+                >
+                    Consult
+                </Link>
+                <Link
+                    className="hover:text-[#ED73CF] transition-colors"
+                    href="#team"
+                >
+                    Team
+                </Link>
+                {session?.user?.isMember && (
+                    <Link
+                        className="hover:text-[#ED73CF] transition-colors"
+                        href="/dashboard/members"
+                    >
+                        Members
+                    </Link>
+                )}
+                <div className="flex justify-end ml-2.5">
+                    <ConnectButton chainStatus="none" showBalance={false} />
+                </div>
+            </div>
+        </div>
+    );
+};

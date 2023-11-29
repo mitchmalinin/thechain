@@ -1,335 +1,231 @@
-'use client'
+"use client";
 
-import {
-  Box,
-  Button,
-  Image as ChakraImage,
-  Flex,
-  HStack,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
+import axios from "axios";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import Masonry from "react-masonry-css";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
-import axios from 'axios'
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import Masonry from 'react-masonry-css'
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
+import chainPic from "../../public/chain-color.webp";
+import ImageOne from "../../public/dinner_club_1.png";
+import ImageTwo from "../../public/dinner_club_2.png";
+import ImageThree from "../../public/dinner_club_3.png";
+import ImageFour from "../../public/dinner_club_4.png";
+import ImageFive from "../../public/dinner_club_5.png";
+import ImageSix from "../../public/dinner_club_6.png";
 
-import ImageOne from '../../public/dinner_club_1.png'
-import ImageTwo from '../../public/dinner_club_2.png'
-import ImageThree from '../../public/dinner_club_3.png'
-import ImageFour from '../../public/dinner_club_4.png'
-import ImageFive from '../../public/dinner_club_5.png'
-import ImageSix from '../../public/dinner_club_6.png'
-
-const NoSSRJoinForm = dynamic(() => import('../forms/JoinForm'), {
-  ssr: false,
-})
+const NoSSRJoinForm = dynamic(() => import("../forms/JoinForm"), {
+    ssr: false,
+});
 
 export const Dinner = () => {
-  const [events, setEvents] = useState([])
+    const [events, setEvents] = useState([]);
 
-  const getEvents = async () => {
-    const { data } = await axios.post('/api/events', {
-      date: new Date().toISOString(),
-    })
+    const getEvents = async () => {
+        const { data } = await axios.post("/api/events", {
+            date: new Date().toISOString(),
+        });
 
-    setEvents(data.data)
-  }
+        setEvents(data.data);
+    };
 
-  useEffect(() => {
-    getEvents()
-  }, [])
+    useEffect(() => {
+        getEvents();
+    }, []);
 
-  return (
-    <>
-      <Flex
-        id="apply"
-        direction="column"
-        alignItems="center"
-        mt="4rem"
-        bg="rgba(255, 173, 226, 0.67)"
-        py={{ lg: '4rem', sm: '2rem' }}
-        px={{ lg: '4rem', sm: '2rem' }}
-        style={{
-          backdropFilter: 'blur(9.1px)',
-        }}
-        position="relative"
-        w={'100%'}
-      >
-        <Text
-          fontSize={{ lg: '24px', sm: '18px' }}
-          mb="1rem"
-          color="#ff62c7"
-          fontWeight="bold"
-        >
-          Web3 Dinner Club
-        </Text>
-
-        <SimpleGrid
-          columns={{ lg: '2', sm: '1' }}
-          gap="10"
-          placeItems="center"
-          maxW={'100rem'}
-        >
-          <VStack alignItems="flex-start">
-            <Text color="black" fontSize={{ sm: '14px', lg: '16px' }}>
-              The Chain Miami hosts a community driven dinner club that invites
-              Miami’s brightest minds in the web 3space to interact, connect,
-              and learn from each other. To ensure a high caliber of attendees
-              and conversations, The Chain's Dinner Club operates through a
-              selective application process.
-            </Text>
-            <Text
-              textAlign="left"
-              fontSize="12px"
-              width={{ lg: '50%', sm: '100%' }}
-              mt="15px"
-              fontStyle="italic"
-              opacity="0.8"
+    return (
+        <>
+            <div
+                id="apply"
+                className="mt-16 flex flex-col items-center bg-[rgba(255,173,226,0.67)] p-8 lg:p-16"
+                style={{ backdropFilter: "blur(9.1px)" }}
             >
-              To sponsor a Chain dinner or be a dinner host, ping
-              monica@thechain.miami
-            </Text>
-          </VStack>
-          <VStack alignItems="flex-start">
-            <HStack
-              bg="black"
-              color="white"
-              py=".5rem"
-              px=".8rem"
-              borderLeft="2px solid white"
-              justifyContent="flex-start"
-            >
-              <Text
-                fontSize={{ sm: '12px', lg: '16px' }}
-                textTransform="uppercase"
-              >
-                The first Tuesday of every month
-              </Text>
-            </HStack>
-            <HStack
-              bg="black"
-              color="white"
-              py=".5rem"
-              px=".8rem"
-              borderLeft="2px solid white"
-              justifyContent="flex-start"
-            >
-              <Text
-                fontSize={{ sm: '12px', lg: '16px' }}
-                textTransform="uppercase"
-              >
-                A highly curated dinner of 15-20 web3 builders in Miami{' '}
-              </Text>
-            </HStack>
-            <HStack
-              bg="black"
-              color="white"
-              py=".5rem"
-              px=".8rem"
-              borderLeft="2px solid white"
-              justifyContent="flex-start"
-            >
-              <Text
-                fontSize={{ sm: '12px', lg: '16px' }}
-                textTransform="uppercase"
-              >
-                Topics, special guests, meaningful connections
-              </Text>
-            </HStack>
-          </VStack>
-        </SimpleGrid>
-        <NoSSRJoinForm />
-      </Flex>
+                <h2 className="mb-4 text-lg font-bold text-[#ff62c7] lg:text-2xl">
+                    Web3 Dinner Club
+                </h2>
 
-      <Flex
-        id="events"
-        columns="1"
-        bg="black"
-        minH="300px"
-        w={'100%'}
-        justifyContent={'center'}
-      >
-        <SimpleGrid
-          columns="1"
-          py={{ lg: '4rem', sm: '2rem' }}
-          px={{ lg: '4rem', sm: '2rem' }}
-          maxW={'100rem'}
-          w="100%"
-        >
-          <Text
-            fontSize={{ lg: '24px', sm: '18px' }}
-            mb="1rem"
-            color="#ff62c7"
-            fontWeight="bold"
-          >
-            Upcoming Events
-          </Text>
-          {events.length > 0 ? (
-            events.map((record, index) => {
-              return (
-                <Flex
-                  key={index}
-                  w="100%"
-                  direction={{ lg: 'row', sm: 'column-reverse' }}
-                  bg="black"
-                  py="1rem"
-                  color="white"
-                  alignItems="center"
-                  justifyContent="space-between"
-                  borderRadius="5px"
-                  maxW={'100rem'}
+                <div className="grid max-w-[100rem] grid-cols-1 place-items-center gap-10 lg:grid-cols-2">
+                    <div className="flex flex-col items-start gap-6">
+                        <p className="text-sm text-black lg:text-base">
+                            The Chain Miami hosts a community driven dinner club
+                            that invites Miami’s brightest minds in the web
+                            3space to interact, connect, and learn from each
+                            other. To ensure a high caliber of attendees and
+                            conversations, The Chain's Dinner Club operates
+                            through a selective application process.
+                        </p>
+                        <p className="w-full text-left text-xs italic opacity-80 lg:w-1/2">
+                            To sponsor a Chain dinner or be a dinner host, ping
+                            monica@thechain.miami
+                        </p>
+                    </div>
+
+                    <div className="flex flex-col items-start">
+                        {[
+                            "The first Tuesday of every month",
+                            "A highly curated dinner of 15-20 web3 builders in Miami",
+                            "Topics, special guests, meaningful connections",
+                        ].map((text, index) => (
+                            <div
+                                key={index}
+                                className="mb-2 flex items-center border-l-2 border-white bg-black px-3 py-2 text-white"
+                            >
+                                <p className="text-xs uppercase lg:text-base">
+                                    {text}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <NoSSRJoinForm />
+            </div>
+
+            <div
+                id="events"
+                className="flex min-h-[300px] w-full justify-center bg-black"
+            >
+                <div className="grid w-full grid-cols-1 p-8 lg:p-16">
+                    <h2 className="mb-4 text-lg font-bold text-[#ff62c7] lg:text-2xl">
+                        Upcoming Events
+                    </h2>
+                    {events.length > 0 ? (
+                        events.map((record, index) => (
+                            <div
+                                key={index}
+                                className="flex w-full max-w-[100rem] flex-col-reverse items-center justify-between rounded-lg bg-black py-4 text-white lg:flex-row"
+                            >
+                                <div className="flex flex-col">
+                                    <p className="mb-2.5 text-sm uppercase text-[rgba(255,173,226,0.67)]">
+                                        {new Date(
+                                            record.event.start_at,
+                                        ).toString()}
+                                    </p>
+                                    <h3 className="max-w-[80%] text-lg lg:text-2xl">
+                                        {record.event.name}
+                                    </h3>
+                                    <button
+                                        className="w-25 mt-5 rounded-md bg-gray-100 p-2 text-sm font-semibold text-gray-800 transition-colors hover:bg-gray-300 lg:w-52 lg:text-base"
+                                        onClick={() =>
+                                            window
+                                                .open(
+                                                    record.event.url,
+                                                    "_blank",
+                                                )
+                                                .focus()
+                                        }
+                                    >
+                                        RSVP
+                                    </button>
+                                </div>
+                                <Image
+                                    className="mb-4 w-[200px] lg:mb-0 lg:w-[500px]"
+                                    src={record.event.cover_url}
+                                    alt="event cover"
+                                    width={500}
+                                    height={500}
+                                />
+                            </div>
+                        ))
+                    ) : (
+                        <p className="mb-8 text-center text-sm uppercase text-white">
+                            No events to show now
+                        </p>
+                    )}
+                </div>
+            </div>
+
+            <div className="relative max-w-[100rem] overflow-hidden px-12 pt-16 sm:px-8 sm:pt-8">
+                <Masonry
+                    breakpointCols={3}
+                    className="my-masonry-grid"
+                    columnClassName="my-masonry-grid_column"
                 >
-                  <Flex direction="column">
-                    <Text
-                      fontSize="14px"
-                      mb="10px"
-                      color="rgba(255, 173, 226, 0.67)"
-                      textTransform="uppercase"
-                    >
-                      {new Date(record.event.start_at).toString()}
-                    </Text>
-                    <Text fontSize={{ lg: '24px', sm: '18px' }} maxW="80%">
-                      {record.event.name}
-                    </Text>
-                    <Button
-                      w={{ lg: '200px', sm: '100px' }}
-                      mt="20px"
-                      fontSize={{ sm: '16px' }}
-                      onClick={() =>
-                        window.open(record.event.url, '_blank').focus()
-                      }
-                    >
-                      RSVP
-                    </Button>
-                  </Flex>
-                  <ChakraImage
-                    w={{ lg: '500px', sm: '200px' }}
-                    mb={{ lg: 0, sm: '1rem' }}
-                    src={record.event.cover_url}
-                    alt="event cover"
-                  />
-                </Flex>
-              )
-            })
-          ) : (
-            <Text
-              fontSize="14px"
-              mb="2rem"
-              textAlign="center"
-              color="white"
-              textTransform="uppercase"
-            >
-              No events to show now
-            </Text>
-          )}
-        </SimpleGrid>
-      </Flex>
+                    <div className="overflow-hidden rounded-3xl">
+                        <Zoom>
+                            <Image
+                                src={ImageOne}
+                                alt="dinner images"
+                                height="100%"
+                                width="100%"
+                                placeholder="blur"
+                                priority
+                            />
+                        </Zoom>
+                    </div>
+                    <div className="overflow-hidden rounded-3xl">
+                        <Zoom>
+                            <Image
+                                src={ImageThree}
+                                alt="dinner images"
+                                height="100%"
+                                width="100%"
+                                placeholder="blur"
+                                priority
+                            />
+                        </Zoom>
+                    </div>
+                    <div className="overflow-hidden rounded-3xl">
+                        <Zoom>
+                            <Image
+                                src={ImageFour}
+                                alt="dinner images"
+                                height="100%"
+                                width="100%"
+                                placeholder="blur"
+                                priority
+                            />
+                        </Zoom>
+                    </div>
+                    <div className="overflow-hidden rounded-3xl">
+                        <Zoom>
+                            <Image
+                                src={ImageFive}
+                                alt="dinner images"
+                                height="100%"
+                                width="100%"
+                                placeholder="blur"
+                                priority
+                            />
+                        </Zoom>
+                    </div>
+                    <div className="overflow-hidden rounded-3xl">
+                        <Zoom>
+                            <Image
+                                src={ImageSix}
+                                alt="dinner images"
+                                height="100%"
+                                width="100%"
+                                placeholder="blur"
+                                priority
+                            />
+                        </Zoom>
+                    </div>
+                    <div className="overflow-hidden rounded-3xl">
+                        <Zoom>
+                            <Image
+                                src={ImageTwo}
+                                alt="dinner images"
+                                height="100%"
+                                width="100%"
+                                placeholder="blur"
+                                priority
+                            />
+                        </Zoom>
+                    </div>
+                </Masonry>
+            </div>
 
-      <Flex
-        px={{ lg: '3rem', sm: '2rem' }}
-        pt={{ lg: '4rem', sm: '2rem' }}
-        // bg='linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(217,240,255,1) 100%)'
-        position="relative"
-        zIndex="1"
-        overflow="hidden"
-        maxW={'100rem'}
-      >
-        <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          <Box borderRadius="20px" overflow="hidden">
-            <Zoom>
-              <Image
-                src={ImageOne}
-                alt="dinner images"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-                priority
-              />
-            </Zoom>
-          </Box>
-          <Box borderRadius="20px" overflow="hidden">
-            <Zoom>
-              <Image
-                src={ImageThree}
-                alt="dinner images"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-                priority
-              />
-            </Zoom>
-          </Box>
-          <Box borderRadius="20px" overflow="hidden">
-            <Zoom>
-              <Image
-                src={ImageFour}
-                alt="dinner images"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-                priority
-              />
-            </Zoom>
-          </Box>
-          <Box borderRadius="20px" overflow="hidden">
-            <Zoom>
-              <Image
-                src={ImageFive}
-                alt="dinner images"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-                priority
-              />
-            </Zoom>
-          </Box>
-          <Box borderRadius="20px" overflow="hidden">
-            <Zoom>
-              <Image
-                src={ImageSix}
-                alt="dinner images"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-                priority
-              />
-            </Zoom>
-          </Box>
-          <Box borderRadius="20px" overflow="hidden">
-            <Zoom>
-              <Image
-                src={ImageTwo}
-                alt="dinner images"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-                priority
-              />
-            </Zoom>
-          </Box>
-        </Masonry>
-      </Flex>
-
-      <ChakraImage
-        src="/chain-color.webp"
-        alt="the chain"
-        position="absolute"
-        left="-680"
-        id="chain-image"
-        zIndex="-1"
-        h="auto"
-        w="auto"
-      />
-    </>
-  )
-}
+            <Image
+                id="chain-image"
+                src={chainPic}
+                alt="the chain"
+                className="absolute left-[-680px] -z-10"
+                width={1500}
+                height={1500}
+            />
+        </>
+    );
+};
