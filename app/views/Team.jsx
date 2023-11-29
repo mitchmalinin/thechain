@@ -127,4 +127,4 @@ export const Team = () => {
             </div>
         </div>
     );
-};
+
