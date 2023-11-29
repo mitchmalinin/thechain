@@ -4,7 +4,6 @@ import { Tweet } from "react-tweet";
 
 export const About = () => {
     console.log("test");
-    const test;
     return (
         <>
             <div
