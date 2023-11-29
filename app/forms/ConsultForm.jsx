@@ -131,9 +131,9 @@ const ConsultForm = () => {
 
     return (
         <>
-            <div className="w-full py-4 max-w-[100rem]">
+            <div className="w-full max-w-[100rem] py-4">
                 <button
-                    className="w-auto border-2 border-[#42b5ff] text-[#42b5ff] text-sm lg:text-base hover:opacity-80 py-2 px-4"
+                    className="w-auto border-2 border-[#42b5ff] px-4 py-2 text-sm text-[#42b5ff] hover:opacity-80 lg:text-base"
                     onClick={() => setIsFormOpen(!isFormOpen)}
                 >
                     {isFormOpen ? "Close Application" : "Open Application"}
@@ -141,8 +141,8 @@ const ConsultForm = () => {
 
                 {isFormOpen && (
                     <div className="flex flex-col items-center p-8 lg:px-4 lg:py-10">
-                        <div className="flex flex-col w-full gap-10">
-                            <div className="mb-10 lg:mb-0 flex flex-col lg:flex-row lg:space-x-5">
+                        <div className="flex w-full flex-col gap-10">
+                            <div className="mb-10 flex flex-col lg:mb-0 lg:flex-row lg:space-x-5">
                                 <TextField
                                     label="Hi, what's your name?"
                                     value={name}
@@ -157,7 +157,7 @@ const ConsultForm = () => {
                                 />
                             </div>
 
-                            <div className="mb-10 lg:mb-0 flex flex-col lg:flex-row lg:space-x-5">
+                            <div className="mb-10 flex flex-col lg:mb-0 lg:flex-row lg:space-x-5">
                                 <TextField
                                     label="Phone Number"
                                     value={phone}
@@ -172,7 +172,7 @@ const ConsultForm = () => {
                                 />
                             </div>
 
-                            <div className="mb-10 lg:mb-0 flex flex-col lg:flex-row lg:space-x-5">
+                            <div className="mb-10 flex flex-col lg:mb-0 lg:flex-row lg:space-x-5">
                                 <RadioGroup
                                     value={contactPreference}
                                     onChange={setContactPreference}
@@ -180,13 +180,13 @@ const ConsultForm = () => {
                                     <RadioGroup.Label>
                                         Preferred Method of Communication
                                     </RadioGroup.Label>
-                                    <div className="flex flex-row gap-2 mt-2">
+                                    <div className="mt-2 flex flex-row gap-2">
                                         {["Email", "Phone Number"].map(
                                             (method, index) => (
                                                 <RadioGroup.Option
                                                     className={({ checked }) =>
                                                         clsx(
-                                                            "cursor-pointer transition-colors hover:opacity-80 bg-white text-black p-2 mb-2 text-sm lg:text-base border border-black rounded-sm",
+                                                            "mb-2 cursor-pointer rounded-sm border border-black bg-white p-2 text-sm text-black transition-colors hover:opacity-80 lg:text-base",
                                                             checked &&
                                                                 "!bg-black text-white",
                                                         )
@@ -202,7 +202,7 @@ const ConsultForm = () => {
                                 </RadioGroup>
                             </div>
 
-                            <div className="mb-10 lg:mb-0 flex flex-row lg:space-x-5 justify-between">
+                            <div className="mb-10 flex flex-row justify-between lg:mb-0 lg:space-x-5">
                                 <RadioGroup
                                     className="w-full"
                                     value={projectType}
@@ -211,13 +211,13 @@ const ConsultForm = () => {
                                     <RadioGroup.Label>
                                         Project Type
                                     </RadioGroup.Label>
-                                    <div className="flex flex-row gap-2 mt-2">
+                                    <div className="mt-2 flex flex-row gap-2">
                                         {["New", "Existing"].map(
                                             (type, index) => (
                                                 <RadioGroup.Option
                                                     className={({ checked }) =>
                                                         clsx(
-                                                            "cursor-pointer transition-colors hover:opacity-80 bg-white text-black p-2 mb-2 text-sm lg:text-base border border-black rounded-sm",
+                                                            "mb-2 cursor-pointer rounded-sm border border-black bg-white p-2 text-sm text-black transition-colors hover:opacity-80 lg:text-base",
                                                             checked &&
                                                                 "!bg-black text-white",
                                                         )
@@ -242,7 +242,7 @@ const ConsultForm = () => {
 
                             <div className="text-black">
                                 <textarea
-                                    className="rounded-md w-full px-2 bg-white h-24 text-sm lg:text-base placeholder:p-2"
+                                    className="h-24 w-full rounded-md bg-white px-2 text-sm placeholder:p-2 lg:text-base"
                                     placeholder="Briefly describe the nature of the consulting project or services you’re interested in."
                                     onChange={(e) => {
                                         if (e.target.value.length <= 200)
@@ -250,13 +250,13 @@ const ConsultForm = () => {
                                     }}
                                     value={projectDesc}
                                 />
-                                <p className="uppercase text-gray-600 text-sm">
+                                <p className="text-sm uppercase text-gray-600">
                                     {200 - projectDesc.length} chars left
                                 </p>
                             </div>
 
-                            <div className="text-black flex flex-row gap-6">
-                                <div className="flex flex-col gap-2 w-full">
+                            <div className="flex flex-row gap-6 text-black">
+                                <div className="flex w-full flex-col gap-2">
                                     <label className="block text-sm lg:text-base">
                                         Required Service
                                         <span className="text-red-500">
@@ -264,7 +264,7 @@ const ConsultForm = () => {
                                         </span>
                                     </label>
                                     <select
-                                        className="w-full py-2 px-4 bg-white text-black text-sm lg:text-base rounded-md"
+                                        className="w-full rounded-md bg-white px-4 py-2 text-sm text-black lg:text-base"
                                         onChange={(e) =>
                                             setService(
                                                 e.target[e.target.selectedIndex]
@@ -290,7 +290,7 @@ const ConsultForm = () => {
                                         })}
                                     </select>
                                 </div>
-                                <div className="flex flex-col gap-2 w-full">
+                                <div className="flex w-full flex-col gap-2">
                                     <label className="block text-sm lg:text-base">
                                         Estimated Budget
                                         <span className="text-red-500">
@@ -298,7 +298,7 @@ const ConsultForm = () => {
                                         </span>
                                     </label>
                                     <select
-                                        className="w-full py-2 p-4 bg-white text-black text-sm lg:text-base rounded-md"
+                                        className="w-full rounded-md bg-white p-4 py-2 text-sm text-black lg:text-base"
                                         value={budget}
                                         onChange={(e) =>
                                             setBudget(
@@ -327,7 +327,7 @@ const ConsultForm = () => {
 
                             <div className="text-black">
                                 <textarea
-                                    className="rounded-md w-full px-2 bg-white h-24 text-sm lg:text-base placeholder:p-2"
+                                    className="h-24 w-full rounded-md bg-white px-2 text-sm placeholder:p-2 lg:text-base"
                                     placeholder="What specific challenges or issues are you looking to address through The Chain’s consulting?"
                                     value={issues}
                                     onChange={(e) => {
@@ -335,14 +335,14 @@ const ConsultForm = () => {
                                             setIssues(e.target.value);
                                     }}
                                 />
-                                <p className="uppercase text-gray-600 text-sm">
+                                <p className="text-sm uppercase text-gray-600">
                                     {200 - issues.length} chars left
                                 </p>
                             </div>
 
                             <div className="text-black">
                                 <textarea
-                                    className="w-full px-2 bg-white h-24 text-sm lg:text-base rounded-md placeholder:p-2"
+                                    className="h-24 w-full rounded-md bg-white px-2 text-sm placeholder:p-2 lg:text-base"
                                     placeholder="Additional Information / questions."
                                     value={extras}
                                     onChange={(e) => {
@@ -350,7 +350,7 @@ const ConsultForm = () => {
                                             setExtras(e.target.value);
                                     }}
                                 />
-                                <p className="uppercase text-gray-600 text-sm">
+                                <p className="text-sm uppercase text-gray-600">
                                     {200 - extras.length} chars left
                                 </p>
                             </div>
@@ -358,7 +358,7 @@ const ConsultForm = () => {
                             {/* Submit Button */}
                             <div className="flex flex-col">
                                 <button
-                                    className="flex flex-row items-center gap-2 cursor-pointer mx-auto mt-8 bg-black border-2 font-semibold border-black text-white py-2 px-4 hover:opacity-80 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="mx-auto mt-8 flex cursor-pointer flex-row items-center gap-2 rounded-lg border-2 border-black bg-black px-4 py-2 font-semibold text-white hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
                                     disabled={
                                         !name ||
                                         !email ||
@@ -378,7 +378,7 @@ const ConsultForm = () => {
                                     Submit Application
                                 </button>
                                 {error && (
-                                    <span className="text-center text-red-500 p-2 font-semibold">
+                                    <span className="p-2 text-center font-semibold text-red-500">
                                         {error}
                                     </span>
                                 )}
@@ -390,10 +390,10 @@ const ConsultForm = () => {
 
             {isSubmissionSuccess && (
                 <div className="fixed inset-0 flex items-center justify-center">
-                    <div className="bg-black bg-opacity-50 absolute inset-0" />
+                    <div className="absolute inset-0 bg-black bg-opacity-50" />
                     <div className="relative bg-white p-8">
                         <IoMdClose
-                            className="cursor-pointer top-2 right-2 absolute"
+                            className="absolute right-2 top-2 cursor-pointer"
                             size={24}
                             onClick={() => {
                                 resetForm();
@@ -401,7 +401,7 @@ const ConsultForm = () => {
                             }}
                         />
                         <div className="flex flex-col items-center">
-                            <MdCelebration className="text-4xl mb-4" />
+                            <MdCelebration className="mb-4 text-4xl" />
                             <span className="text-[#42b5ff]">
                                 Your application to consult the chain has been
                                 submitted. You will be contacted accordingly.

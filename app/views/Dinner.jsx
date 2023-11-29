@@ -39,16 +39,16 @@ export const Dinner = () => {
         <>
             <div
                 id="apply"
-                className="flex flex-col items-center mt-16 bg-[rgba(255,173,226,0.67)] lg:p-16 p-8"
+                className="mt-16 flex flex-col items-center bg-[rgba(255,173,226,0.67)] p-8 lg:p-16"
                 style={{ backdropFilter: "blur(9.1px)" }}
             >
-                <h2 className="text-lg lg:text-2xl mb-4 text-[#ff62c7] font-bold">
+                <h2 className="mb-4 text-lg font-bold text-[#ff62c7] lg:text-2xl">
                     Web3 Dinner Club
                 </h2>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 place-items-center max-w-[100rem]">
+                <div className="grid max-w-[100rem] grid-cols-1 place-items-center gap-10 lg:grid-cols-2">
                     <div className="flex flex-col items-start gap-6">
-                        <p className="text-black text-sm lg:text-base">
+                        <p className="text-sm text-black lg:text-base">
                             The Chain Miami hosts a community driven dinner club
                             that invites Miami’s brightest minds in the web
                             3space to interact, connect, and learn from each
@@ -56,7 +56,7 @@ export const Dinner = () => {
                             conversations, The Chain's Dinner Club operates
                             through a selective application process.
                         </p>
-                        <p className="text-left text-xs lg:w-1/2 w-full italic opacity-80">
+                        <p className="w-full text-left text-xs italic opacity-80 lg:w-1/2">
                             To sponsor a Chain dinner or be a dinner host, ping
                             monica@thechain.miami
                         </p>
@@ -70,9 +70,9 @@ export const Dinner = () => {
                         ].map((text, index) => (
                             <div
                                 key={index}
-                                className="flex items-center bg-black text-white mb-2 py-2 px-3 border-l-2 border-white"
+                                className="mb-2 flex items-center border-l-2 border-white bg-black px-3 py-2 text-white"
                             >
-                                <p className="text-xs lg:text-base uppercase">
+                                <p className="text-xs uppercase lg:text-base">
                                     {text}
                                 </p>
                             </div>
@@ -85,29 +85,29 @@ export const Dinner = () => {
 
             <div
                 id="events"
-                className="bg-black min-h-[300px] w-full flex justify-center"
+                className="flex min-h-[300px] w-full justify-center bg-black"
             >
-                <div className="grid grid-cols-1 lg:p-16 p-8 w-full">
-                    <h2 className="text-lg lg:text-2xl mb-4 text-[#ff62c7] font-bold">
+                <div className="grid w-full grid-cols-1 p-8 lg:p-16">
+                    <h2 className="mb-4 text-lg font-bold text-[#ff62c7] lg:text-2xl">
                         Upcoming Events
                     </h2>
                     {events.length > 0 ? (
                         events.map((record, index) => (
                             <div
                                 key={index}
-                                className="flex lg:flex-row flex-col-reverse bg-black py-4 text-white items-center justify-between rounded-lg w-full max-w-[100rem]"
+                                className="flex w-full max-w-[100rem] flex-col-reverse items-center justify-between rounded-lg bg-black py-4 text-white lg:flex-row"
                             >
                                 <div className="flex flex-col">
-                                    <p className="text-sm mb-2.5 text-[rgba(255,173,226,0.67)] uppercase">
+                                    <p className="mb-2.5 text-sm uppercase text-[rgba(255,173,226,0.67)]">
                                         {new Date(
                                             record.event.start_at,
                                         ).toString()}
                                     </p>
-                                    <h3 className="text-lg lg:text-2xl max-w-[80%]">
+                                    <h3 className="max-w-[80%] text-lg lg:text-2xl">
                                         {record.event.name}
                                     </h3>
                                     <button
-                                        className="lg:w-52 w-25 mt-5 lg:text-base bg-gray-100 text-gray-800 rounded-md p-2 font-semibold text-sm hover:bg-gray-300 transition-colors"
+                                        className="w-25 mt-5 rounded-md bg-gray-100 p-2 text-sm font-semibold text-gray-800 transition-colors hover:bg-gray-300 lg:w-52 lg:text-base"
                                         onClick={() =>
                                             window
                                                 .open(
@@ -121,7 +121,7 @@ export const Dinner = () => {
                                     </button>
                                 </div>
                                 <Image
-                                    className="lg:w-[500px] w-[200px] lg:mb-0 mb-4"
+                                    className="mb-4 w-[200px] lg:mb-0 lg:w-[500px]"
                                     src={record.event.cover_url}
                                     alt="event cover"
                                     width={500}
@@ -130,20 +130,20 @@ export const Dinner = () => {
                             </div>
                         ))
                     ) : (
-                        <p className="text-sm mb-8 text-center text-white uppercase">
+                        <p className="mb-8 text-center text-sm uppercase text-white">
                             No events to show now
                         </p>
                     )}
                 </div>
             </div>
 
-            <div className="px-12 sm:px-8 pt-16 sm:pt-8 relative overflow-hidden max-w-[100rem]">
+            <div className="relative max-w-[100rem] overflow-hidden px-12 pt-16 sm:px-8 sm:pt-8">
                 <Masonry
                     breakpointCols={3}
                     className="my-masonry-grid"
                     columnClassName="my-masonry-grid_column"
                 >
-                    <div className="rounded-3xl overflow-hidden">
+                    <div className="overflow-hidden rounded-3xl">
                         <Zoom>
                             <Image
                                 src={ImageOne}
@@ -155,7 +155,7 @@ export const Dinner = () => {
                             />
                         </Zoom>
                     </div>
-                    <div className="rounded-3xl overflow-hidden">
+                    <div className="overflow-hidden rounded-3xl">
                         <Zoom>
                             <Image
                                 src={ImageThree}
@@ -167,7 +167,7 @@ export const Dinner = () => {
                             />
                         </Zoom>
                     </div>
-                    <div className="rounded-3xl overflow-hidden">
+                    <div className="overflow-hidden rounded-3xl">
                         <Zoom>
                             <Image
                                 src={ImageFour}
@@ -179,7 +179,7 @@ export const Dinner = () => {
                             />
                         </Zoom>
                     </div>
-                    <div className="rounded-3xl overflow-hidden">
+                    <div className="overflow-hidden rounded-3xl">
                         <Zoom>
                             <Image
                                 src={ImageFive}
@@ -191,7 +191,7 @@ export const Dinner = () => {
                             />
                         </Zoom>
                     </div>
-                    <div className="rounded-3xl overflow-hidden">
+                    <div className="overflow-hidden rounded-3xl">
                         <Zoom>
                             <Image
                                 src={ImageSix}
@@ -203,7 +203,7 @@ export const Dinner = () => {
                             />
                         </Zoom>
                     </div>
-                    <div className="rounded-3xl overflow-hidden">
+                    <div className="overflow-hidden rounded-3xl">
                         <Zoom>
                             <Image
                                 src={ImageTwo}
@@ -222,7 +222,7 @@ export const Dinner = () => {
                 id="chain-image"
                 src={chainPic}
                 alt="the chain"
-                className="absolute -z-10 left-[-680px]"
+                className="absolute left-[-680px] -z-10"
                 width={1500}
                 height={1500}
             />

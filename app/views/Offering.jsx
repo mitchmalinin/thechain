@@ -5,28 +5,28 @@ import { offerings } from "../utils/constants";
 
 export const Offering = () => {
     return (
-        <div className="flex flex-col items-center mt-24">
-            <h2 className="text-lg lg:text-2xl mb-8 text-[#ff62c7] font-bold">
+        <div className="mt-24 flex flex-col items-center">
+            <h2 className="mb-8 text-lg font-bold text-[#ff62c7] lg:text-2xl">
                 Benefits
             </h2>
             <div
                 id="offering"
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-4 lg:mt-0 px-8 sm:px-16 max-w-[100rem]"
+                className="mt-4 grid max-w-[100rem] grid-cols-1 gap-5 px-8 sm:px-16 md:grid-cols-2 lg:mt-0 lg:grid-cols-4"
             >
                 {offerings.map((offer, index) => (
                     <div
                         key={index}
-                        className="flex flex-col items-center justify-start min-h-[150px] p-6 bg-[#000000ed] text-white rounded-lg"
+                        className="flex min-h-[150px] flex-col items-center justify-start rounded-lg bg-[#000000ed] p-6 text-white"
                     >
                         <img
                             src={offer.icon}
                             alt="icon"
-                            className="w-10 mb-4 filter invert"
+                            className="mb-4 w-10 invert filter"
                         />
-                        <h3 className="text-base font-bold mb-0 min-h-[45px] text-center text-[#ff62c7]">
+                        <h3 className="mb-0 min-h-[45px] text-center text-base font-bold text-[#ff62c7]">
                             {offer.title}
                         </h3>
-                        <p className="text-center text-sm mt-1 opacity-80">
+                        <p className="mt-1 text-center text-sm opacity-80">
                             {offer.content}
                         </p>
                         {index === 3 && (
@@ -40,7 +40,7 @@ export const Offering = () => {
                     </div>
                 ))}
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 mt-16 bg-[#000000ed] px-8 p-10 text-white max-w-[100rem]">
+            <div className="mt-16 grid max-w-[100rem] grid-cols-1 gap-16 bg-[#000000ed] p-10 px-8 text-white lg:grid-cols-3">
                 {[
                     { metric: "400k+", description: "social impressions" },
                     { metric: "1000+", description: "connections made" },
@@ -48,7 +48,7 @@ export const Offering = () => {
                 ].map((item, index) => (
                     <div
                         key={index}
-                        className="text-center gap-3 flex flex-col"
+                        className="flex flex-col gap-3 text-center"
                     >
                         <p className="text-5xl font-bold text-[#42b5ff]">
                             {item.metric}
