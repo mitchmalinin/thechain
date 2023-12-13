@@ -56,12 +56,14 @@ export function getAuthOptions() {
                             );
                         }
 
-                        if (data) {
+                        if (data && data.length > 0) {
                             // User is found and is a member
                             const user = {
-                                id: data.wallet_address,
-                                isMember: true,
+                                id: data[0].wallet_address,
+                                isMember: data[0].is_accepted,
                             };
+
+                            console.log("user", user);
                             return user;
                         }
                         return null; // User not found or not accepted

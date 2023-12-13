@@ -18,7 +18,11 @@ export const Header = () => {
     const dropdownRef = useRef(null);
 
     useEffect(() => {
-        if (address && session && address !== session.user.id) {
+        if (
+            address &&
+            session &&
+            address.toLocaleLowerCase() !== session.user.id
+        ) {
             disconnect();
             signOut({ callbackUrl: window.location.origin });
         }
@@ -49,7 +53,7 @@ export const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <div className="flex w-full flex-row items-center justify-between p-2 bg-black">
+        <div className="flex w-full flex-row items-center justify-between bg-black p-2">
             <div className="p-2">
                 <Image
                     src="/the-chain-logo.png"
@@ -74,44 +78,44 @@ export const Header = () => {
                     isMobileMenuOpen
                         ? "scale-100 opacity-100"
                         : "scale-0 opacity-0"
-                } absolute top-0 left-0 z-10 gap-1 w-full flex flex-col items-start bg-black text-white py-4 px-6 transition-transform duration-300 ease-out`}
+                } absolute left-0 top-0 z-10 flex w-full flex-col items-start gap-1 bg-black px-6 py-4 text-white transition-transform duration-300 ease-out`}
                 style={{
                     transformOrigin: "top right",
                 }}
             >
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#apply"
                 >
                     Apply
                 </Link>
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#about"
                 >
                     About
                 </Link>
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#events"
                 >
                     Events
                 </Link>
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#consult"
                 >
                     Consult
                 </Link>
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#team"
                 >
                     Team
                 </Link>
                 {session?.user?.isMember && (
                     <Link
-                        className="hover:text-[#ED73CF] transition-colors"
+                        className="transition-colors hover:text-[#ED73CF]"
                         href="/dashboard/members"
                     >
                         Members
@@ -119,46 +123,46 @@ export const Header = () => {
                 )}
             </div>
 
-            <div className="hidden lg:flex text-white gap-2 items-center">
+            <div className="hidden items-center gap-2 text-white lg:flex">
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#apply"
                 >
                     Apply
                 </Link>
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#about"
                 >
                     About
                 </Link>
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#events"
                 >
                     Events
                 </Link>
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#consult"
                 >
                     Consult
                 </Link>
                 <Link
-                    className="hover:text-[#ED73CF] transition-colors"
+                    className="transition-colors hover:text-[#ED73CF]"
                     href="#team"
                 >
                     Team
                 </Link>
                 {session?.user?.isMember && (
                     <Link
-                        className="hover:text-[#ED73CF] transition-colors"
+                        className="transition-colors hover:text-[#ED73CF]"
                         href="/dashboard/members"
                     >
                         Members
                     </Link>
                 )}
-                <div className="flex justify-end ml-2.5">
+                <div className="ml-2.5 flex justify-end">
                     <ConnectButton chainStatus="none" showBalance={false} />
                 </div>
             </div>
