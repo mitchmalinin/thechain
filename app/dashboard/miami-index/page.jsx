@@ -61,6 +61,7 @@ export default function Members() {
                 <select
                     onChange={(e) => setFilter(e.target.value)}
                     className="rounded bg-gray-300 p-2"
+                    value={filter}
                 >
                     <option value="">All</option>
                     <option value="accepted">Is member</option>
@@ -85,7 +86,9 @@ export default function Members() {
                                 </h3>
                                 <p className="text-base">{member.occupation}</p>
                             </div>
-                            <p className="text-sm">{member.contribution}</p>
+                            <p className="break-words text-sm">
+                                {member.contribution}
+                            </p>
                         </div>
 
                         <div className="flex flex-row justify-center text-4xl">

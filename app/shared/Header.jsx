@@ -11,6 +11,7 @@ import { useAccount, useDisconnect } from "wagmi";
 export const Header = () => {
     const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const { data: session } = useSession();
 
     const { address } = useAccount();
@@ -25,11 +26,13 @@ export const Header = () => {
         ) {
             disconnect();
             signOut({ callbackUrl: window.location.origin });
+        } else if (!address && session) {
+            signOut({ callbackUrl: window.location.origin });
         }
     }, [address, disconnect, session]);
 
     const handleNavigation = (section) => {
-        router.push(`/#${section}`);
+        router.replace(`/#${section}`);
         setIsMobileMenuOpen(false);
     };
 
@@ -83,84 +86,158 @@ export const Header = () => {
                     transformOrigin: "top right",
                 }}
             >
-                <Link
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#apply"
+                    onClick={() => handleNavigation("apply")}
                 >
                     Apply
-                </Link>
-                <Link
+                </span>
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#about"
+                    onClick={() => handleNavigation("about")}
                 >
                     About
-                </Link>
-                <Link
+                </span>
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#events"
+                    onClick={() => handleNavigation("events")}
                 >
                     Events
-                </Link>
-                <Link
+                </span>
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#consult"
+                    onClick={() => handleNavigation("consult")}
                 >
                     Consult
-                </Link>
-                <Link
+                </span>
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#team"
+                    onClick={() => handleNavigation("team")}
                 >
                     Team
-                </Link>
+                </span>
                 {session?.user?.isMember && (
-                    <Link
-                        className="transition-colors hover:text-[#ED73CF]"
-                        href="/dashboard/members"
+                    <div
+                        onMouseEnter={() => setIsDropdownOpen(true)}
+                        className="relative"
                     >
-                        Members
-                    </Link>
+                        <span className="transition-colors hover:text-[#ED73CF]">
+                            Dashboard
+                        </span>
+                        {isDropdownOpen && (
+                            <div
+                                onMouseLeave={() => setIsDropdownOpen(false)}
+                                className="absolute left-0 z-10 mt-2 w-48 rounded-md bg-black text-white shadow-lg ring-1 ring-black ring-opacity-5 transition-colors"
+                            >
+                                <div
+                                    className="py-1 transition-colors"
+                                    role="menu"
+                                    aria-orientation="vertical"
+                                    aria-labelledby="options-menu"
+                                >
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                        role="menuitem"
+                                        href="/dashboard/miami-index"
+                                    >
+                                        Miami Index
+                                    </Link>
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF] "
+                                        role="menuitem"
+                                        href="/dashboard/leaderboard"
+                                    >
+                                        Leaderboard
+                                    </Link>
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950  hover:text-[#ED73CF]"
+                                        role="menuitem"
+                                        href="/dashboard/profile"
+                                    >
+                                        Profile
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 )}
             </div>
 
-            <div className="hidden items-center gap-2 text-white lg:flex">
-                <Link
+            <div className="hidden cursor-pointer items-center gap-2 text-white lg:flex">
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#apply"
+                    onClick={() => handleNavigation("apply")}
                 >
                     Apply
-                </Link>
-                <Link
+                </span>
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#about"
+                    onClick={() => handleNavigation("about")}
                 >
                     About
-                </Link>
-                <Link
+                </span>
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#events"
+                    onClick={() => handleNavigation("events")}
                 >
                     Events
-                </Link>
-                <Link
+                </span>
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#consult"
+                    onClick={() => handleNavigation("consult")}
                 >
                     Consult
-                </Link>
-                <Link
+                </span>
+                <span
                     className="transition-colors hover:text-[#ED73CF]"
-                    href="#team"
+                    onClick={() => handleNavigation("team")}
                 >
                     Team
-                </Link>
+                </span>
                 {session?.user?.isMember && (
-                    <Link
-                        className="transition-colors hover:text-[#ED73CF]"
-                        href="/dashboard/members"
+                    <div
+                        onMouseEnter={() => setIsDropdownOpen(true)}
+                        className="relative"
                     >
-                        Members
-                    </Link>
+                        <span className="transition-colors hover:text-[#ED73CF]">
+                            Dashboard
+                        </span>
+                        {isDropdownOpen && (
+                            <div
+                                onMouseLeave={() => setIsDropdownOpen(false)}
+                                className="absolute left-0 z-10 mt-2 w-48 rounded-md bg-black text-white shadow-lg ring-1 ring-black ring-opacity-5 transition-colors"
+                            >
+                                <div
+                                    className="py-1 "
+                                    role="menu"
+                                    aria-orientation="vertical"
+                                    aria-labelledby="options-menu"
+                                >
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                        role="menuitem"
+                                        href="/dashboard/miami-index"
+                                    >
+                                        Miami Index
+                                    </Link>
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF] "
+                                        role="menuitem"
+                                        href="/dashboard/leaderboard"
+                                    >
+                                        Leaderboard
+                                    </Link>
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950  hover:text-[#ED73CF]"
+                                        role="menuitem"
+                                        href="/dashboard/profile"
+                                    >
+                                        Profile
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 )}
                 <div className="ml-2.5 flex justify-end">
                     <ConnectButton chainStatus="none" showBalance={false} />

@@ -13,10 +13,10 @@ import { Team } from "./Team";
 
 export default function Home() {
     return (
-        <div className="flex flex-col justify-between items-center mx-auto">
-            <div className="flex flex-col items-center justify-evenly p-8 bg-gradient-to-tr from-[#53cef1] via-[#ff68d3] to-[#f2eff1] text-white relative overflow-hidden w-full min-h-[80vh]">
-                <div className="flex flex-col items-start rounded-2xl text-center lg:p-16 p-8 z-20 max-w-[100rem]">
-                    <div className="flex flex-col items-center w-full gap-2">
+        <div className="mx-auto flex flex-col items-center justify-between">
+            <div className="relative flex min-h-[80vh] w-full flex-col items-center justify-evenly overflow-hidden bg-gradient-to-tr from-[#53cef1] via-[#ff68d3] to-[#f2eff1] p-8 text-white">
+                <div className="z-[1] flex max-w-[100rem] flex-col items-start rounded-2xl p-8 text-center lg:p-16">
+                    <div className="flex w-full flex-col items-center gap-2">
                         <h1 className="text-6xl font-bold text-gray-900">
                             Miami’s Web3 Plug.
                         </h1>
@@ -27,7 +27,7 @@ export default function Home() {
                             </strong>
                         </p>
                         <Link href="#apply" className="mt-20 lg:mt-40">
-                            <button className="bg-transparent transition-opacity py-1 px-4 font-semibold rounded-lg text-white border-2 border-white text-lg lg:text-xl hover:opacity-60">
+                            <button className="rounded-lg border-2 border-white bg-transparent px-4 py-1 text-lg font-semibold text-white transition-opacity hover:opacity-60 lg:text-xl">
                                 Apply to Join
                             </button>
                         </Link>
@@ -37,13 +37,13 @@ export default function Home() {
                     id="chain-image"
                     src={chainPic}
                     alt="the chain"
-                    className="absolute z-50 right-[-880px] top-32"
+                    className="absolute right-[-880px] top-32 z-50"
                     width={1500}
                     height={1500}
                 />
             </div>
 
-            <div className="py-8 flex justify-center items-center">
+            <div className="flex items-center justify-center py-8">
                 <Image
                     src={GroupPic}
                     alt="the chain december"
@@ -54,7 +54,7 @@ export default function Home() {
 
             <About />
 
-            <div className="flex flex-col items-center w-full">
+            <div className="flex w-full flex-col items-center">
                 <Offering />
                 <Dinner />
                 <Consult />

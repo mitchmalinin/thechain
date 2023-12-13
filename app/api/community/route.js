@@ -110,8 +110,6 @@ export async function GET(request) {
             query = query.ilike("name", `%${search}%`);
         }
 
-        console.log("filter", filter);
-
         if (filter) {
             if (filter === "accepted") {
                 query = query.eq("is_accepted", true);
