@@ -48,7 +48,8 @@ export function getAuthOptions() {
                         const { data, error } = await supabase
                             .from("users")
                             .select("*")
-                            .eq("wallet_address", address);
+                            .eq("wallet_address", address)
+                            .single();
 
                         if (error) {
                             throw new Error(
@@ -56,11 +57,11 @@ export function getAuthOptions() {
                             );
                         }
 
-                        if (data && data.length > 0) {
+                        if (data) {
                             // User is found and is a member
                             const user = {
-                                id: data[0].wallet_address,
-                                isMember: data[0].is_accepted,
+                                id: data.wallet_address,
+                                isMember: data.is_accepted,
                             };
 
                             console.log("user", user);

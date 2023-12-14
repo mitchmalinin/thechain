@@ -55,6 +55,8 @@ export const Header = () => {
         };
     }, [isMobileMenuOpen]);
 
+    console.log("session", session);
+
     return (
         <div className="flex w-full flex-row items-center justify-between bg-black p-2">
             <div className="p-2">

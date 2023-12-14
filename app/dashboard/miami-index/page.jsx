@@ -3,6 +3,7 @@ import { useDebounce } from "@/app/hooks/useDebounce";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiFillLinkedin, AiFillTwitterSquare } from "react-icons/ai";
+import { ImSpinner8 } from "react-icons/im";
 import useSWR from "swr";
 
 export default function Members() {
@@ -30,7 +31,7 @@ export default function Members() {
     if (isLoading)
         return (
             <div className="flex min-h-screen items-center justify-center">
-                <div className="h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-purple-500"></div>
+                <ImSpinner8 size={64} className="animate-spin text-[#ff62c7]" />
             </div>
         );
 
