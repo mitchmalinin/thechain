@@ -58,17 +58,17 @@ export default function Profile() {
             </div>
         );
 
+    if (!profile)
+        return (
+            <div className="flex min-h-screen items-center justify-center">
+                <div>Must be Chain Member to Access</div>
+            </div>
+        );
+
     if (error)
         return (
             <div className="flex min-h-screen items-center justify-center">
                 <p>Error loading profile</p>
-            </div>
-        );
-
-    if (!profile)
-        return (
-            <div className="flex min-h-screen items-center justify-center">
-                <p>No profile found</p>
             </div>
         );
 

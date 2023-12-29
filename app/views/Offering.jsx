@@ -40,23 +40,6 @@ export const Offering = () => {
                     </div>
                 ))}
             </div>
-            <div className="mt-16 grid max-w-[100rem] grid-cols-1 gap-16 bg-[#000000ed] p-10 px-8 text-white lg:grid-cols-3">
-                {[
-                    { metric: "400k+", description: "social impressions" },
-                    { metric: "1000+", description: "connections made" },
-                    { metric: "17+", description: "past events" },
-                ].map((item, index) => (
-                    <div
-                        key={index}
-                        className="flex flex-col gap-3 text-center"
-                    >
-                        <p className="text-5xl font-bold text-[#42b5ff]">
-                            {item.metric}
-                        </p>
-                        <p className="text-sm">{item.description}</p>
-                    </div>
-                ))}
-            </div>
         </div>
     );
 };

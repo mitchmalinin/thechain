@@ -38,7 +38,7 @@ export default function Members() {
     if (!members)
         return (
             <div className="flex min-h-screen items-center justify-center">
-                <div>Must be Chain Member to view</div>
+                <div>Must be Chain Member to Access</div>
             </div>
         );
 

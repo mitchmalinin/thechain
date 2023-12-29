@@ -88,9 +88,9 @@ const JoinForm = () => {
 
     return (
         <>
-            <div className="w-full max-w-[100rem] py-4">
+            <div className="flex w-full max-w-[100rem] flex-col items-center py-4">
                 <button
-                    className="w-auto border-2 border-[#FF61C7] bg-[#FF61C7] px-4 py-2 text-sm text-white hover:opacity-80 lg:text-base"
+                    className=" w-max self-center rounded border-2 border-[#FF61C7] px-4 py-2 text-sm text-[#FF61C7] hover:opacity-80 lg:text-xl"
                     onClick={() => setIsFormOpen(!isFormOpen)}
                 >
                     {isFormOpen ? "Close Application" : "Open Application"}

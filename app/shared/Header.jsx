@@ -55,8 +55,6 @@ export const Header = () => {
         };
     }, [isMobileMenuOpen]);
 
-    console.log("session", session);
-
     return (
         <div className="flex w-full flex-row items-center justify-between bg-black p-2">
             <div className="p-2">
@@ -100,12 +98,7 @@ export const Header = () => {
                 >
                     About
                 </span>
-                <span
-                    className="transition-colors hover:text-[#ED73CF]"
-                    onClick={() => handleNavigation("events")}
-                >
-                    Events
-                </span>
+
                 <span
                     className="transition-colors hover:text-[#ED73CF]"
                     onClick={() => handleNavigation("consult")}
@@ -178,12 +171,7 @@ export const Header = () => {
                 >
                     About
                 </span>
-                <span
-                    className="transition-colors hover:text-[#ED73CF]"
-                    onClick={() => handleNavigation("events")}
-                >
-                    Events
-                </span>
+
                 <span
                     className="transition-colors hover:text-[#ED73CF]"
                     onClick={() => handleNavigation("consult")}
