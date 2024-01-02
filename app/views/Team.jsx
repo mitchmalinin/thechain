@@ -1,361 +1,130 @@
-'use client'
+"use client";
 
 import {
-  Box,
-  Link as ChakraLink,
-  Flex,
-  HStack,
-  SimpleGrid,
-  Text,
-} from '@chakra-ui/react'
+    AiFillInstagram,
+    AiFillLinkedin,
+    AiFillTwitterSquare,
+} from "react-icons/ai";
 
-import {
-  AiFillInstagram,
-  AiFillLinkedin,
-  AiFillTwitterSquare,
-} from 'react-icons/ai'
+import Image from "next/image";
 
-import Image from 'next/image'
+import Link from "next/link";
+import Anna from "../../public/anna.png";
+import Ahsley from "../../public/ashley.jpeg";
+import Kyle from "../../public/kyle.jpg";
+import Mitch from "../../public/mitch.jpeg";
+import Monica from "../../public/monica.png";
+import Neha from "../../public/neha.jpeg";
 
-import Anna from '../../public/anna.png'
-import Ahsley from '../../public/ashley.jpeg'
-import Kyle from '../../public/kyle.jpg'
-import Mitch from '../../public/mitch.jpeg'
-import Monica from '../../public/monica.png'
-import Neha from '../../public/neha.jpeg'
+const team = [
+    {
+        name: "Anna Gandrabura",
+        role: "Founder - English For IT",
+        image: Anna,
+        twitter: "https://twitter.com/anna_gandrabura",
+        linkedin: "https://www.linkedin.com/in/annagandrabura/",
+        instagram: "https://www.instagram.com/annglish/",
+    },
+    {
+        name: "Monica Rojas",
+        role: "Founder - The Chain",
+        image: Monica,
+        twitter: "https://twitter.com/LaMoniRojas",
+        linkedin: "https://www.linkedin.com/in/monica-rojas24/",
+        instagram: "https://www.instagram.com/la_monirojas/",
+    },
+    {
+        name: "Mitch Malinin",
+        role: "Frontend Web Alchemist",
+        image: Mitch,
+        twitter: "https://twitter.com/0xMrWzrd",
+        linkedin: "https://www.linkedin.com/in/mitchmalinin/",
+    },
+    {
+        name: "Kyle Sonlin",
+        role: "Entrepreneur, Investor, Bestselling Author",
+        image: Kyle,
+        twitter: "https://twitter.com/KyleSonlin",
+        linkedin: "https://www.linkedin.com/in/kylesonlin/",
+    },
+    {
+        name: "Neha Jwala",
+        role: "Co-Founder, Marketer - Nifty Bridge",
+        image: Neha,
+        twitter: "https://twitter.com/nehaisfunny",
+        linkedin: "https://www.linkedin.com/in/neha-jwala/",
+    },
+    {
+        name: "Ashley Caines",
+        role: "Web3 Educator",
+        image: Ahsley,
+        twitter: "https://twitter.com/ashmcai",
+        linkedin: "https://www.linkedin.com/in/ashleycaines/",
+    },
+];
 
 export const Team = () => {
-  return (
-    <Flex direction="column">
-      <Text
-        fontWeight="bold"
-        textAlign="center"
-        mt="1rem"
-        fontSize={{ lg: '1.5rem', sm: '1rem' }}
-        p="1rem"
-        color="black"
-      >
-        Meet the Team
-      </Text>
-      <Flex
-        direction="column"
-        alignItems="center"
-        px={{ base: '2rem', lg: '5rem' }}
-        py={{ base: '2rem', lg: '2rem' }}
-      >
-        <SimpleGrid
-          columns={{ lg: 3, md: 3, sm: 2 }}
-          gap="2rem"
-          id="team"
-          alignItems={'baseline'}
-        >
-          <Flex
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            minH="150px"
-            p="1rem"
-            borderRadius="5px"
-            color="black"
-          >
-            <Box
-              w={{ lg: '150px', sm: '100px' }}
-              h={{ lg: '150px', sm: '100px' }}
-              overflow="hidden"
-              borderRadius="50%"
-              style={{ filter: 'grayscale(1)' }}
-              mb="15px"
-            >
-              <Image
-                src={Anna}
-                alt="Anna"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-              />
-            </Box>
-            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
-              Anna Gandrabura
-            </Text>
-            <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
-              Founder - English For IT
-            </Text>
-            <HStack mt="15px">
-              <ChakraLink
-                href="https://twitter.com/anna_gandrabura"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillTwitterSquare />
-              </ChakraLink>
-              <ChakraLink
-                href="https://www.linkedin.com/in/annagandrabura/"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillLinkedin />
-              </ChakraLink>
-              <ChakraLink
-                href="https://www.instagram.com/annglish/"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillInstagram />
-              </ChakraLink>
-            </HStack>
-          </Flex>
-
-          <Flex
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            minH="150px"
-            p="1rem"
-            borderRadius="5px"
-            color="black"
-          >
-            <Box
-              w={{ lg: '150px', sm: '100px' }}
-              h={{ lg: '150px', sm: '100px' }}
-              overflow="hidden"
-              borderRadius="50%"
-              style={{ filter: 'grayscale(1)' }}
-              mb="15px"
-            >
-              <Image
-                src={Monica}
-                alt="Monica"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-              />
-            </Box>
-            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
-              Monica Rojas
-            </Text>
-            <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
-              Founder - The Chain
-            </Text>
-            <HStack mt="15px">
-              <ChakraLink
-                href="https://twitter.com/LaMoniRojas"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillTwitterSquare />
-              </ChakraLink>
-              <ChakraLink
-                href="https://www.linkedin.com/in/monica-rojas24/"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillLinkedin />
-              </ChakraLink>
-              <ChakraLink
-                href="https://www.instagram.com/la_monirojas/"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillInstagram />
-              </ChakraLink>
-            </HStack>
-          </Flex>
-
-          <Flex
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            minH="150px"
-            p="1rem"
-            borderRadius="5px"
-            color="black"
-          >
-            <Box
-              w={{ lg: '150px', sm: '100px' }}
-              h={{ lg: '150px', sm: '100px' }}
-              overflow="hidden"
-              borderRadius="50%"
-              style={{ filter: 'grayscale(1)' }}
-              mb="15px"
-            >
-              <Image
-                src={Mitch}
-                alt="MrWzrd"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-              />
-            </Box>
-            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
-              Mitch Malinin
-            </Text>
-            <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
-              Frontend Web Alchemist
-            </Text>
-            <HStack mt="15px">
-              <ChakraLink
-                href="https://twitter.com/0xMrWzrd"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillTwitterSquare />
-              </ChakraLink>
-              <ChakraLink
-                href="https://www.linkedin.com/in/mitchmalinin/"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillLinkedin />
-              </ChakraLink>
-            </HStack>
-          </Flex>
-
-          <Flex
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            minH="150px"
-            p="1rem"
-            borderRadius="5px"
-            color="black"
-          >
-            <Box
-              w={{ lg: '150px', sm: '100px' }}
-              h={{ lg: '150px', sm: '100px' }}
-              overflow="hidden"
-              borderRadius="50%"
-              style={{ filter: 'grayscale(1)' }}
-              mb="15px"
-            >
-              <Image
-                src={Kyle}
-                alt="Kyle"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-              />
-            </Box>
-            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
-              Kyle Sonlin
-            </Text>
-            <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
-              Entrepreneur, Investor, Bestselling Author
-            </Text>
-            <HStack mt="15px">
-              <ChakraLink
-                href="https://twitter.com/KyleSonlin"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillTwitterSquare />
-              </ChakraLink>
-              <ChakraLink
-                href="https://www.linkedin.com/in/kylesonlin/"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillLinkedin />
-              </ChakraLink>
-            </HStack>
-          </Flex>
-          <Flex
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            minH="150px"
-            p="1rem"
-            borderRadius="5px"
-            color="black"
-          >
-            <Box
-              w={{ lg: '150px', sm: '100px' }}
-              h={{ lg: '150px', sm: '100px' }}
-              overflow="hidden"
-              borderRadius="50%"
-              style={{ filter: 'grayscale(1)' }}
-              mb="15px"
-            >
-              <Image
-                src={Neha}
-                alt="Kyle"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-              />
-            </Box>
-            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
-              Neha Jwala
-            </Text>
-            <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
-              Co-Founder, Marketer - Nifty Bridge
-            </Text>
-            <HStack mt="15px">
-              <ChakraLink
-                href="https://twitter.com/nehaisfunny"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillTwitterSquare />
-              </ChakraLink>
-              <ChakraLink
-                href="https://www.linkedin.com/in/neha-jwala/"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillLinkedin />
-              </ChakraLink>
-            </HStack>
-          </Flex>
-          <Flex
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-            minH="150px"
-            p="1rem"
-            borderRadius="5px"
-            color="black"
-          >
-            <Box
-              w={{ lg: '150px', sm: '100px' }}
-              h={{ lg: '150px', sm: '100px' }}
-              overflow="hidden"
-              borderRadius="50%"
-              style={{ filter: 'grayscale(1)' }}
-              mb="15px"
-            >
-              <Image
-                src={Ahsley}
-                alt="Ash"
-                height="100%"
-                width="100%"
-                placeholder="blur"
-              />
-            </Box>
-            <Text fontSize={{ lg: '1.2rem', sm: '1rem' }} fontWeight="bold">
-              Ashley Caines
-            </Text>
-            <Text opacity="0.7" textAlign="center" fontSize="0.8rem" mt="5px">
-              Web3 Educator
-            </Text>
-            <HStack mt="15px">
-              <ChakraLink
-                href="https://twitter.com/ashmcai"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillTwitterSquare />
-              </ChakraLink>
-              <ChakraLink
-                href="https://www.linkedin.com/in/ashleycaines/"
-                isExternal
-                fontSize="25px"
-              >
-                <AiFillLinkedin />
-              </ChakraLink>
-            </HStack>
-          </Flex>
-        </SimpleGrid>
-      </Flex>
-    </Flex>
-  )
-}
+    return (
+        <div className="flex flex-col">
+            <h2 className="mt-4 p-4 text-center text-lg font-bold text-black lg:text-2xl">
+                Meet the Team
+            </h2>
+            <div className="flex flex-col items-center px-8 py-8 lg:px-20">
+                <div
+                    className="grid grid-cols-1 gap-8 lg:grid-cols-3"
+                    id="team"
+                >
+                    {team.map((member, index) => (
+                        <div
+                            key={index}
+                            className="flex min-h-[150px] flex-col items-center justify-center rounded-lg p-4 text-black"
+                        >
+                            <div className="mb-4 h-24 w-24 overflow-hidden rounded-full grayscale lg:h-40 lg:w-40">
+                                <Image
+                                    src={member.image}
+                                    alt={`${member.name} - ${member.role}`}
+                                    fill={true}
+                                />
+                            </div>
+                            <p className="text-lg font-bold lg:text-xl">
+                                {member.name}
+                            </p>
+                            <p className="mt-2 text-center text-xs opacity-70">
+                                {member.role}
+                            </p>
+                            <div className="mt-4 flex gap-2">
+                                {member.twitter && (
+                                    <Link
+                                        href={member.twitter}
+                                        className="text-2xl"
+                                        target="_blank"
+                                    >
+                                        <AiFillTwitterSquare />
+                                    </Link>
+                                )}
+                                {member.linkedin && (
+                                    <Link
+                                        href={member.linkedin}
+                                        className="text-2xl"
+                                        target="_blank"
+                                    >
+                                        <AiFillLinkedin />
+                                    </Link>
+                                )}
+                                {member.instagram && (
+                                    <Link
+                                        href={member.instagram}
+                                        className="text-2xl"
+                                        target="_blank"
+                                    >
+                                        <AiFillInstagram />
+                                    </Link>
+                                )}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};

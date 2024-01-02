@@ -1,87 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
 }
 
 *:focus {
-  box-shadow: none !important;
+    box-shadow: none !important;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  background: transparent;
+    width: 10px;
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ff62c7;
-  border-radius: 5px;
+    background: #ff62c7;
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff62c7;
+    background: #ff62c7;
 }
 
 #gradient {
-  background: linear-gradient(
-    14deg,
-    rgba(83, 206, 241, 1) 0%,
-    rgba(255, 104, 211, 1) 51%,
-    rgba(242, 239, 241, 1) 98%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    background: linear-gradient(
+        14deg,
+        rgba(83, 206, 241, 1) 0%,
+        rgba(255, 104, 211, 1) 51%,
+        rgba(242, 239, 241, 1) 98%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #chain-image {
-  -webkit-animation: spin 4s linear infinite;
-  -moz-animation: spin 4s linear infinite;
-  animation: spin 25s linear infinite;
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 25s linear infinite;
 }
 @-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(360deg);
-  }
+    100% {
+        -moz-transform: rotate(360deg);
+    }
 }
 @-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 @keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 .my-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
-  display: flex;
-  margin-left: -30px; /* gutter size offset */
-  width: auto;
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -30px; /* gutter size offset */
+    width: auto;
 }
 .my-masonry-grid_column {
-  padding-left: 20px; /* gutter size */
-  background-clip: padding-box;
+    padding-left: 20px; /* gutter size */
+    background-clip: padding-box;
 }
 
 /* Style your items */
 .my-masonry-grid_column > div {
-  /* change div to reference your elements you put in <Masonry> */
-  background: grey;
-  margin-bottom: 30px;
+    /* change div to reference your elements you put in <Masonry> */
+    background: grey;
+    margin-bottom: 30px;
 }
 
 #footer-background {
-  height: 100px;
-  background-image: url(/trees.png);
-  background-size: contain;
-  background-repeat: repeat-x;
+    height: 100px;
+    background-image: url(/trees.png);
+    background-size: contain;
+    background-repeat: repeat-x;
 }

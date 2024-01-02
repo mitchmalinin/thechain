@@ -1,107 +1,63 @@
-'use client'
-
-import {
-  Box,
-  Link as ChakraLink,
-  Flex,
-  HStack,
-  SimpleGrid,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
-
-import { FaInstagram, FaTwitter } from 'react-icons/fa'
+import Link from "next/link";
+import { FaInstagram, FaTwitter } from "react-icons/fa";
 
 export const Footer = () => {
-  return (
-    <Flex direction="column">
-      <Box id="footer-background"></Box>
-      <Flex
-        w="100%"
-        direction={{ base: 'column-reverse', md: 'row', lg: 'row' }}
-        alignItems="flex-start"
-        justifyContent="space-between"
-        px={{ base: '2rem', lg: '5rem' }}
-        py={{ base: '1rem', lg: '2rem' }}
-        bg="black"
-      >
-        <VStack alignItems="flex-start">
-          <Text
-            fontWeight="bold"
-            fontSize={{ lg: '1.5rem', sm: '1rem' }}
-            mb={{ lg: '10px', sm: '0' }}
-            mt={{ lg: 0, sm: '1.5rem' }}
-            color="#ff62c7"
-          >
-            The Chain
-          </Text>
-          <HStack color="white">
-            <ChakraLink
-              href="https://twitter.com/thechain_miami"
-              fontSize="25px"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaTwitter />
-            </ChakraLink>
-            <ChakraLink
-              href="https://www.instagram.com/thechain_miami/"
-              target="_blank"
-              rel="noopener noreferrer"
-              fontSize="25px"
-            >
-              <FaInstagram />
-            </ChakraLink>
-          </HStack>
-        </VStack>
+    return (
+        <footer className="flex flex-col">
+            <div id="footer-background" />
+            <div className="w-full flex flex-col-reverse md:flex-row items-start justify-between px-8 py-4 lg:px-20 lg:py-8 bg-black">
+                <div className="flex flex-col items-start gap-6">
+                    <h2 className="font-bold lg:mb-3 text-lg lg:text-2xl lg:mt-0 sm:mt-6 text-[#ff62c7]">
+                        The Chain
+                    </h2>
+                    <div className="flex text-white text-2xl gap-2">
+                        <Link
+                            href="https://twitter.com/thechain_miami"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <FaTwitter />
+                        </Link>
+                        <Link
+                            href="https://www.instagram.com/thechain_miami/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <FaInstagram />
+                        </Link>
+                    </div>
+                </div>
 
-        <SimpleGrid columns={2} spacing={{ base: '2rem', lg: '5rem' }}>
-          <VStack alignItems="flex-start">
-            <Text
-              fontSize={{ lg: '18px', sm: '16px' }}
-              color="#42b5ff"
-              fontWeight="bold"
-            >
-              For Community
-            </Text>
-
-            <ChakraLink href="/#apply">
-              <Text
-                fontSize={{ lg: '16px', sm: '14px' }}
-                color="white"
-                cursor="pointer"
-                opacity="0.8"
-              >
-                Join Us
-              </Text>
-            </ChakraLink>
-          </VStack>
-          <VStack alignItems="flex-start">
-            <Text
-              fontSize={{ lg: '18px', sm: '16px' }}
-              color="#42b5ff"
-              fontWeight="bold"
-            >
-              For Clients
-            </Text>
-            <ChakraLink href="/#consult">
-              <Text
-                fontSize={{ lg: '16px', sm: '14px' }}
-                color="white"
-                cursor="pointer"
-                opacity="0.8"
-              >
-                Hire Us
-              </Text>
-            </ChakraLink>
-          </VStack>
-        </SimpleGrid>
-      </Flex>
-      <Box bg="black" color="white" px={{ base: '2rem', lg: '5rem' }}>
-        <Text fontSize="12px" my="10px" textAlign="center">
-          the chain miami © 2023
-        </Text>
-      </Box>
-    </Flex>
-  )
-}
+                <div className="grid grid-cols-2 gap-8 lg:gap-20 mt-8 md:mt-0">
+                    <div className="flex flex-col items-start gap-2">
+                        <h3 className="text-base lg:text-lg text-blue-400 font-bold">
+                            For Community
+                        </h3>
+                        <Link
+                            href="/#apply"
+                            className="text-sm lg:text-base text-white cursor-pointer opacity-80"
+                        >
+                            Join Us
+                        </Link>
+                    </div>
+                    <div className="flex flex-col items-start gap-2">
+                        <h3 className="text-base lg:text-lg text-blue-400 font-bold">
+                            For Clients
+                        </h3>
+                        <Link
+                            href="/#consult"
+                            className="text-sm lg:text-base text-white cursor-pointer opacity-80"
+                        >
+                            Hire Us
+                        </Link>
+                    </div>
+                </div>
+            </div>
+            <div className="bg-black text-white px-8 lg:px-20">
+                <p className="text-xs my-2.5 text-center">
+                    the chain miami © 2023
+                </p>
+            </div>
+        </footer>
+    );
+};
