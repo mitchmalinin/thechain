@@ -11,6 +11,7 @@ import { useAccount, useDisconnect } from "wagmi";
 export const Header = () => {
     const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const { data: session } = useSession();
 
     const { address } = useAccount();
@@ -18,14 +19,20 @@ export const Header = () => {
     const dropdownRef = useRef(null);
 
     useEffect(() => {
-        if (address && session && address !== session.user.id) {
+        if (
+            address &&
+            session &&
+            address.toLocaleLowerCase() !== session.user.id
+        ) {
             disconnect();
+            signOut({ callbackUrl: window.location.origin });
+        } else if (!address && session) {
             signOut({ callbackUrl: window.location.origin });
         }
     }, [address, disconnect, session]);
 
     const handleNavigation = (section) => {
-        router.push(`/#${section}`);
+        router.replace(`/#${section}`);
         setIsMobileMenuOpen(false);
     };
 
@@ -49,7 +56,7 @@ export const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <div className="flex w-full flex-row items-center justify-between p-2 bg-black">
+        <div className="flex w-full flex-row items-center justify-between bg-black p-2">
             <div className="p-2">
                 <Image
                     src="/the-chain-logo.png"
@@ -74,91 +81,155 @@ export const Header = () => {
                     isMobileMenuOpen
                         ? "scale-100 opacity-100"
                         : "scale-0 opacity-0"
-                } absolute top-0 left-0 z-10 gap-1 w-full flex flex-col items-start bg-black text-white py-4 px-6 transition-transform duration-300 ease-out`}
+                } absolute left-0 top-0 z-10 flex w-full flex-col items-start gap-1 bg-black px-6 py-4 text-white transition-transform duration-300 ease-out`}
                 style={{
                     transformOrigin: "top right",
                 }}
             >
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#apply"
+                <span
+                    className="transition-colors hover:text-[#ED73CF]"
+                    onClick={() => handleNavigation("apply")}
                 >
                     Apply
-                </Link>
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#about"
+                </span>
+                <span
+                    className="transition-colors hover:text-[#ED73CF]"
+                    onClick={() => handleNavigation("about")}
                 >
                     About
-                </Link>
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#events"
-                >
-                    Events
-                </Link>
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#consult"
+                </span>
+
+                <span
+                    className="transition-colors hover:text-[#ED73CF]"
+                    onClick={() => handleNavigation("consult")}
                 >
                     Consult
-                </Link>
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#team"
+                </span>
+                <span
+                    className="transition-colors hover:text-[#ED73CF]"
+                    onClick={() => handleNavigation("team")}
                 >
                     Team
-                </Link>
+                </span>
                 {session?.user?.isMember && (
-                    <Link
-                        className="hover:text-[#ED73CF] transition-colors"
-                        href="/dashboard/members"
+                    <div
+                        onMouseEnter={() => setIsDropdownOpen(true)}
+                        className="relative"
                     >
-                        Members
-                    </Link>
+                        <span className="transition-colors hover:text-[#ED73CF]">
+                            Dashboard
+                        </span>
+                        {isDropdownOpen && (
+                            <div
+                                onMouseLeave={() => setIsDropdownOpen(false)}
+                                className="absolute left-0 z-10 mt-2 w-48 rounded-md bg-black text-white shadow-lg ring-1 ring-black ring-opacity-5 transition-colors"
+                            >
+                                <div
+                                    className="py-1 transition-colors"
+                                    role="menu"
+                                    aria-orientation="vertical"
+                                    aria-labelledby="options-menu"
+                                >
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                        role="menuitem"
+                                        href="/dashboard/miami-index"
+                                    >
+                                        Miami Index
+                                    </Link>
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF] "
+                                        role="menuitem"
+                                        href="/dashboard/leaderboard"
+                                    >
+                                        Leaderboard
+                                    </Link>
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950  hover:text-[#ED73CF]"
+                                        role="menuitem"
+                                        href="/dashboard/profile"
+                                    >
+                                        Profile
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 )}
             </div>
 
-            <div className="hidden lg:flex text-white gap-2 items-center">
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#apply"
+            <div className="hidden cursor-pointer items-center gap-2 text-white lg:flex">
+                <span
+                    className="transition-colors hover:text-[#ED73CF]"
+                    onClick={() => handleNavigation("apply")}
                 >
                     Apply
-                </Link>
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#about"
+                </span>
+                <span
+                    className="transition-colors hover:text-[#ED73CF]"
+                    onClick={() => handleNavigation("about")}
                 >
                     About
-                </Link>
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#events"
-                >
-                    Events
-                </Link>
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#consult"
+                </span>
+
+                <span
+                    className="transition-colors hover:text-[#ED73CF]"
+                    onClick={() => handleNavigation("consult")}
                 >
                     Consult
-                </Link>
-                <Link
-                    className="hover:text-[#ED73CF] transition-colors"
-                    href="#team"
+                </span>
+                <span
+                    className="transition-colors hover:text-[#ED73CF]"
+                    onClick={() => handleNavigation("team")}
                 >
                     Team
-                </Link>
+                </span>
                 {session?.user?.isMember && (
-                    <Link
-                        className="hover:text-[#ED73CF] transition-colors"
-                        href="/dashboard/members"
+                    <div
+                        onMouseEnter={() => setIsDropdownOpen(true)}
+                        className="relative"
                     >
-                        Members
-                    </Link>
+                        <span className="transition-colors hover:text-[#ED73CF]">
+                            Dashboard
+                        </span>
+                        {isDropdownOpen && (
+                            <div
+                                onMouseLeave={() => setIsDropdownOpen(false)}
+                                className="absolute left-0 z-10 mt-2 w-48 rounded-md bg-black text-white shadow-lg ring-1 ring-black ring-opacity-5 transition-colors"
+                            >
+                                <div
+                                    className="py-1 "
+                                    role="menu"
+                                    aria-orientation="vertical"
+                                    aria-labelledby="options-menu"
+                                >
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                        role="menuitem"
+                                        href="/dashboard/miami-index"
+                                    >
+                                        Miami Index
+                                    </Link>
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF] "
+                                        role="menuitem"
+                                        href="/dashboard/leaderboard"
+                                    >
+                                        Leaderboard
+                                    </Link>
+                                    <Link
+                                        className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950  hover:text-[#ED73CF]"
+                                        role="menuitem"
+                                        href="/dashboard/profile"
+                                    >
+                                        Profile
+                                    </Link>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 )}
-                <div className="flex justify-end ml-2.5">
+                <div className="ml-2.5 flex justify-end">
                     <ConnectButton chainStatus="none" showBalance={false} />
                 </div>
             </div>

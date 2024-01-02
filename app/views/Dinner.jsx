@@ -39,46 +39,12 @@ export const Dinner = () => {
         <>
             <div
                 id="apply"
-                className="mt-16 flex flex-col items-center bg-[rgba(255,173,226,0.67)] p-8 lg:p-16"
+                className="mt-16 flex w-full flex-col items-center bg-[rgba(255,173,226,0.67)] p-8 lg:p-16"
                 style={{ backdropFilter: "blur(9.1px)" }}
             >
-                <h2 className="mb-4 text-lg font-bold text-[#ff62c7] lg:text-2xl">
-                    Web3 Dinner Club
+                <h2 className="mb-4 self-center text-lg font-bold text-[#ff62c7] lg:text-2xl">
+                    Apply to Join Here
                 </h2>
-
-                <div className="grid max-w-[100rem] grid-cols-1 place-items-center gap-10 lg:grid-cols-2">
-                    <div className="flex flex-col items-start gap-6">
-                        <p className="text-sm text-black lg:text-base">
-                            The Chain Miami hosts a community driven dinner club
-                            that invites Miami’s brightest minds in the web
-                            3space to interact, connect, and learn from each
-                            other. To ensure a high caliber of attendees and
-                            conversations, The Chain's Dinner Club operates
-                            through a selective application process.
-                        </p>
-                        <p className="w-full text-left text-xs italic opacity-80 lg:w-1/2">
-                            To sponsor a Chain dinner or be a dinner host, ping
-                            monica@thechain.miami
-                        </p>
-                    </div>
-
-                    <div className="flex flex-col items-start">
-                        {[
-                            "The first Tuesday of every month",
-                            "A highly curated dinner of 15-20 web3 builders in Miami",
-                            "Topics, special guests, meaningful connections",
-                        ].map((text, index) => (
-                            <div
-                                key={index}
-                                className="mb-2 flex items-center border-l-2 border-white bg-black px-3 py-2 text-white"
-                            >
-                                <p className="text-xs uppercase lg:text-base">
-                                    {text}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
 
                 <NoSSRJoinForm />
             </div>

@@ -92,6 +92,9 @@ export async function POST(request) {
 export async function GET(request) {
     const secret = process.env.NEXTAUTH_SECRET;
     const token = await getToken({ req: request, secret });
+    const url = new URL(request.url);
+    const search = url.searchParams.get("search");
+    const filter = url.searchParams.get("filter");
 
     if (!token || !token.isMember) {
         return new Response(null, {
@@ -101,11 +104,22 @@ export async function GET(request) {
     }
 
     try {
-        const { data: members, error } = await supabase
-            .from("users")
-            .select("*");
-        // for later admin dashboard
-        // .eq("is_accepted", true);
+        let query = supabase.from("users").select("*");
+
+        if (search) {
+            query = query.ilike("name", `%${search}%`);
+        }
+
+        if (filter) {
+            if (filter === "accepted") {
+                query = query.eq("is_accepted", true);
+            }
+            if (filter === "not_accepted") {
+                query = query.eq("is_accepted", false);
+            }
+        }
+
+        const { data: members, error } = await query;
 
         if (error) throw error;
 
