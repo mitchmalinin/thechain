@@ -1,4 +1,45 @@
 import { supabase } from "@/app/utils/supabaseClient";
+import { getToken } from "next-auth/jwt";
+
+export async function GET(request) {
+    const secret = process.env.NEXTAUTH_SECRET;
+    const token = await getToken({ req: request, secret });
+    const url = new URL(request.url);
+    const profile = url.searchParams.has("profile");
+
+    if (!token || !token.isMember) {
+        return new Response(null, {
+            status: 403,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
+
+    try {
+        let query = supabase
+            .from("points_dev")
+            .select("*")
+            .order("points", { ascending: false });
+
+        if (profile) {
+            query = query.eq("wallet_address", token.id).single();
+        }
+
+        const { data: users, error } = await query;
+
+        if (error) throw error;
+
+        return new Response(JSON.stringify(users), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+        });
+    } catch (err) {
+        console.error(err);
+        return new Response(err.message || "Something went wrong.", {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
+}
 
 export async function POST(request) {
     try {

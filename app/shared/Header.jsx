@@ -11,7 +11,10 @@ import { useAccount, useDisconnect } from "wagmi";
 export const Header = () => {
     const router = useRouter();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState({
+        about: false,
+        dashboard: false,
+    });
     const { data: session } = useSession();
 
     const { address } = useAccount();
@@ -56,7 +59,7 @@ export const Header = () => {
     }, [isMobileMenuOpen]);
 
     return (
-        <div className="flex w-full flex-row items-center justify-between bg-black p-2">
+        <div className="flex flex-row items-center justify-between w-full p-2 bg-black">
             <div className="p-2">
                 <Image
                     src="/the-chain-logo.png"
@@ -72,7 +75,7 @@ export const Header = () => {
                 className="lg:hidden"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-                <IoMdMenu className="h-6 w-6 text-white" />
+                <IoMdMenu className="w-6 h-6 text-white" />
             </button>
 
             <div
@@ -92,37 +95,81 @@ export const Header = () => {
                 >
                     Apply
                 </span>
-                <span
-                    className="transition-colors hover:text-[#ED73CF]"
-                    onClick={() => handleNavigation("about")}
+                <div
+                    onMouseEnter={() =>
+                        setIsDropdownOpen({ dashboard: false, about: true })
+                    }
+                    className="relative"
                 >
-                    About
-                </span>
-
-                <span
-                    className="transition-colors hover:text-[#ED73CF]"
-                    onClick={() => handleNavigation("consult")}
-                >
-                    Consult
-                </span>
-                <span
-                    className="transition-colors hover:text-[#ED73CF]"
-                    onClick={() => handleNavigation("team")}
-                >
-                    Team
-                </span>
+                    <span className="transition-colors hover:text-[#ED73CF]">
+                        About
+                    </span>
+                    {isDropdownOpen.about && (
+                        <div
+                            onMouseLeave={() =>
+                                setIsDropdownOpen({
+                                    ...isDropdownOpen,
+                                    about: false,
+                                })
+                            }
+                            className="absolute left-0 z-10 w-48 mt-2 text-white transition-colors bg-black rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
+                        >
+                            <div
+                                className="py-1 transition-colors"
+                                role="menu"
+                                aria-orientation="vertical"
+                                aria-labelledby="options-menu"
+                            >
+                                <span
+                                    className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                    onClick={() => handleNavigation("about")}
+                                >
+                                    Origin
+                                </span>
+                                <span
+                                    className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                    onClick={() => handleNavigation("events")}
+                                >
+                                    Events
+                                </span>
+                                <span
+                                    className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                    onClick={() => handleNavigation("consult")}
+                                >
+                                    Consult
+                                </span>
+                                <span
+                                    className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                    onClick={() => handleNavigation("team")}
+                                >
+                                    Team
+                                </span>
+                            </div>
+                        </div>
+                    )}
+                </div>
                 {session?.user?.isMember && (
                     <div
-                        onMouseEnter={() => setIsDropdownOpen(true)}
+                        onMouseEnter={() =>
+                            setIsDropdownOpen({
+                                about: false,
+                                dashboard: true,
+                            })
+                        }
                         className="relative"
                     >
                         <span className="transition-colors hover:text-[#ED73CF]">
                             Dashboard
                         </span>
-                        {isDropdownOpen && (
+                        {isDropdownOpen.dashboard && (
                             <div
-                                onMouseLeave={() => setIsDropdownOpen(false)}
-                                className="absolute left-0 z-10 mt-2 w-48 rounded-md bg-black text-white shadow-lg ring-1 ring-black ring-opacity-5 transition-colors"
+                                onMouseLeave={() =>
+                                    setIsDropdownOpen({
+                                        ...isDropdownOpen,
+                                        dashboard: false,
+                                    })
+                                }
+                                className="absolute left-0 z-10 w-48 mt-2 text-white transition-colors bg-black rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
                             >
                                 <div
                                     className="py-1 transition-colors"
@@ -158,44 +205,87 @@ export const Header = () => {
                 )}
             </div>
 
-            <div className="hidden cursor-pointer items-center gap-2 text-white lg:flex">
+            <div className="items-center hidden gap-2 text-white cursor-pointer lg:flex">
                 <span
                     className="transition-colors hover:text-[#ED73CF]"
                     onClick={() => handleNavigation("apply")}
                 >
                     Apply
                 </span>
-                <span
-                    className="transition-colors hover:text-[#ED73CF]"
-                    onClick={() => handleNavigation("about")}
+                <div
+                    onMouseEnter={() =>
+                        setIsDropdownOpen({ dashboard: false, about: true })
+                    }
+                    className="relative"
                 >
-                    About
-                </span>
-
-                <span
-                    className="transition-colors hover:text-[#ED73CF]"
-                    onClick={() => handleNavigation("consult")}
-                >
-                    Consult
-                </span>
-                <span
-                    className="transition-colors hover:text-[#ED73CF]"
-                    onClick={() => handleNavigation("team")}
-                >
-                    Team
-                </span>
+                    <span className="transition-colors hover:text-[#ED73CF]">
+                        About
+                    </span>
+                    {isDropdownOpen.about && (
+                        <div
+                            onMouseLeave={() =>
+                                setIsDropdownOpen({
+                                    about: false,
+                                })
+                            }
+                            className="absolute left-0 z-10 w-48 mt-2 text-white transition-colors bg-black rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
+                        >
+                            <div
+                                className="py-1 transition-colors"
+                                role="menu"
+                                aria-orientation="vertical"
+                                aria-labelledby="options-menu"
+                            >
+                                <span
+                                    className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                    onClick={() => handleNavigation("about")}
+                                >
+                                    Origin
+                                </span>
+                                <span
+                                    className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                    onClick={() => handleNavigation("events")}
+                                >
+                                    Events
+                                </span>
+                                <span
+                                    className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                    onClick={() => handleNavigation("consult")}
+                                >
+                                    Consult
+                                </span>
+                                <span
+                                    className="block px-4 py-2 text-sm transition-colors hover:bg-gray-950 hover:text-[#ED73CF]"
+                                    onClick={() => handleNavigation("team")}
+                                >
+                                    Team
+                                </span>
+                            </div>
+                        </div>
+                    )}
+                </div>
                 {session?.user?.isMember && (
                     <div
-                        onMouseEnter={() => setIsDropdownOpen(true)}
+                        onMouseEnter={() =>
+                            setIsDropdownOpen({
+                                about: false,
+                                dashboard: true,
+                            })
+                        }
                         className="relative"
                     >
                         <span className="transition-colors hover:text-[#ED73CF]">
                             Dashboard
                         </span>
-                        {isDropdownOpen && (
+                        {isDropdownOpen.dashboard && (
                             <div
-                                onMouseLeave={() => setIsDropdownOpen(false)}
-                                className="absolute left-0 z-10 mt-2 w-48 rounded-md bg-black text-white shadow-lg ring-1 ring-black ring-opacity-5 transition-colors"
+                                onMouseLeave={() =>
+                                    setIsDropdownOpen({
+                                        ...isDropdownOpen,
+                                        dashboard: false,
+                                    })
+                                }
+                                className="absolute left-0 z-10 w-48 mt-2 text-white transition-colors bg-black rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
                             >
                                 <div
                                     className="py-1 "
