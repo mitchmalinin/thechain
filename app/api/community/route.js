@@ -1,5 +1,5 @@
-import { EmailTemplate } from "@/app/components/emailTemplate";
-import { NotifyAdminEmail } from "@/app/components/notifyAdminEmail";
+import { NotifyAdminEmail } from "@/app/components/emailTemplates/notifyAdminEmail";
+import { WelcomeEmail } from "@/app/components/emailTemplates/welcomeEmail";
 import { supabase } from "@/app/utils/supabaseClient";
 import { getToken } from "next-auth/jwt";
 import { Resend } from "resend";
@@ -15,7 +15,7 @@ const notifyApplicantEmail = async (toEmail, firstName) => {
             from: FROM_EMAIL,
             to: [toEmail],
             subject: SUBJECT,
-            react: EmailTemplate({ firstName: firstName }),
+            react: WelcomeEmail({ firstName: firstName }),
         });
     } catch (err) {
         console.log(err);
