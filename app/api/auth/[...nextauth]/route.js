@@ -62,6 +62,7 @@ export function getAuthOptions() {
                             const user = {
                                 id: data.wallet_address,
                                 isMember: data.is_accepted,
+                                isAdmin: data.is_admin,
                             };
 
                             console.log("user", user);

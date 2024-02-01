@@ -97,9 +97,9 @@ const JoinForm = () => {
                 </button>
 
                 {isFormOpen && (
-                    <div className="flex flex-col items-center p-8 lg:px-4 lg:py-10">
-                        <div className="flex w-full flex-col gap-10">
-                            <div className="mb-10 flex flex-col lg:mb-0 lg:flex-row lg:space-x-5">
+                    <div className="flex flex-col items-center w-full p-8 lg:px-4 lg:py-10">
+                        <div className="flex flex-col w-full gap-10">
+                            <div className="flex flex-col mb-10 lg:mb-0 lg:flex-row lg:space-x-5">
                                 <TextField
                                     label="Hi, what's your name?"
                                     value={name}
@@ -122,7 +122,7 @@ const JoinForm = () => {
                                 />
                             </div>
 
-                            <div className="mb-10 flex flex-col lg:mb-0 lg:flex-row lg:space-x-5">
+                            <div className="flex flex-col mb-10 lg:mb-0 lg:flex-row lg:space-x-5">
                                 <TextField
                                     label="Twitter?"
                                     value={twitter}
@@ -143,7 +143,7 @@ const JoinForm = () => {
                                     </span>
                                 </label>
                                 <select
-                                    className="w-full rounded-md bg-white p-4 py-2 text-sm text-black lg:text-base"
+                                    className="w-full p-4 py-2 text-sm text-black bg-white rounded-md lg:text-base"
                                     onChange={(e) =>
                                         setOccupation(e.target.value)
                                     }
@@ -154,7 +154,7 @@ const JoinForm = () => {
                                         return (
                                             <option
                                                 key={index}
-                                                className="bg-white text-black"
+                                                className="text-black bg-white"
                                                 value={occupation}
                                             >
                                                 {occupation}
@@ -166,7 +166,7 @@ const JoinForm = () => {
 
                             <div className="text-black">
                                 <textarea
-                                    className="h-24 w-full rounded-md bg-white px-2 text-sm placeholder:p-2 lg:text-base"
+                                    className="w-full h-24 px-2 text-sm bg-white rounded-md placeholder:p-2 lg:text-base"
                                     placeholder="Please say a few words about you and why you would like to become a member of The Chain. What are your interests? Who are you looking to meet? Any hobbies / interests outside of work?"
                                     onChange={(e) => {
                                         if (e.target.value.length <= 200)
@@ -174,14 +174,14 @@ const JoinForm = () => {
                                     }}
                                     value={reasons}
                                 />
-                                <p className="text-sm uppercase text-gray-600">
+                                <p className="text-sm text-gray-600 uppercase">
                                     {200 - reasons.length} chars left
                                 </p>
                             </div>
 
                             <div className="text-black">
                                 <textarea
-                                    className="h-24 w-full rounded-md bg-white px-2 text-sm placeholder:p-2 lg:text-base"
+                                    className="w-full h-24 px-2 text-sm bg-white rounded-md placeholder:p-2 lg:text-base"
                                     placeholder="What do you want to contribute to the community? What areas of expertise or resources can you offer the community?"
                                     onChange={(e) => {
                                         if (e.target.value.length <= 200)
@@ -189,7 +189,7 @@ const JoinForm = () => {
                                     }}
                                     value={contribution}
                                 />
-                                <p className="text-sm uppercase text-gray-600">
+                                <p className="text-sm text-gray-600 uppercase">
                                     {200 - contribution.length} chars left
                                 </p>
                             </div>
@@ -220,7 +220,7 @@ const JoinForm = () => {
 
                             <div className="text-black">
                                 <textarea
-                                    className="h-24 w-full rounded-md bg-white px-2 text-sm text-black placeholder:p-2 lg:text-base"
+                                    className="w-full h-24 px-2 text-sm text-black bg-white rounded-md placeholder:p-2 lg:text-base"
                                     placeholder="Anything else? Is there something you’d like to share, ask or offer? This is your time to ask!"
                                     onChange={(e) => {
                                         if (e.target.value.length <= 200) {
@@ -229,7 +229,7 @@ const JoinForm = () => {
                                     }}
                                     value={extras}
                                 />
-                                <p className="text-sm uppercase text-gray-600">
+                                <p className="text-sm text-gray-600 uppercase">
                                     {200 - extras.length} chars left
                                 </p>
                             </div>
@@ -237,7 +237,7 @@ const JoinForm = () => {
                             {/* Submit Button */}
                             <div className="flex flex-col">
                                 <button
-                                    className="mx-auto mt-8 flex cursor-pointer flex-row items-center gap-2 rounded-lg border-2 border-black bg-black px-4 py-2 font-semibold text-white hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+                                    className="flex flex-row items-center gap-2 px-4 py-2 mx-auto mt-8 font-semibold text-white bg-black border-2 border-black rounded-lg cursor-pointer hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
                                     disabled={
                                         !wallet || !name || !email || isLoading
                                     }
@@ -262,7 +262,7 @@ const JoinForm = () => {
                                     Submit Application
                                 </button>
                                 {error && (
-                                    <span className="p-2 text-center font-semibold text-red-500">
+                                    <span className="p-2 font-semibold text-center text-red-500">
                                         {error}
                                     </span>
                                 )}
@@ -275,9 +275,9 @@ const JoinForm = () => {
             {isSubmissionSuccess && (
                 <div className="fixed inset-0 flex items-center justify-center">
                     <div className="absolute inset-0 bg-black bg-opacity-50" />
-                    <div className="relative bg-white p-8">
+                    <div className="relative p-8 bg-white">
                         <IoMdClose
-                            className="absolute right-2 top-2 cursor-pointer"
+                            className="absolute cursor-pointer right-2 top-2"
                             size={24}
                             onClick={() => {
                                 resetForm();
