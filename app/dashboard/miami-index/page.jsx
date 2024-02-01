@@ -1,5 +1,6 @@
 "use client";
 import { useDebounce } from "@/app/hooks/useDebounce";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiFillLinkedin, AiFillTwitterSquare } from "react-icons/ai";
@@ -10,6 +11,9 @@ export default function Members() {
     const fetcher = (url) => fetch(url).then((r) => r.json());
     const [searchTerm, setSearchTerm] = useState("");
     const [filter, setFilter] = useState("");
+    const { data: session } = useSession();
+    const [adminViewOn, setAdminViewOn] = useState(false);
+    const [loadingState, setLoadingState] = useState({});
 
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
@@ -17,6 +21,7 @@ export default function Members() {
         data: members,
         error,
         isLoading,
+        mutate,
     } = useSWR(
         `/api/community?search=${debouncedSearchTerm}&filter=${filter}`,
         fetcher,
@@ -49,24 +54,75 @@ export default function Members() {
             </div>
         );
 
+    const toggleMemberStatus = async (member) => {
+        if (member.is_accepted) {
+            console.log("already");
+            return;
+        }
+
+        setLoadingState((prev) => ({ ...prev, [member.ID]: true }));
+
+        const user = await (
+            await fetch(`/api/profile?wallet_address=${member.wallet_address}`)
+        ).json();
+
+        if (user) {
+            const sendEmailResponse = await fetch(
+                "/api/send-acceptance-email",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: user.email,
+                        name: user.name,
+                        wallet: user.wallet_address,
+                    }),
+                },
+            );
+
+            if (sendEmailResponse.ok) {
+                console.log("working");
+                mutate(); // Refetch members to update the UI
+            } else {
+                throw new Error("Failed to send acceptance email");
+            }
+        }
+
+        setLoadingState((prev) => ({ ...prev, [member.ID]: false }));
+    };
+
     return (
         <div className="grid min-h-screen content-start px-8 pt-4">
-            <div className="flex gap-4 pb-4">
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    value={searchTerm}
-                    className="rounded border-2 border-gray-300 px-4"
-                />
-                <select
-                    onChange={(e) => setFilter(e.target.value)}
-                    className="rounded bg-gray-300 p-2"
-                    value={filter}
-                >
-                    <option value="">All</option>
-                    <option value="accepted">Is member</option>
-                </select>
+            <div className="flex justify-between gap-4 pb-4">
+                <div className="flex gap-4">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        value={searchTerm}
+                        className="rounded border-2 border-gray-300 px-4"
+                    />
+                    <select
+                        onChange={(e) => setFilter(e.target.value)}
+                        className="rounded bg-gray-300 p-2"
+                        value={filter}
+                    >
+                        <option value="">All</option>
+                        <option value="accepted">Is member</option>
+                    </select>
+                </div>
+
+                {session.user.isAdmin && (
+                    <label className="switch flex items-center gap-1">
+                        <span>Admin View</span>
+                        <input
+                            type="checkbox"
+                            onChange={() => setAdminViewOn((prev) => !prev)}
+                        />
+                    </label>
+                )}
             </div>
             <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
                 {members.map((member) => (
@@ -74,6 +130,29 @@ export default function Members() {
                         key={member.ID}
                         className="flex flex-col justify-between space-y-3 rounded-lg border p-5 shadow-md"
                     >
+                        {adminViewOn && (
+                            <button
+                                onClick={() => toggleMemberStatus(member)}
+                                disabled={loadingState[member.ID]}
+                                className={`${
+                                    member.is_accepted
+                                        ? "bg-green-500"
+                                        : "bg-red-500"
+                                } rounded p-2 text-white ${
+                                    loadingState[member.ID]
+                                        ? "cursor-not-allowed opacity-50"
+                                        : ""
+                                }`}
+                            >
+                                {loadingState[member.ID] ? (
+                                    <ImSpinner8 className="animate-spin" />
+                                ) : member.is_accepted ? (
+                                    "Accepted"
+                                ) : (
+                                    "Not Accepted"
+                                )}
+                            </button>
+                        )}
                         <div className="flex h-40 w-full items-center justify-center overflow-hidden bg-gray-200">
                             {/* Placeholder for member image */}
                             <span className="text-2xl text-gray-500">

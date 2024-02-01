@@ -41,6 +41,9 @@ export async function GET(request) {
     const secret = process.env.NEXTAUTH_SECRET;
     const token = await getToken({ req: request, secret });
 
+    const url = new URL(request.url);
+    const passedAddress = url.searchParams.get("wallet_address");
+
     if (!token || !token.isMember) {
         return new Response(null, {
             status: 403,
@@ -52,7 +55,7 @@ export async function GET(request) {
         const { data: user, error } = await supabase
             .from("users")
             .select("*")
-            .eq("wallet_address", token.id)
+            .eq("wallet_address", passedAddress ? passedAddress : token.id)
             .single();
 
         if (error) throw error;
