@@ -41,6 +41,7 @@ export function getAuthOptions() {
                             req: { headers: req.headers },
                         }),
                     });
+
                     if (result.success) {
                         const address = siwe.address.toLowerCase(); // Normalize the address
 
@@ -50,6 +51,8 @@ export function getAuthOptions() {
                             .select("*")
                             .eq("wallet_address", address)
                             .single();
+
+                        console.log("data", data, error);
 
                         if (error) {
                             throw new Error(
@@ -65,7 +68,6 @@ export function getAuthOptions() {
                                 isAdmin: data.is_admin,
                             };
 
-                            console.log("user", user);
                             return user;
                         }
                         return null; // User not found or not accepted
