@@ -13,6 +13,7 @@ export default function Members() {
     const [filter, setFilter] = useState("");
     const { data: session } = useSession();
     const [adminViewOn, setAdminViewOn] = useState(false);
+    const [loadingState, setLoadingState] = useState({});
 
     const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
@@ -20,6 +21,7 @@ export default function Members() {
         data: members,
         error,
         isLoading,
+        mutate,
     } = useSWR(
         `/api/community?search=${debouncedSearchTerm}&filter=${filter}`,
         fetcher,
@@ -33,21 +35,21 @@ export default function Members() {
 
     if (isLoading)
         return (
-            <div className="flex items-center justify-center min-h-screen">
+            <div className="flex min-h-screen items-center justify-center">
                 <ImSpinner8 size={64} className="animate-spin text-[#ff62c7]" />
             </div>
         );
 
     if (!members)
         return (
-            <div className="flex items-center justify-center min-h-screen">
+            <div className="flex min-h-screen items-center justify-center">
                 <div>Must be Chain Member to Access</div>
             </div>
         );
 
     if (error)
         return (
-            <div className="flex items-center justify-center min-h-screen">
+            <div className="flex min-h-screen items-center justify-center">
                 <div>Failed to load members</div>
             </div>
         );
@@ -57,6 +59,8 @@ export default function Members() {
             console.log("already");
             return;
         }
+
+        setLoadingState((prev) => ({ ...prev, [member.ID]: true }));
 
         const user = await (
             await fetch(`/api/profile?wallet_address=${member.wallet_address}`)
@@ -73,20 +77,24 @@ export default function Members() {
                     body: JSON.stringify({
                         email: user.email,
                         name: user.name,
+                        wallet: user.wallet_address,
                     }),
                 },
             );
 
             if (sendEmailResponse.ok) {
                 console.log("working");
+                mutate(); // Refetch members to update the UI
             } else {
                 throw new Error("Failed to send acceptance email");
             }
         }
+
+        setLoadingState((prev) => ({ ...prev, [member.ID]: false }));
     };
 
     return (
-        <div className="grid content-start min-h-screen px-8 pt-4">
+        <div className="grid min-h-screen content-start px-8 pt-4">
             <div className="flex justify-between gap-4 pb-4">
                 <div className="flex gap-4">
                     <input
@@ -94,11 +102,11 @@ export default function Members() {
                         placeholder="Search..."
                         onChange={(e) => setSearchTerm(e.target.value)}
                         value={searchTerm}
-                        className="px-4 border-2 border-gray-300 rounded"
+                        className="rounded border-2 border-gray-300 px-4"
                     />
                     <select
                         onChange={(e) => setFilter(e.target.value)}
-                        className="p-2 bg-gray-300 rounded"
+                        className="rounded bg-gray-300 p-2"
                         value={filter}
                     >
                         <option value="">All</option>
@@ -107,7 +115,7 @@ export default function Members() {
                 </div>
 
                 {session.user.isAdmin && (
-                    <label className="flex items-center gap-1 switch">
+                    <label className="switch flex items-center gap-1">
                         <span>Admin View</span>
                         <input
                             type="checkbox"
@@ -120,36 +128,45 @@ export default function Members() {
                 {members.map((member) => (
                     <div
                         key={member.ID}
-                        className="flex flex-col justify-between p-5 space-y-3 border rounded-lg shadow-md"
+                        className="flex flex-col justify-between space-y-3 rounded-lg border p-5 shadow-md"
                     >
                         {adminViewOn && (
                             <button
                                 onClick={() => toggleMemberStatus(member)}
+                                disabled={loadingState[member.ID]}
                                 className={`${
                                     member.is_accepted
                                         ? "bg-green-500"
                                         : "bg-red-500"
-                                } rounded p-2 text-white`}
+                                } rounded p-2 text-white ${
+                                    loadingState[member.ID]
+                                        ? "cursor-not-allowed opacity-50"
+                                        : ""
+                                }`}
                             >
-                                {member.is_accepted
-                                    ? "Accepted"
-                                    : "Not Accepted"}
+                                {loadingState[member.ID] ? (
+                                    <ImSpinner8 className="animate-spin" />
+                                ) : member.is_accepted ? (
+                                    "Accepted"
+                                ) : (
+                                    "Not Accepted"
+                                )}
                             </button>
                         )}
-                        <div className="flex items-center justify-center w-full h-40 overflow-hidden bg-gray-200">
+                        <div className="flex h-40 w-full items-center justify-center overflow-hidden bg-gray-200">
                             {/* Placeholder for member image */}
                             <span className="text-2xl text-gray-500">
                                 Photo
                             </span>
                         </div>
-                        <div className="flex flex-col flex-grow gap-4">
+                        <div className="flex flex-grow flex-col gap-4">
                             <div>
                                 <h3 className="text-lg font-black">
                                     {member.name}
                                 </h3>
                                 <p className="text-base">{member.occupation}</p>
                             </div>
-                            <p className="text-sm break-words">
+                            <p className="break-words text-sm">
                                 {member.contribution}
                             </p>
                         </div>
